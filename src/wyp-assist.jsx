@@ -455,11 +455,17 @@ function generatePDF({projectName,venue,chainSystem,totalHoists,hoistLines,addon
     doc.text(`Date: ${new Date().toLocaleDateString()}`,pw-mr-40,y-infoH);
     // D8/D8+ Warning Banner
     if(d8){
-      newPageIfNeeded(14);
-      doc.setFillColor(231,76,60);doc.rect(ml,y,pw-ml-mr,10,'F');
-      doc.setFontSize(13);doc.setFont('helvetica','bold');doc.setTextColor(255,255,255);
-      doc.text(tx.psD8Warn,ml+(pw-ml-mr)/2,y+7,{align:"center"});
-      y+=14;
+      newPageIfNeeded(16);
+      const bw=pw-ml-mr;
+      // Outer border
+      doc.setDrawColor(231,76,60);doc.setLineWidth(1.5);doc.rect(ml,y,bw,12);
+      // Inner filled bar with padding
+      doc.setFillColor(231,76,60);doc.rect(ml+2,y+2,bw-4,8,'F');
+      // Warning text (strip unicode emoji — not supported by jsPDF helvetica)
+      const d8Text=tx.psD8Warn.replace(/[^\x20-\x7E]/g,'').trim()||"D8/D8+ RATED SYSTEM REQUIRED";
+      doc.setFontSize(12);doc.setFont('helvetica','bold');doc.setTextColor(255,255,255);
+      doc.text("!! "+d8Text+" !!",ml+bw/2,y+8,{align:"center"});
+      y+=16;
     }
 
     // Helper: draw a section table header
@@ -674,23 +680,14 @@ function PullSheetTab(){
         <Field label={tx.psReturnDate}>
           <input type="date" style={s.input} value={returnDate} onChange={e=>setReturnDate(e.target.value)}/>
         </Field>
-        <Field label={tx.psCountry}><Chips options={COUNTRIES} value={country} onChange={setCountry}/></Field>
+        <Field label={tx.psCountry}>
+          <select style={s.input} value={country} onChange={e=>setCountry(e.target.value)}>
+            {COUNTRIES.map(c=><option key={c} value={c}>{c}</option>)}
+          </select>
+        </Field>
       </div>
 
-      <div style={s.secTitle}>{tx.psChainSystem}</div>
-      <Field label={tx.psSystemType}><Chips options={CHAIN_SYSTEMS} value={cs} onChange={setCs}/></Field>
-
-      {/* D8 / D8+ Toggle */}
-      <div style={{marginTop:20,marginBottom:8}}>
-        <button style={{...s.chip(d8),background:d8?`${danger}25`:s.chip(false).background,color:d8?danger:t.textSecondary,border:d8?`2px solid ${danger}`:`1px solid ${t.border}`,fontWeight:d8?900:500,fontSize:12,padding:"10px 20px",letterSpacing:1.5}} onClick={()=>setD8(!d8)}>
-          {d8?"⚠ ":"🔒 "}{tx.psD8}
-        </button>
-      </div>
-      {d8&&<div style={{background:`${danger}18`,border:`2px solid ${danger}`,borderRadius:6,padding:"10px 16px",marginBottom:16,display:"flex",alignItems:"center",gap:10}}>
-        <span style={{fontSize:20}}>⚠</span>
-        <span style={{color:danger,fontWeight:900,fontSize:13,letterSpacing:1.5,textTransform:"uppercase",animation:"pulse 1.5s ease-in-out infinite"}}>{tx.psD8Warn}</span>
-      </div>}
-
+      {/* Motor Counts */}
       <div style={s.secTitle}>{tx.psMotorCounts}</div>
       <div style={s.g4}>
         {MOTOR_TYPES.map(ty=>{const isH=parseFloat(ty)>1;return(
@@ -700,10 +697,21 @@ function PullSheetTab(){
             <div style={s.ctr}><button style={s.ctrBtn} onClick={()=>mc(ty,-1)}>−</button><input type="number" min="0" style={s.ctrVal} value={m[ty]} onChange={e=>{const v=parseInt(e.target.value);setM(p=>({...p,[ty]:isNaN(v)?0:Math.max(0,v)}));}} onFocus={e=>e.target.select()}/><button style={s.ctrBtn} onClick={()=>mc(ty,1)}>+</button></div>
           </div>);})}
       </div>
-      <div style={{marginTop:16,textAlign:"center"}}>
-        <span style={{fontSize:14,color:t.textSecondary}}>{tx.psTotalHoists}: </span>
-        <span style={{fontSize:22,fontWeight:900,color:t.accent}}>{tot}</span>
-        <span style={{fontSize:12,color:t.textSecondary,marginLeft:8}}>{tx.psOnSystem} {cs} {tx.psSystem}</span>
+      <div style={{marginTop:12,textAlign:"center",background:t.surfaceLight,border:`1px solid ${t.border}`,borderRadius:6,padding:"12px 20px",display:"inline-flex",alignItems:"baseline",gap:6,justifyContent:"center",width:"100%",boxSizing:"border-box"}}>
+        <span style={{fontSize:12,color:t.textSecondary,letterSpacing:1.5,textTransform:"uppercase",fontWeight:600}}>{tx.psTotalHoists}:</span>
+        <span style={{fontSize:26,fontWeight:900,color:t.accent,lineHeight:1}}>{tot}</span>
+        <span style={{fontSize:11,color:t.textSecondary}}>{tx.psOnSystem} {cs} {tx.psSystem}</span>
+      </div>
+
+      {/* Chain System + D8 Toggle — horizontal row */}
+      <div style={{display:"flex",alignItems:"center",gap:16,marginTop:16,flexWrap:"wrap"}}>
+        <div style={{display:"flex",alignItems:"center",gap:8}}>
+          <span style={{fontSize:10,color:t.textSecondary,letterSpacing:1.5,textTransform:"uppercase",fontWeight:600}}>{tx.psChainSystem}:</span>
+          <Chips options={CHAIN_SYSTEMS} value={cs} onChange={setCs}/>
+        </div>
+        <button style={{...s.chip(d8),background:d8?`${danger}25`:s.chip(false).background,color:d8?danger:t.textSecondary,border:d8?`2px solid ${danger}`:`1px solid ${t.border}`,fontWeight:d8?900:500,fontSize:12,padding:"9px 18px",letterSpacing:1.5}} onClick={()=>setD8(!d8)}>
+          {d8?"⚠ ":"🔒 "}{tx.psD8}
+        </button>
       </div>
     </div>
 
