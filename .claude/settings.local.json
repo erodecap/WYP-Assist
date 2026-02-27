@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(npx vite build)",
+      "Bash(npx vitest run)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npm install jspdf)",
+      "Bash(node -e \":*)",
+      "Bash(npm install @emailjs/browser)",
+      "Bash(git init)",
+      "Bash(git add .gitignore index.html package.json package-lock.json plan.md vite.config.js wyp-assist.jsx src/ .claude/)"
+    ]
+  }
+}
