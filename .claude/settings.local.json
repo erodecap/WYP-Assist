@@ -16,7 +16,9 @@
       "Bash(brew install gh)",
       "Bash(gh auth status)",
       "Bash(gh repo edit erodecap/WYP-Assist --visibility private)",
-      "Bash(gh repo edit erodecap/WYP-Assist --visibility private --accept-visibility-change-consequences)"
+      "Bash(gh repo edit erodecap/WYP-Assist --visibility private --accept-visibility-change-consequences)",
+      "Bash(npm run build)",
+      "Bash(git add src/wyp-assist.jsx dist/ .claude/settings.local.json)"
     ]
   }
 }

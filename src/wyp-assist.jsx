@@ -290,6 +290,7 @@ function SvgCrosshair({cx,cy,r,stroke}){
   </g>;
 }
 
+// ── Legacy parser (kept for test compatibility) ──
 export function parseMarkoutCSV(text){
   const lines=text.trim().split(/\r?\n/).filter(l=>l.trim());
   if(lines.length<2) return {points:[],errors:["File is empty or has no data rows"]};
@@ -299,7 +300,7 @@ export function parseMarkoutCSV(text){
   for(let i=1;i<lines.length;i++){
     const cols=lines[i].split(",").map(c=>c.trim());
     const num=parseInt(cols[iNum]);
-    if(isNaN(num)) continue; // skip summary/blank rows
+    if(isNaN(num)) continue;
     const ym=parseFloat(cols[iYm])||0, xm=parseFloat(cols[iXm])||0;
     const yft=parseFloat(cols[iYft])||0, xft=parseFloat(cols[iXft])||0;
     points.push({
@@ -309,6 +310,165 @@ export function parseMarkoutCSV(text){
       cableFt:parseFloat(cols[iCableFt])||0, cableM:parseFloat(cols[iCableM])||0,
     });
   }
+  return {points,errors};
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// FLEXIBLE CSV IMPORTER
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// Parse feet-inches strings like 48'2.221", -27'0", .795", 30'3 3/4" → decimal feet
+export function parseFeetInches(str){
+  if(!str||typeof str!=="string") return 0;
+  str=str.trim().replace(/"/g,"");
+  if(!str) return 0;
+  // Try pure decimal first
+  const plain=parseFloat(str);
+  if(!isNaN(plain)&&!str.includes("'")) return plain;
+  // Detect negative
+  const neg=str.startsWith("-")?-1:1;
+  str=str.replace(/^-/,"");
+  // Match feet'inches pattern
+  const m=str.match(/^(\d+)?'?\s*(\d+\.?\d*)?(?:\s+(\d+)\/(\d+))?'?"?$/);
+  if(!m){
+    // Fallback: just inches with quote? e.g. .795"
+    const inOnly=parseFloat(str);
+    return isNaN(inOnly)?0:neg*(inOnly/12);
+  }
+  const feet=parseFloat(m[1])||0;
+  let inches=parseFloat(m[2])||0;
+  if(m[3]&&m[4]) inches+=parseInt(m[3])/parseInt(m[4]); // fractional inches
+  return neg*(feet+inches/12);
+}
+
+// Parse load values like "2204.62 lb", "1000 kgs", "500" → { lbs, kgs }
+export function parseLoadValue(str){
+  if(!str||typeof str!=="string") return {lbs:0,kgs:0};
+  str=str.trim();
+  const numMatch=str.match(/^([\d.,]+)/);
+  if(!numMatch) return {lbs:0,kgs:0};
+  const val=parseFloat(numMatch[1].replace(",",""))||0;
+  const lower=str.toLowerCase();
+  if(lower.includes("kg")){return {lbs:val*2.20462,kgs:val};}
+  if(lower.includes("lb")||lower.includes("lbf")){return {lbs:val,kgs:val/2.20462};}
+  // Assume lbs if no unit
+  return {lbs:val,kgs:val/2.20462};
+}
+
+// Parse position: try decimal first, then feet-inches
+export function parsePosition(str){
+  if(!str||typeof str!=="string") return 0;
+  str=str.trim();
+  if(!str) return 0;
+  // If it contains ' (foot mark), parse as feet-inches
+  if(str.includes("'")) return parseFeetInches(str);
+  // If it contains " (inch mark only), it's inches → convert to feet
+  if(str.includes('"')){const v=parseFloat(str.replace(/"/g,""))||0;return v/12;}
+  // Otherwise pure decimal
+  return parseFloat(str)||0;
+}
+
+// Extract type from a Name field like "1 Ton Lights", "1/2 Ton Scenery"
+export function extractTypeFromName(name){
+  if(!name) return "Unknown Other";
+  name=name.trim();
+  // Match patterns: "1 Ton Lights", "1/2 Ton Scenery", "1.6 Ton Super Grid"
+  const m=name.match(/^([\d./]+\s*Ton)\s+(.+)$/i);
+  if(m) return `${m[1]} ${m[2]}`.trim();
+  // Return as-is if no pattern match
+  return name||"Unknown Other";
+}
+
+// Phase 1: Pre-parse CSV into raw headers + rows with auto-delimiter detection
+export function preParseCSV(text){
+  const lines=text.trim().split(/\r?\n/).filter(l=>l.trim());
+  if(lines.length<2) return {headers:[],rows:[],delimiter:","};
+  const first=lines[0];
+  // Auto-detect delimiter: semicolons vs commas vs tabs
+  const semis=(first.match(/;/g)||[]).length;
+  const commas=(first.match(/,/g)||[]).length;
+  const tabs=(first.match(/\t/g)||[]).length;
+  const delimiter=semis>commas&&semis>tabs?";":tabs>commas?"\t":",";
+  const headers=first.split(delimiter).map(h=>h.trim()).filter(h=>h);
+  const rows=[];
+  for(let i=1;i<lines.length;i++){
+    const cols=lines[i].split(delimiter).map(c=>c.trim());
+    // Skip empty rows
+    if(cols.every(c=>!c)) continue;
+    rows.push(cols);
+  }
+  return {headers,rows,delimiter};
+}
+
+// App fields the user can map CSV columns to
+const MAP_FIELDS=[
+  {key:"label",label:"Label / Name",keywords:["label","name","hoist","point","id"],required:false},
+  {key:"type",label:"Type / Category",keywords:["type","category","kind","class"],required:false},
+  {key:"xPos",label:"X Position",keywords:["x-pos","x pos","x","stage left","sl"],required:true},
+  {key:"yPos",label:"Y Position",keywords:["y-pos","y pos","y","upstage","ds","us"],required:true},
+  {key:"load",label:"Load / Weight",keywords:["load","weight","capacity","lbs","kgs","lb","kg","force"],required:false},
+  {key:"trim",label:"Trim Height",keywords:["trim","height","z","elevation"],required:false},
+  {key:"notes",label:"Notes",keywords:["notes","note","comment","origin","memo"],required:false},
+];
+
+// Auto-match CSV headers to app fields
+export function autoMatchHeaders(csvHeaders){
+  const mapping={};
+  const lowerHeaders=csvHeaders.map(h=>h.toLowerCase());
+  MAP_FIELDS.forEach(field=>{
+    let bestIdx=-1, bestScore=0;
+    lowerHeaders.forEach((h,idx)=>{
+      // Check each keyword against this header
+      field.keywords.forEach(kw=>{
+        let score=0;
+        if(h===kw) score=10; // exact match
+        else if(h.includes(kw)) score=5; // contains
+        else if(kw.includes(h)&&h.length>1) score=3; // keyword contains header
+        if(score>bestScore){bestScore=score;bestIdx=idx;}
+      });
+    });
+    mapping[field.key]=bestIdx>=0?bestIdx:-1;
+  });
+  return mapping;
+}
+
+// Phase 2: Apply column mapping to produce points[]
+export function applyColumnMapping(rawData,mapping){
+  const {rows}=rawData;
+  const points=[],errors=[];
+  let pointNum=1;
+  rows.forEach((cols,rowIdx)=>{
+    // Skip rows where both X and Y are empty
+    const xRaw=mapping.xPos>=0?cols[mapping.xPos]||"":"";
+    const yRaw=mapping.yPos>=0?cols[mapping.yPos]||"":"";
+    if(!xRaw&&!yRaw) return;
+    const labelRaw=mapping.label>=0?cols[mapping.label]||"":"";
+    const typeRaw=mapping.type>=0?cols[mapping.type]||"":"";
+    const loadRaw=mapping.load>=0?cols[mapping.load]||"":"";
+    const trimRaw=mapping.trim>=0?cols[mapping.trim]||"":"";
+    const notesRaw=mapping.notes>=0?cols[mapping.notes]||"":"";
+    // Parse positions (handles feet-inches and decimal)
+    const xft=parsePosition(xRaw);
+    const yft=parsePosition(yRaw);
+    const xm=xft*0.3048;
+    const ym=yft*0.3048;
+    // Parse load
+    const {lbs,kgs}=parseLoadValue(loadRaw);
+    // Determine type: use Type column if mapped, otherwise extract from Label/Name
+    const type=typeRaw?typeRaw.trim():extractTypeFromName(labelRaw);
+    // Trim
+    const trimFt=parsePosition(trimRaw);
+    const trimM=trimFt*0.3048;
+    // Label: use label column, or auto-number
+    const label=labelRaw||`P${pointNum}`;
+    points.push({
+      num:pointNum++, label, ym:parseFloat(ym.toFixed(3)), xm:parseFloat(xm.toFixed(3)),
+      yft:parseFloat(yft.toFixed(3)), xft:parseFloat(xft.toFixed(3)),
+      type, lbs:parseFloat(lbs.toFixed(2)), kgs:parseFloat(kgs.toFixed(2)),
+      notes:notesRaw, trimFt:parseFloat(trimFt.toFixed(3)), trimM:parseFloat(trimM.toFixed(3)),
+      cableFt:0, cableM:0,
+    });
+  });
   return {points,errors};
 }
 
@@ -1210,6 +1370,57 @@ function generateMarkoutPDF({points,unit,paperSize,fileName,tx,theme}){
   doc2.save(`WYP_Markout_Data_${fileName||"export"}.pdf`);
 }
 
+// ── Column Mapper UI ──
+function ColumnMapper({rawCSV,onApply,onCancel}){
+  const{s,t}=useTheme();
+  const[mapping,setMapping]=useState(()=>autoMatchHeaders(rawCSV.headers));
+  const setField=(key,val)=>setMapping(p=>({...p,[key]:parseInt(val)}));
+  const canApply=mapping.xPos>=0&&mapping.yPos>=0;
+  // Preview first 3 data rows
+  const preview=rawCSV.rows.slice(0,3);
+  return(
+    <div style={s.card}>
+      <div style={s.cardTitle}><span style={{fontSize:16}}>🔗</span> MAP CSV COLUMNS</div>
+      <div style={{fontSize:11,color:t.textSecondary,marginBottom:16}}>Match your CSV headers to the fields below. X and Y Position are required.</div>
+      {/* Preview table */}
+      <div style={{overflowX:"auto",marginBottom:20}}>
+        <table style={{...s.tbl,fontSize:11}}>
+          <thead><tr>
+            {rawCSV.headers.map((h,i)=><th key={i} style={{...s.th,fontSize:9,whiteSpace:"nowrap",minWidth:60}}><span style={{color:t.accent,marginRight:4}}>#{i}</span>{h}</th>)}
+          </tr></thead>
+          <tbody>
+            {preview.map((row,ri)=><tr key={ri}>{rawCSV.headers.map((_,ci)=><td key={ci} style={{...s.td,fontSize:10,color:t.textSecondary,whiteSpace:"nowrap",maxWidth:120,overflow:"hidden",textOverflow:"ellipsis"}}>{row[ci]||"—"}</td>)}</tr>)}
+          </tbody>
+        </table>
+      </div>
+      {/* Mapping dropdowns */}
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",gap:12}}>
+        {MAP_FIELDS.map(f=>(
+          <div key={f.key} style={{background:t.surfaceLight,borderRadius:6,padding:12,border:`1px solid ${f.required&&mapping[f.key]<0?"#E74C3C40":t.border}`}}>
+            <label style={{...s.label,marginBottom:4,display:"flex",alignItems:"center",gap:4}}>
+              {f.label}{f.required&&<span style={{color:"#E74C3C",fontSize:9}}>*</span>}
+            </label>
+            <select style={{...s.input,fontSize:12,padding:"8px 10px"}} value={mapping[f.key]} onChange={e=>setField(f.key,e.target.value)}>
+              <option value={-1}>— skip —</option>
+              {rawCSV.headers.map((h,i)=><option key={i} value={i}>{h}</option>)}
+            </select>
+            {mapping[f.key]>=0&&<div style={{fontSize:9,color:t.textSecondary,marginTop:4,opacity:0.7}}>
+              Preview: {preview[0]?.[mapping[f.key]]||"—"}
+            </div>}
+          </div>
+        ))}
+      </div>
+      <div style={{display:"flex",gap:12,marginTop:20,alignItems:"center"}}>
+        <button style={{...s.exportBtn,opacity:canApply?1:0.4,cursor:canApply?"pointer":"not-allowed"}} onClick={()=>canApply&&onApply(mapping)} disabled={!canApply}>
+          ✓ APPLY MAPPING
+        </button>
+        <button style={{...s.chip(false),padding:"10px 20px",cursor:"pointer"}} onClick={onCancel}>Cancel</button>
+        {!canApply&&<span style={{fontSize:10,color:"#E74C3C",letterSpacing:1}}>X and Y Position are required</span>}
+      </div>
+    </div>
+  );
+}
+
 function MarkoutTab(){
   const{s,t,tx,lang,setTab,setSharedMotors}=useTheme();
   const[points,setPoints]=useState([]);
@@ -1219,15 +1430,30 @@ function MarkoutTab(){
   const[sortCol,setSortCol]=useState("num");
   const[sortDir,setSortDir]=useState(1);
   const[pushed,setPushed]=useState(false);
+  // Flexible CSV importer state
+  const[rawCSV,setRawCSV]=useState(null); // { headers, rows, delimiter }
+  const[showMapper,setShowMapper]=useState(false);
   const hasData=points.length>0;
   const handleFile=e=>{
     const file=e.target.files[0];if(!file)return;
     setFileName(file.name.replace(/\.csv$/i,""));
     setPushed(false);
     const reader=new FileReader();
-    reader.onload=ev=>{const{points:pts,errors}=parseMarkoutCSV(ev.target.result);setPoints(pts);};
+    reader.onload=ev=>{
+      const raw=preParseCSV(ev.target.result);
+      setRawCSV(raw);
+      setShowMapper(true);
+      setPoints([]);
+    };
     reader.readAsText(file);
   };
+  const handleMappingApply=(mapping)=>{
+    if(!rawCSV) return;
+    const{points:pts}=applyColumnMapping(rawCSV,mapping);
+    setPoints(pts);
+    setShowMapper(false);
+  };
+  const handleMappingCancel=()=>{setShowMapper(false);setRawCSV(null);};
   const handlePushToPull=()=>{
     if(!hasData)return;
     const motors=countMotorsFromCSV(points);
@@ -1270,8 +1496,10 @@ function MarkoutTab(){
         <div style={s.res}><div style={{...s.resVal,color:success}}>{totWeight.toLocaleString()}</div><div style={s.resLbl}>{tx.moTotalWeight} ({wL})</div></div>
         <div style={s.res}><div style={{...s.resVal,color:t.accent}}>{types.length}</div><div style={s.resLbl}>{tx.moType}s</div></div>
       </div>}
-      {fileName&&<div style={{marginTop:12,fontSize:11,color:t.textSecondary,letterSpacing:1}}>📄 {fileName}.csv</div>}
+      {fileName&&<div style={{marginTop:12,fontSize:11,color:t.textSecondary,letterSpacing:1}}>📄 {fileName}.csv{rawCSV&&` · ${rawCSV.rows.length} rows · delimiter: "${rawCSV.delimiter==="\t"?"tab":rawCSV.delimiter}"`}</div>}
     </div>
+    {/* Column Mapper */}
+    {showMapper&&rawCSV&&<ColumnMapper rawCSV={rawCSV} onApply={handleMappingApply} onCancel={handleMappingCancel}/>}
     {hasData&&<div style={s.card}><div style={s.cardTitle}><span>◆</span> {tx.moTitle} — {fileName}</div>
       <MarkoutVisualizer points={points} unit={unit} theme={t} tx={tx}/>
     </div>}
