@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useRef, createContext, useContext } from "react";
 import { jsPDF } from "jspdf";
-import emailjs from "@emailjs/browser";
+
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // CATALOG DATABASE
@@ -238,10 +238,7 @@ const CHAIN_SYSTEMS = ["60'", "80'", "125'"];
 const MOTOR_TYPES = [".25 Ton", ".5 Ton", "1 Ton", "2 Ton"];
 const COUNTRIES = ["N & S America", "Europe", "United Kingdom", "Australia", "Asia"];
 
-// EmailJS configuration — replace with your actual credentials
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+
 export function r5(n) { return Math.ceil(n / 5) * 5; }
 export function rU(n) { return Math.ceil(n); }
 const danger = "#E74C3C", success = "#2ECC71", warning = "#E67E22";
@@ -1628,24 +1625,28 @@ function PullSheetTab(){
     try{
       const doc=generatePDF(pdfParams());
       const pdfBase64=doc.output("datauristring").split(",")[1];
-      await emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ID,{
-        to_emails:"MRich@christielites.com,costa@wypproductions.com,evan@rodecap.co",
-        from_name:userName,
-        from_email:userEmail,
-        project_name:pn||"Untitled",
-        venue:vn||"—",
-        show_date:showDate,
-        return_date:returnDate||"N/A",
-        country:country,
-        d8_status:d8?tx.psD8Warn:"Standard",
-        total_hoists:String(tot),
-        chain_system:cs,
-        pdf_attachment:pdfBase64,
-      },EMAILJS_PUBLIC_KEY);
+      const resp=await fetch("/api/send-quote",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          from_name:userName,
+          from_email:userEmail,
+          project_name:pn||"Untitled",
+          venue:vn||"—",
+          show_date:showDate,
+          return_date:returnDate||"N/A",
+          country:country,
+          d8_status:d8?tx.psD8Warn:"Standard",
+          total_hoists:String(tot),
+          chain_system:cs,
+          pdf_base64:pdfBase64,
+        }),
+      });
+      if(!resp.ok){const e=await resp.json();throw new Error(e.error||"Send failed");}
       setSendStatus("sent");
       setTimeout(()=>setSendStatus(null),4000);
     }catch(err){
-      console.error("EmailJS error:",err);
+      console.error("Send quote error:",err);
       setSendStatus("error");
       setTimeout(()=>setSendStatus(null),5000);
     }
@@ -2744,8 +2745,7 @@ export default function WYPAssist(){
             [data-r="header-nav-wrap"]{flex-wrap:wrap!important;flex-shrink:1!important;justify-content:center!important;gap:4px!important;width:100%!important}
             [data-r="header-nav-wrap"] nav{flex-wrap:wrap!important;justify-content:center!important;gap:4px!important;width:100%!important}
             [data-r="header-nav-wrap"] nav button{padding:8px 8px!important;font-size:9px!important;flex:1 1 auto!important;min-width:0!important;white-space:nowrap!important}
-            [data-r="lang-divider"]{display:none!important}
-            [data-r="lang-toggle"]{padding:8px 10px!important;font-size:9px!important}
+            [data-r="lang-toggle"]{position:absolute!important;top:12px!important;right:14px!important;padding:6px 10px!important;font-size:9px!important;z-index:2!important}
             [data-r="main-area"]{padding:16px 10px!important}
             [data-r="card"]{padding:16px 12px!important;overflow-x:hidden!important}
             [data-r="g2"]{grid-template-columns:1fr!important}
@@ -2771,19 +2771,18 @@ export default function WYPAssist(){
           }
         `}</style>
         <FlagStripe theme={lang}/>
-        <header style={styles.header}><div data-r="header-inner" style={styles.headerInner}>
+        <header style={styles.header}><div data-r="header-inner" style={{...styles.headerInner,position:"relative"}}>
           <div style={styles.logo}>
             <img src="/wyp-logo-192.png" alt="WYP" style={styles.logoIcon}/>
             <div style={{minWidth:0,flex:1}}><div data-r="logo-text" style={{...styles.logoText,fontFamily:"'Orbitron',sans-serif"}}>{tx.appName}</div><div data-r="logo-sub" style={styles.logoSub}>{tx.appSub}</div></div>
           </div>
+          <button data-r="lang-toggle" style={{...styles.langBtn(true),position:"relative"}} onClick={()=>setLang(lang==="usa"?"pr":"usa")}>
+            <span>{lang==="usa"?"🇺🇸":"🇵🇷"}</span>
+            <span style={{fontSize:11}}>{lang==="usa"?"EN":"ES"}</span>
+            <span style={{fontSize:8,opacity:0.5,marginLeft:2}}>▾</span>
+          </button>
           <div data-r="header-nav-wrap" style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap",flexShrink:1}}>
             <nav style={styles.nav}>{tabList.map(tb=><button key={tb.id} style={styles.navBtn(tab===tb.id)} onClick={()=>setTab(tb.id)}>{tb.icon} {tb.label}</button>)}</nav>
-            <div data-r="lang-divider" style={{height:28,width:1,background:theme.border,flexShrink:0}}/>
-            <button data-r="lang-toggle" style={{...styles.langBtn(true),position:"relative"}} onClick={()=>setLang(lang==="usa"?"pr":"usa")}>
-              <span>{lang==="usa"?"🇺🇸":"🇵🇷"}</span>
-              <span style={{fontSize:11}}>{lang==="usa"?"EN":"ES"}</span>
-              <span style={{fontSize:8,opacity:0.5,marginLeft:2}}>▾</span>
-            </button>
           </div>
         </div></header>
         <FlagStripe theme={lang}/>
