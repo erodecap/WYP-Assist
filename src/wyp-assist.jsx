@@ -154,7 +154,7 @@ const i18n = {
     appName:"WYP ASSIST",appSub:"Entertainment Rigging Tools",tabLoad:"Point Load",tabPull:"Pull Sheet",tabBridle:"Bridle Calc",
     disclaimer:"⚠ All calculations are estimates for planning purposes. Always verify with a qualified structural engineer and follow local codes. Safety factor of 5:1 minimum for overhead rigging.",
     footer1:"WYP Assist v1.0",footer2:"Professional rigging calculations for entertainment industry",
-    plTitle:"Hoist Point Load Calculator",plSystemType:"System Type",plTotalLoad:"Total Load",plNumPoints:"Number of Hoist Points",plSpanLength:"Span Length",plChordAngle:"Chord Angle",plRadius:"Radius",plArcAngle:"Arc Angle (° — 360 for full circle)",plDropHeight:"Drop Height",plResults:"Results",plPerPoint:"per point",plDesignLoad:"Design Load",plHoistPoints:"Hoist Points",plSystemDetails:"System Details",plNotes:"Notes",plConfig:"Rigging Configuration",plVisual:"System Diagram",
+    plTitle:"Hoist Point Load Calculator",plSystemType:"System Type",plTotalLoad:"Total Load",plNumPoints:"Number of Hoist Points",plSpanLength:"Span Length",plChordAngle:"Chord Angle",plRadius:"Radius",plArcAngle:"Arc Angle (° — 360 for full circle)",plDropHeight:"Drop Height",plResults:"Results",plPerPoint:"per point",plDesignLoad:"Design Load",plHoistPoints:"Hoist Points",plSystemDetails:"System Details",plNotes:"Notes",plConfig:"Rigging Configuration",plVisual:"System Diagram",plLoadMode:"Loading Mode",plLoadEven:"Even Distribution",plLoadCustom:"Custom Loads",plHoistSpacing:"Hoist Spacing",plHoistEven:"Even Spacing",plHoistCustom:"Custom Positions",plHoistPositions:"Hoist Positions",plClickToAdd:"Click on the truss to place a load. Drag to reposition.",plLoadList:"Applied Loads",plPosition:"Position",plWeight:"Weight",plReactions:"Support Reactions",plBeamAnalysis:"Continuous beam analysis (Three-Moment Theorem)",plAddLoad:"Add Load",plMaxReaction:"MAX",plDeleteLoad:"Remove",
     straight:"Straight",curved:"Curved",circular:"Circular",vertical:"Vertical",
     straightNote:"Even distribution assumed along straight truss/pipe",straightNote2:"End points ~60% avg, mid points ~115% avg (beam loading)",curvedNote1:"Curve correction factor",curvedNote2:"Outer points carry proportionally higher loads on curves",circularEndNote:"end points carry ~20% more",circularNote:"Circular rigs distribute load evenly when full 360°",verticalNote1:"Vertical loads include 1.25x dynamic factor for movement",verticalNote2:"Account for shock loading during accel/decel",openArc:"Open arc",
     psTitle:"Pull Sheet Generator",psProject:"Project Name",psVenue:"Venue",psChainSystem:"Chain Hoist System",psSystemType:"System Type",psMotorCounts:"Motor Counts",psHardware:"Hardware",psSteelCable:"Steel",psTotalHoists:"Total Hoists",psOnSystem:"on",psSystem:"system",psPullSheet:"Pull Sheet",psProject2:"Project",psVenue2:"Venue",psChainSys2:"Chain System",psBreakdown:"Breakdown by Motor Type",psMotors:"Motors",psItem:"Item",psSize:"Cat. ID",psQty:"Qty",
@@ -164,13 +164,13 @@ const i18n = {
     brNote1:"Always verify beam/structure capacity before loading. Angles above 90° significantly increase leg tension.",brNote2:"Horizontal forces must be resolved by the structure. Confirm breast line capacity if used.",brNote3:"Arena bridles: ensure all four attachment points are at equal elevation.",brGearList:"Bridle Gear List",brAngleWarn:"ANGLE WARNING",brAngleWarnText:"Included angle exceeds 120°. Leg loads increase dramatically. Consider wider beam spacing or more headroom.",brError:"Beam spacing must be > pick point spacing.",brEmpty:"Enter dimensions above to calculate bridle geometry",
     twoLeg:"2-Leg",threeLeg:"3-Leg",arena:"Arena (4-Leg)",sameSpreahalf:"Same as half-spread",
     gridIron:"Grid / Iron",beam:"Beam",load:"Load",
-    tabMarkout:"Markout",moTitle:"Markout Generator",moImportCSV:"Import CSV",moExportPDF:"Export PDF",moUnit:"Units",moPaper:"Paper Size",moTotalPts:"Total Points",moTotalWeight:"Total Weight",moUpstage:"UPSTAGE",moDownstage:"DOWNSTAGE",moStageLeft:"STAGE LEFT",moStageRight:"STAGE RIGHT",moCL:"CL",moLabel:"Label",moType:"Type",moLoad:"Load",moNotes:"Notes",moTrim:"Trim",moCable:"Cable",moEmpty:"Import a CSV file to generate your markout sheet",moLegend:"Legend",moNum:"#",moY:"Y",moX:"X",moPushPull:"Push to Pull Sheet",moPushPullDone:"Sent to Pull Sheet",
+    tabMarkout:"Markout",moTitle:"Markout Generator",moImportCSV:"Import CSV",moExportPDF:"Export PDF",moUnit:"Units",moPaper:"Paper Size",moTotalPts:"Total Points",moTotalWeight:"Total Weight",moUpstage:"UPSTAGE",moDownstage:"DOWNSTAGE",moStageLeft:"STAGE LEFT",moStageRight:"STAGE RIGHT",moCL:"CL",moLabel:"Label",moType:"Type",moLoad:"Load",moNotes:"Notes",moTrim:"Trim",moCable:"Cable",moEmpty:"Import a CSV file to generate your markout sheet",moLegend:"Legend",moNum:"#",moY:"Y",moX:"X",moPushPull:"Push to Pull Sheet",moPushPullDone:"Sent to Pull Sheet",moTemplate:"Download Template",moVwHelp:"Create a hoist report in Vectorworks",moLoadIn:"Load-In Markout",moExportLoadIn:"Export Load-In PDF",moSL:"SL",moSR:"SR",
   },
   pr: {
     appName:"WYP ASSIST",appSub:"Herramientas de Aparejo para Entretenimiento",tabLoad:"Carga Puntual",tabPull:"Hoja de Tiro",tabBridle:"Calc. Brida",
     disclaimer:"⚠ Todos los cálculos son estimaciones para planificación. Verifique con un ingeniero estructural calificado. Factor de seguridad mínimo de 5:1.",
     footer1:"WYP Assist v1.0",footer2:"Cálculos profesionales de aparejo para entretenimiento",
-    plTitle:"Calculadora de Carga Puntual",plSystemType:"Tipo de Sistema",plTotalLoad:"Carga Total",plNumPoints:"Número de Puntos",plSpanLength:"Longitud del Tramo",plChordAngle:"Ángulo de Cuerda",plRadius:"Radio",plArcAngle:"Ángulo de Arco (° — 360 para círculo)",plDropHeight:"Altura de Caída",plResults:"Resultados",plPerPoint:"por punto",plDesignLoad:"Carga de Diseño",plHoistPoints:"Puntos de Polipasto",plSystemDetails:"Detalles del Sistema",plNotes:"Notas",plConfig:"Configuración de Aparejo",plVisual:"Diagrama del Sistema",
+    plTitle:"Calculadora de Carga Puntual",plSystemType:"Tipo de Sistema",plTotalLoad:"Carga Total",plNumPoints:"Número de Puntos",plSpanLength:"Longitud del Tramo",plChordAngle:"Ángulo de Cuerda",plRadius:"Radio",plArcAngle:"Ángulo de Arco (° — 360 para círculo)",plDropHeight:"Altura de Caída",plResults:"Resultados",plPerPoint:"por punto",plDesignLoad:"Carga de Diseño",plHoistPoints:"Puntos de Polipasto",plSystemDetails:"Detalles del Sistema",plNotes:"Notas",plConfig:"Configuración de Aparejo",plVisual:"Diagrama del Sistema",plLoadMode:"Modo de Carga",plLoadEven:"Distribución Uniforme",plLoadCustom:"Cargas Personalizadas",plHoistSpacing:"Espaciado de Polipastos",plHoistEven:"Espaciado Uniforme",plHoistCustom:"Posiciones Personalizadas",plHoistPositions:"Posiciones de Polipastos",plClickToAdd:"Clic en el truss para colocar carga. Arrastre para mover.",plLoadList:"Cargas Aplicadas",plPosition:"Posición",plWeight:"Peso",plReactions:"Reacciones en Apoyos",plBeamAnalysis:"Análisis de viga continua (Teorema de Tres Momentos)",plAddLoad:"Agregar Carga",plMaxReaction:"MÁX",plDeleteLoad:"Eliminar",
     straight:"Recto",curved:"Curvo",circular:"Circular",vertical:"Vertical",
     straightNote:"Distribución uniforme a lo largo de truss/tubo recto",straightNote2:"Puntos finales ~60%, puntos medios ~115%",curvedNote1:"Factor de corrección de curva",curvedNote2:"Puntos exteriores cargan más en curvas",circularEndNote:"puntos finales ~20% más",circularNote:"Circular distribuye carga uniforme a 360°",verticalNote1:"Cargas verticales: factor dinámico 1.25x",verticalNote2:"Considere carga de impacto en aceleración",openArc:"Arco abierto",
     psTitle:"Generador de Hoja de Tiro",psProject:"Nombre del Proyecto",psVenue:"Lugar",psChainSystem:"Sistema de Polipasto",psSystemType:"Tipo de Sistema",psMotorCounts:"Conteo de Motores",psHardware:"Herrajes",psSteelCable:"Acero",psTotalHoists:"Total Polipastos",psOnSystem:"en",psSystem:"sistema",psPullSheet:"Hoja de Tiro",psProject2:"Proyecto",psVenue2:"Lugar",psChainSys2:"Sistema de Cadena",psBreakdown:"Desglose por Tipo de Motor",psMotors:"Motores",psItem:"Artículo",psSize:"Cat. ID",psQty:"Cant.",
@@ -180,7 +180,7 @@ const i18n = {
     brNote1:"Verifique capacidad de viga/estructura. Ángulos >90° aumentan tensión.",brNote2:"Fuerzas horizontales resueltas por la estructura. Confirme línea de pecho.",brNote3:"Arena: cuatro puntos a misma elevación.",brGearList:"Lista de Equipo de Brida",brAngleWarn:"ADVERTENCIA DE ÁNGULO",brAngleWarnText:"Ángulo >120°. Cargas aumentan dramáticamente.",brError:"Espaciado de vigas debe ser > espaciado de puntos.",brEmpty:"Ingrese dimensiones para calcular",
     twoLeg:"2-Patas",threeLeg:"3-Patas",arena:"Arena (4-Patas)",sameSpreahalf:"Igual que mitad de extensión",
     gridIron:"Parrilla",beam:"Viga",load:"Carga",
-    tabMarkout:"Marcado",moTitle:"Generador de Marcado",moImportCSV:"Importar CSV",moExportPDF:"Exportar PDF",moUnit:"Unidades",moPaper:"Tamaño Papel",moTotalPts:"Total Puntos",moTotalWeight:"Peso Total",moUpstage:"FONDO",moDownstage:"FRENTE",moStageLeft:"IZQUIERDA",moStageRight:"DERECHA",moCL:"LC",moLabel:"Etiqueta",moType:"Tipo",moLoad:"Carga",moNotes:"Notas",moTrim:"Trim",moCable:"Cable",moEmpty:"Importe un archivo CSV para generar su hoja de marcado",moLegend:"Leyenda",moNum:"#",moY:"Y",moX:"X",moPushPull:"Enviar a Hoja de Tiro",moPushPullDone:"Enviado a Hoja de Tiro",
+    tabMarkout:"Marcado",moTitle:"Generador de Marcado",moImportCSV:"Importar CSV",moExportPDF:"Exportar PDF",moUnit:"Unidades",moPaper:"Tamaño Papel",moTotalPts:"Total Puntos",moTotalWeight:"Peso Total",moUpstage:"FONDO",moDownstage:"FRENTE",moStageLeft:"IZQUIERDA",moStageRight:"DERECHA",moCL:"LC",moLabel:"Etiqueta",moType:"Tipo",moLoad:"Carga",moNotes:"Notas",moTrim:"Trim",moCable:"Cable",moEmpty:"Importe un archivo CSV para generar su hoja de marcado",moLegend:"Leyenda",moNum:"#",moY:"Y",moX:"X",moPushPull:"Enviar a Hoja de Tiro",moPushPullDone:"Enviado a Hoja de Tiro",moTemplate:"Descargar Plantilla",moVwHelp:"Crear reporte de polipastos en Vectorworks",moLoadIn:"Marcado de Carga",moExportLoadIn:"Exportar PDF de Carga",moSL:"IZ",moSR:"DE",
   },
 };
 
@@ -279,6 +279,19 @@ function countMotorsFromCSV(points){
   const counts={".25 Ton":0,".5 Ton":0,"1 Ton":0,"2 Ton":0};
   points.forEach(p=>{const m=csvTypeToMotor(p.type);if(m)counts[m]++;});
   return counts;
+}
+
+// Download blank CSV template for markout
+function downloadMarkoutTemplate(){
+  const hdr="#,POINT LABEL,Y [m],X [m],Y [ft],X [ft],TYPE,Load [lbs],Load [kgs],NOTES,TRIM [ft],TRIM [m],CABLE [ft],CABLE [m]";
+  const row="1,FOH-1,0,0,0,0,1 Ton Lights,500,226.8,Example note,40,12.192,60,18.288";
+  const csv=hdr+"\n"+row+"\n";
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download="WYP_Markout_Template.csv";
+  document.body.appendChild(a);a.click();
+  document.body.removeChild(a);URL.revokeObjectURL(url);
 }
 
 // Crosshair lines for hoist symbols
@@ -486,6 +499,139 @@ export function calcHoistGear(motorType, count) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// CONTINUOUS BEAM SOLVER (Three-Moment Theorem)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// Thomas algorithm for tridiagonal matrix: a=sub-diag, b=main-diag, c=super-diag, d=RHS
+function solveTridiagonal(a, b, c, d) {
+  const n = b.length;
+  if (n === 0) return [];
+  if (n === 1) return [d[0] / b[0]];
+  const cp = new Array(n), dp = new Array(n), x = new Array(n);
+  cp[0] = c[0] / b[0];
+  dp[0] = d[0] / b[0];
+  for (let i = 1; i < n; i++) {
+    const m = b[i] - a[i] * cp[i - 1];
+    cp[i] = i < n - 1 ? c[i] / m : 0;
+    dp[i] = (d[i] - a[i] * dp[i - 1]) / m;
+  }
+  x[n - 1] = dp[n - 1];
+  for (let i = n - 2; i >= 0; i--) x[i] = dp[i] - cp[i] * x[i + 1];
+  return x;
+}
+
+/**
+ * Solve a continuous beam with N supports under arbitrary point loads.
+ * Uses the Three-Moment Theorem (Clapeyron) to find support reactions.
+ * @param {number[]} supportPositions - sorted ascending positions of supports
+ * @param {{position:number, weight:number}[]} loads - point loads on the beam
+ * @returns {{reactions:number[], moments:number[], maxReaction:number}}
+ */
+export function solveBeamReactions(supportPositions, loads) {
+  const N = supportPositions.length;
+  if (N === 0) return { reactions: [], moments: [], maxReaction: 0 };
+  if (N === 1) {
+    const total = loads.reduce((s, l) => s + l.weight, 0);
+    return { reactions: [total], moments: [0], maxReaction: total };
+  }
+
+  // Span lengths
+  const nSpans = N - 1;
+  const L = [];
+  for (let i = 0; i < nSpans; i++) L.push(supportPositions[i + 1] - supportPositions[i]);
+
+  // Assign each load to a span and compute theta contributions
+  const thetaL = new Array(nSpans).fill(0);
+  const thetaR = new Array(nSpans).fill(0);
+  // Also track simple-beam reactions for each span
+  const simpleLeft = new Array(nSpans).fill(0);
+  const simpleRight = new Array(nSpans).fill(0);
+
+  loads.forEach(ld => {
+    if (ld.weight === 0) return;
+    // Clamp load position to beam extent
+    let pos = Math.max(supportPositions[0], Math.min(supportPositions[N - 1], ld.position));
+    // Find which span this load falls in
+    let spanIdx = 0;
+    for (let i = 0; i < nSpans; i++) {
+      if (pos <= supportPositions[i + 1] + 1e-12) { spanIdx = i; break; }
+      if (i === nSpans - 1) spanIdx = i;
+    }
+    const a = pos - supportPositions[spanIdx];
+    const b = L[spanIdx] - a;
+    const P = ld.weight;
+    const Li = L[spanIdx];
+    if (Li < 1e-12) {
+      // Zero-length span: load goes to left support
+      simpleLeft[spanIdx] += P;
+      return;
+    }
+    // Theta contributions for three-moment equations
+    thetaL[spanIdx] += P * a * (Li * Li - a * a) / (6 * Li);
+    thetaR[spanIdx] += P * b * (Li * Li - b * b) / (6 * Li);
+    // Simple beam reactions
+    simpleLeft[spanIdx] += P * b / Li;
+    simpleRight[spanIdx] += P * a / Li;
+  });
+
+  // Build tridiagonal system for interior moments (M[0]=0, M[N-1]=0)
+  const nInterior = N - 2;
+  const moments = new Array(N).fill(0); // M[0..N-1]
+
+  if (nInterior > 0) {
+    const sa = new Array(nInterior).fill(0); // sub-diagonal
+    const sb = new Array(nInterior).fill(0); // main diagonal
+    const sc = new Array(nInterior).fill(0); // super-diagonal
+    const sd = new Array(nInterior).fill(0); // RHS
+
+    for (let k = 0; k < nInterior; k++) {
+      const i = k + 1; // support index (1..N-2)
+      const leftSpan = i - 1;
+      const rightSpan = i;
+      sa[k] = k > 0 ? L[leftSpan] : 0;
+      sb[k] = 2 * (L[leftSpan] + L[rightSpan]);
+      sc[k] = k < nInterior - 1 ? L[rightSpan] : 0;
+      sd[k] = -6 * (thetaR[leftSpan] + thetaL[rightSpan]);
+    }
+
+    const mInterior = solveTridiagonal(sa, sb, sc, sd);
+    for (let k = 0; k < nInterior; k++) moments[k + 1] = mInterior[k];
+  }
+
+  // Compute reactions from simple beam + moment corrections
+  const reactions = new Array(N).fill(0);
+  for (let i = 0; i < nSpans; i++) {
+    const Li = L[i];
+    if (Li < 1e-12) {
+      reactions[i] += simpleLeft[i];
+      continue;
+    }
+    const momentCorr = (moments[i + 1] - moments[i]) / Li;
+    reactions[i] += simpleLeft[i] - momentCorr;
+    reactions[i + 1] += simpleRight[i] + momentCorr;
+  }
+
+  const maxReaction = Math.max(0, ...reactions);
+  return { reactions, moments, maxReaction };
+}
+
+/**
+ * Generate evenly-spaced loads to approximate a uniform distributed load.
+ * @param {number} totalWeight
+ * @param {number} numPoints - number of discrete load points
+ * @param {number} spanLength
+ * @returns {{position:number, weight:number}[]}
+ */
+export function generateEvenLoads(totalWeight, numPoints, spanLength) {
+  if (numPoints <= 0 || spanLength <= 0) return [];
+  const w = totalWeight / numPoints;
+  return Array.from({ length: numPoints }, (_, i) => ({
+    position: numPoints === 1 ? spanLength / 2 : (spanLength * i) / (numPoints - 1),
+    weight: w,
+  }));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // STYLES
 // ═══════════════════════════════════════════════════════════════════════════════
 function mkS(t) {
@@ -497,11 +643,11 @@ function mkS(t) {
     logoIcon:{width:48,height:48,background:t.accentGradient,borderRadius:6,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:900,fontSize:20,color:"#fff",boxShadow:`0 4px 20px ${t.accent}40`},
     logoText:{fontSize:24,fontWeight:900,letterSpacing:3,color:t.textPrimary},
     logoSub:{fontSize:9,color:t.textSecondary,letterSpacing:4,textTransform:"uppercase",marginTop:2},
-    nav:{display:"flex",gap:4,flexWrap:"nowrap",flexShrink:0},
+    nav:{display:"flex",gap:4,flexWrap:"wrap",flexShrink:1},
     navBtn:(a)=>({padding:"10px 12px",textAlign:"center",whiteSpace:"nowrap",background:a?`linear-gradient(180deg,${t.accent} 0%,${t.accent}CC 100%)`:"transparent",color:a?"#fff":t.textSecondary,border:a?`2px solid ${t.accent}`:`2px solid ${t.border}`,borderRadius:2,cursor:"pointer",fontFamily:"inherit",fontSize:10,fontWeight:a?900:600,letterSpacing:1.2,textTransform:"uppercase",transition:"all .15s",boxShadow:a?`0 2px 8px ${t.accent}50,inset 0 1px 0 rgba(255,255,255,0.15)`:"none",textShadow:a?"0 1px 2px rgba(0,0,0,0.3)":"none",borderBottom:a?`2px solid ${t.accent}80`:`2px solid ${t.border}`}),
     langBtn:(a)=>({padding:"8px 10px",background:a?t.secondary:"transparent",color:a?"#fff":t.textSecondary,border:a?`2px solid ${t.secondary}`:`2px solid ${t.border}`,borderRadius:2,cursor:"pointer",fontFamily:"inherit",fontSize:12,fontWeight:a?800:500,transition:"all .15s",display:"flex",alignItems:"center",gap:4,boxShadow:a?`0 2px 8px ${t.secondary}40,inset 0 1px 0 rgba(255,255,255,0.15)`:"none",letterSpacing:a?1:0}),
-    main:{maxWidth:1200,margin:"0 auto",padding:"32px 24px"},
-    card:{background:t.surface,border:`1px solid ${t.border}`,borderRadius:8,padding:28,marginBottom:20,boxShadow:t.cardGlow},
+    main:{maxWidth:1200,margin:"0 auto",padding:"32px 24px",boxSizing:"border-box"},
+    card:{background:t.surface,border:`1px solid ${t.border}`,borderRadius:8,padding:28,marginBottom:20,boxShadow:t.cardGlow,boxSizing:"border-box"},
     cardTitle:{fontSize:15,fontWeight:700,color:t.accent,letterSpacing:2,textTransform:"uppercase",marginBottom:20,paddingBottom:12,borderBottom:`1px solid ${t.border}`,display:"flex",alignItems:"center",gap:10},
     secTitle:{fontSize:12,fontWeight:700,color:t.textSecondary,letterSpacing:3,textTransform:"uppercase",marginBottom:16,marginTop:24},
     label:{fontSize:10,color:t.textSecondary,letterSpacing:1.5,textTransform:"uppercase",marginBottom:6,display:"block",fontWeight:600},
@@ -561,8 +707,113 @@ const MiniCounter = ({value, onChange}) => {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// SVG DIAGRAMS (same as before, abbreviated)
+// SVG DIAGRAMS
 // ═══════════════════════════════════════════════════════════════════════════════
+
+// Interactive diagram for straight rigs with beam loading
+function InteractivePointLoadDiagram({spanLength,hoistPositions,loads,reactions,maxReaction,unit,loadMode,onAddLoad,onUpdateLoad,onDeleteLoad,svgRef}){
+  const{t,tx}=useTheme();const ac=t.accent,dim=t.textSecondary;
+  const uW=unit==="imperial"?"lbs":"kg",uD=unit==="imperial"?"ft":"m";
+  const w=600,h=400,padX=60,plotW=w-padX*2;
+  const S=Math.max(spanLength,0.001);
+  const toSvgX=pos=>padX+(pos/S)*plotW;
+  const toBeamPos=svgX=>Math.max(0,Math.min(S,((svgX-padX)/plotW)*S));
+  const gridY=20,hoistY=80,trussY=120,loadY=220,dimY=360;
+
+  // Reaction color: green→yellow→red
+  const rxColor=r=>{
+    if(maxReaction<=0)return success;
+    const ratio=Math.abs(r)/maxReaction;
+    if(ratio<0.5)return success;
+    if(ratio<0.8)return warning;
+    return danger;
+  };
+
+  // Handle click on truss to add load (custom mode only)
+  const handleTrussClick=e=>{
+    if(loadMode!=="custom"||!svgRef.current||!onAddLoad)return;
+    const svg=svgRef.current;
+    const pt=svg.createSVGPoint();
+    pt.x=e.clientX;pt.y=e.clientY;
+    const svgPt=pt.matrixTransform(svg.getScreenCTM().inverse());
+    const pos=toBeamPos(svgPt.x);
+    onAddLoad(pos);
+  };
+
+  // Drag state (local to SVG interactions)
+  const[dragId,setDragId]=useState(null);
+  const handleDragStart=(e,id)=>{e.stopPropagation();setDragId(id);};
+  const handleDragMove=e=>{
+    if(dragId===null||!svgRef.current||!onUpdateLoad)return;
+    const svg=svgRef.current;
+    const pt=svg.createSVGPoint();
+    pt.x=e.clientX;pt.y=e.clientY;
+    const svgPt=pt.matrixTransform(svg.getScreenCTM().inverse());
+    const pos=Math.round(toBeamPos(svgPt.x)*100)/100;
+    onUpdateLoad(dragId,"position",pos);
+  };
+  const handleDragEnd=()=>setDragId(null);
+
+  return(
+    <svg ref={svgRef} viewBox={`0 0 ${w} ${h}`} style={{width:"100%",maxWidth:600,cursor:loadMode==="custom"?"crosshair":"default",userSelect:"none"}}
+      onMouseMove={handleDragMove} onMouseUp={handleDragEnd} onMouseLeave={handleDragEnd}>
+      <defs>
+        <marker id="ipl-ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill={ac}/></marker>
+      </defs>
+      {/* Grid Iron */}
+      <rect x={padX-10} y={gridY} width={plotW+20} height={12} rx={2} fill={dim} opacity={0.3}/>
+      <text x={w/2} y={gridY-4} textAnchor="middle" fill={dim} fontSize="10" fontFamily="inherit" letterSpacing="2">{tx.gridIron}</text>
+      {/* Hoist chain lines + points + reactions */}
+      {hoistPositions.map((pos,i)=>{
+        const x=toSvgX(pos);const rx=(reactions&&reactions[i])||0;const col=rxColor(rx);const isMax=maxReaction>0&&Math.abs(rx-maxReaction)<0.01;
+        return(<g key={`h${i}`}>
+          <line x1={x} y1={gridY+12} x2={x} y2={hoistY-8} stroke={dim} strokeWidth={1.5} strokeDasharray="4 3"/>
+          <circle cx={x} cy={hoistY} r={6} fill={col} stroke={isMax?"#fff":"none"} strokeWidth={isMax?2:0}/>
+          <text x={x} y={hoistY-14} textAnchor="middle" fill={col} fontSize="10" fontFamily="inherit" fontWeight="700">{rx.toFixed(0)} {uW}</text>
+          {isMax&&<text x={x} y={hoistY-26} textAnchor="middle" fill={danger} fontSize="8" fontFamily="inherit" fontWeight="900" letterSpacing="1">{tx.plMaxReaction}</text>}
+          <text x={x} y={hoistY+18} textAnchor="middle" fill={dim} fontSize="8" fontFamily="inherit">R{i+1}</text>
+        </g>);
+      })}
+      {/* Truss line (clickable in custom mode) */}
+      <rect x={padX-6} y={trussY-8} width={plotW+12} height={16} rx={3} fill="none" stroke={ac} strokeWidth={2}
+        style={{cursor:loadMode==="custom"?"crosshair":"default"}} onClick={handleTrussClick}/>
+      <text x={w/2} y={trussY+4} textAnchor="middle" fill={ac} fontSize="9" fontFamily="inherit" fontWeight="700">TRUSS</text>
+      {/* Load arrows */}
+      {loads.map((ld,i)=>{
+        const x=toSvgX(ld.position);
+        return(<g key={`ld${ld.id||i}`}>
+          {/* Arrow from truss down */}
+          <line x1={x} y1={trussY+10} x2={x} y2={loadY-10} stroke={ac} strokeWidth={2} markerEnd="url(#ipl-ah)"/>
+          {/* Load box - draggable in custom mode */}
+          <g style={{cursor:loadMode==="custom"?"grab":"default"}}
+            onMouseDown={loadMode==="custom"?e=>handleDragStart(e,ld.id):undefined}>
+            <rect x={x-32} y={loadY-8} width={64} height={26} rx={4} fill={ac} opacity={0.15} stroke={ac} strokeWidth={1}/>
+            <text x={x} y={loadY+10} textAnchor="middle" fill={ac} fontSize="10" fontFamily="inherit" fontWeight="700">{ld.weight.toFixed(0)} {uW}</text>
+          </g>
+          {/* Position label */}
+          <text x={x} y={loadY+32} textAnchor="middle" fill={dim} fontSize="8" fontFamily="inherit">{ld.position.toFixed(1)} {uD}</text>
+          {/* Delete button (custom mode) */}
+          {loadMode==="custom"&&onDeleteLoad&&(
+            <g style={{cursor:"pointer"}} onClick={()=>onDeleteLoad(ld.id)}>
+              <circle cx={x+28} cy={loadY-4} r={7} fill={danger} opacity={0.8}/>
+              <text x={x+28} y={loadY-1} textAnchor="middle" fill="#fff" fontSize="9" fontFamily="inherit" fontWeight="700">✕</text>
+            </g>
+          )}
+        </g>);
+      })}
+      {/* Dimension line */}
+      <line x1={padX} y1={dimY} x2={padX+plotW} y2={dimY} stroke={dim} strokeWidth={1}/>
+      <line x1={padX} y1={dimY-5} x2={padX} y2={dimY+5} stroke={dim} strokeWidth={1}/>
+      <line x1={padX+plotW} y1={dimY-5} x2={padX+plotW} y2={dimY+5} stroke={dim} strokeWidth={1}/>
+      <text x={w/2} y={dimY+16} textAnchor="middle" fill={dim} fontSize="10" fontFamily="inherit">{S.toFixed(1)} {uD}</text>
+      {/* Click hint for custom mode */}
+      {loadMode==="custom"&&loads.length===0&&(
+        <text x={w/2} y={trussY+40} textAnchor="middle" fill={dim} fontSize="11" fontFamily="inherit" fontStyle="italic">{tx.plClickToAdd}</text>
+      )}
+    </svg>
+  );
+}
+
 function PointLoadDiagram({rigType,numPoints,pointLoad,unit}){
   const{t,tx}=useTheme();const N=parseInt(numPoints)||3;const pL=parseFloat(pointLoad)||0;
   const uW=unit==="imperial"?"lbs":"kg";const w=520,h=320;const ac=t.accent,dim=t.textSecondary,sec=t.secondary;
@@ -694,38 +945,184 @@ function PointLoadTab(){
   const[rig,setRig]=useState("straight");const[load,setLoad]=useState("");const[pts,setPts]=useState("");
   const[span,setSpan]=useState("");const[chord,setChord]=useState("");const[rad,setRad]=useState("");
   const[arc,setArc]=useState("");const[drop,setDrop]=useState("");const[unit,setUnit]=useState("imperial");
+  // Beam loading state (straight rig only)
+  const[loadMode,setLoadMode]=useState("even"); // "even" | "custom"
+  const[hoistMode,setHoistMode]=useState("even"); // "even" | "custom"
+  const[customLoads,setCustomLoads]=useState([]); // [{id,position,weight}]
+  const[customHoists,setCustomHoists]=useState(""); // comma-separated positions string
+  const nextLoadId=useRef(1);
+  const svgRef=useRef(null);
+
   const labels={straight:tx.straight,curved:tx.curved,circular:tx.circular};
   const uW=unit==="imperial"?"lbs":"kg",uD=unit==="imperial"?"ft":"m";
+
+  // Custom load handlers
+  const addLoad=(pos)=>{
+    const w=parseFloat(load)||100;
+    setCustomLoads(prev=>[...prev,{id:nextLoadId.current++,position:Math.round(pos*100)/100,weight:Math.round(w/Math.max(parseInt(pts)||1,1))}]);
+  };
+  const updateLoad=(id,field,val)=>{
+    setCustomLoads(prev=>prev.map(l=>l.id===id?{...l,[field]:parseFloat(val)||0}:l));
+  };
+  const deleteLoad=(id)=>{
+    setCustomLoads(prev=>prev.filter(l=>l.id!==id));
+  };
+
+  // Compute results — beam solver for straight, legacy for curved/circular
   const res=useMemo(()=>{
-    const W=parseFloat(load),N=parseInt(pts);if(!W||!N||N<1)return null;let pL,notes=[],det={};
-    if(rig==="straight"){pL=W/N;det.span=parseFloat(span)||0;notes.push(tx.straightNote);if(N>=2){det.endLoad=(pL*.6).toFixed(1);det.midLoad=(pL*1.15).toFixed(1);notes.push(tx.straightNote2);}}
-    else if(rig==="curved"){const a=(parseFloat(chord)||0)*Math.PI/180;const cf=a>0?(2*Math.sin(a/2))/a:1;pL=(W/N)/cf;det.curveFactor=cf.toFixed(3);notes.push(`${tx.curvedNote1}: ${cf.toFixed(3)}`);notes.push(tx.curvedNote2);}
+    const N=parseInt(pts);
+    if(rig==="straight"){
+      const S=parseFloat(span)||0;
+      if(!N||N<1||S<=0)return null;
+      // Hoist positions
+      let hoistPos;
+      if(hoistMode==="custom"&&customHoists.trim()){
+        hoistPos=customHoists.split(",").map(v=>parseFloat(v.trim())).filter(v=>!isNaN(v)&&v>=0&&v<=S).sort((a,b)=>a-b);
+        if(hoistPos.length<1)hoistPos=Array.from({length:N},(_,i)=>N===1?S/2:(S*i)/(N-1));
+      }else{
+        hoistPos=Array.from({length:N},(_,i)=>N===1?S/2:(S*i)/(N-1));
+      }
+      // Loads
+      let beamLoads;
+      if(loadMode==="custom"){
+        beamLoads=customLoads.map(l=>({position:l.position,weight:l.weight}));
+      }else{
+        const W=parseFloat(load);if(!W)return null;
+        // Approximate UDL with N*4 even loads
+        const nPts=Math.max(N*4,8);
+        beamLoads=generateEvenLoads(W,nPts,S);
+      }
+      if(beamLoads.length===0&&loadMode==="custom")beamLoads=[]; // allow empty for display
+      const{reactions,moments,maxReaction}=solveBeamReactions(hoistPos,beamLoads);
+      const totalLoad=beamLoads.reduce((s,l)=>s+l.weight,0);
+      const avgLoad=hoistPos.length>0?totalLoad/hoistPos.length:0;
+      const notes=[tx.plBeamAnalysis];
+      return{pL:avgLoad.toFixed(1),dL:(maxReaction*5).toFixed(1),notes,det:{},
+        beam:true,reactions,moments,maxReaction,hoistPositions:hoistPos,
+        beamLoads,totalLoad,spanLength:S};
+    }
+    // Curved / circular — legacy W/N
+    const W=parseFloat(load);if(!W||!N||N<1)return null;let pL,notes=[],det={};
+    if(rig==="curved"){const a=(parseFloat(chord)||0)*Math.PI/180;const cf=a>0?(2*Math.sin(a/2))/a:1;pL=(W/N)/cf;det.curveFactor=cf.toFixed(3);notes.push(`${tx.curvedNote1}: ${cf.toFixed(3)}`);notes.push(tx.curvedNote2);}
     else if(rig==="circular"){const r=parseFloat(rad)||0,a=parseFloat(arc)||360;det.circumference=(a*Math.PI/180*r).toFixed(1);det.arcAngle=a;pL=W/N;if(a<360){det.endPointLoad=(pL*1.2).toFixed(1);notes.push(`${tx.openArc} (${a}°): ${tx.circularEndNote}`);}notes.push(tx.circularNote);}
-    else{pL=W/N;det.dropHeight=parseFloat(drop)||0;det.dynamicLoad=(pL*1.25).toFixed(1);notes.push(tx.verticalNote1);notes.push(tx.verticalNote2);}
-    return{pL:pL.toFixed(1),dL:(pL*5).toFixed(1),notes,det};
-  },[rig,load,pts,span,chord,rad,arc,drop,tx]);
+    else{pL=W/N;notes.push(tx.straightNote);}
+    return{pL:pL.toFixed(1),dL:(pL*5).toFixed(1),notes,det,beam:false};
+  },[rig,load,pts,span,chord,rad,arc,drop,tx,loadMode,hoistMode,customLoads,customHoists]);
+
+  // Reaction color helper
+  const rxColor=(r,max)=>{
+    if(max<=0)return success;
+    const ratio=Math.abs(r)/max;
+    if(ratio<0.5)return success;if(ratio<0.8)return warning;return danger;
+  };
+
   return(<div>
-    <div style={s.card}><div style={s.cardTitle}><span style={{fontSize:18}}>⚙</span> {tx.plTitle}</div>
+    <div data-r="card" style={s.card}><div style={s.cardTitle}><span style={{fontSize:18}}>⚙</span> {tx.plTitle}</div>
       <Chips options={["imperial","metric"]} value={unit} onChange={setUnit}/>
       <div style={s.secTitle}>{tx.plConfig}</div>
       <Field label={tx.plSystemType}><div style={{display:"flex",gap:8,flexWrap:"wrap"}}>{RIG_KEYS.map(k=><button key={k} style={s.chip(rig===k)} onClick={()=>setRig(k)}>{labels[k]}</button>)}</div></Field>
-      <div style={s.g3}>
-        <Field label={`${tx.plTotalLoad} (${uW})`}><Inp value={load} onChange={setLoad} placeholder="0"/></Field>
+      <div data-r="g3" style={s.g3}>
+        {(rig!=="straight"||loadMode==="even")&&<Field label={`${tx.plTotalLoad} (${uW})`}><Inp value={load} onChange={setLoad} placeholder="0"/></Field>}
         <Field label={tx.plNumPoints}><Inp value={pts} onChange={setPts} placeholder="0" step="1"/></Field>
         {rig==="straight"&&<Field label={`${tx.plSpanLength} (${uD})`}><Inp value={span} onChange={setSpan} placeholder="0"/></Field>}
         {rig==="curved"&&<Field label={`${tx.plChordAngle} (°)`}><Inp value={chord} onChange={setChord} placeholder="0"/></Field>}
         {rig==="circular"&&<Field label={`${tx.plRadius} (${uD})`}><Inp value={rad} onChange={setRad} placeholder="0"/></Field>}
       </div>
       {rig==="circular"&&<Field label={tx.plArcAngle} style={{marginTop:8}}><Inp value={arc} onChange={setArc} placeholder="360"/></Field>}
+
+      {/* Straight rig: load mode + hoist spacing toggles */}
+      {rig==="straight"&&<>
+        <div style={{marginTop:16,display:"flex",gap:24,flexWrap:"wrap"}}>
+          <Field label={tx.plLoadMode}><div style={{display:"flex",gap:8}}>
+            <button style={s.chip(loadMode==="even")} onClick={()=>setLoadMode("even")}>{tx.plLoadEven}</button>
+            <button style={s.chip(loadMode==="custom")} onClick={()=>setLoadMode("custom")}>{tx.plLoadCustom}</button>
+          </div></Field>
+          <Field label={tx.plHoistSpacing}><div style={{display:"flex",gap:8}}>
+            <button style={s.chip(hoistMode==="even")} onClick={()=>setHoistMode("even")}>{tx.plHoistEven}</button>
+            <button style={s.chip(hoistMode==="custom")} onClick={()=>setHoistMode("custom")}>{tx.plHoistCustom}</button>
+          </div></Field>
+        </div>
+        {/* Custom hoist positions input */}
+        {hoistMode==="custom"&&<Field label={`${tx.plHoistPositions} (${uD}) — comma separated`} style={{marginTop:8}}>
+          <input style={s.input} type="text" value={customHoists} onChange={e=>setCustomHoists(e.target.value)} placeholder={`e.g. 0, 10, 20, 30`}/>
+        </Field>}
+        {/* Custom load list table */}
+        {loadMode==="custom"&&customLoads.length>0&&(
+          <div style={{marginTop:12}}>
+            <div style={s.secTitle}>{tx.plLoadList}</div>
+            <div style={{display:"flex",flexDirection:"column",gap:4}}>
+              {customLoads.map(ld=>(
+                <div key={ld.id} data-r="custom-load-row" style={{display:"flex",gap:8,alignItems:"center",background:t.surfaceLight,padding:"4px 8px",borderRadius:4,border:`1px solid ${t.border}`}}>
+                  <span style={{color:t.textSecondary,fontSize:10,minWidth:50,flexShrink:0}}>{tx.plPosition} ({uD})</span>
+                  <input type="number" style={{...s.input,width:80,minWidth:60,flex:"1 1 60px",margin:0,padding:"3px 6px"}} value={ld.position} onChange={e=>updateLoad(ld.id,"position",e.target.value)} step="0.1"/>
+                  <span style={{color:t.textSecondary,fontSize:10,minWidth:40,flexShrink:0}}>{tx.plWeight} ({uW})</span>
+                  <input type="number" style={{...s.input,width:80,minWidth:60,flex:"1 1 60px",margin:0,padding:"3px 6px"}} value={ld.weight} onChange={e=>updateLoad(ld.id,"weight",e.target.value)}/>
+                  <button style={{...s.chip(false),color:danger,borderColor:danger,padding:"2px 8px",fontSize:11,cursor:"pointer",flexShrink:0}} onClick={()=>deleteLoad(ld.id)}>✕</button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        {/* Add load button for custom mode */}
+        {loadMode==="custom"&&(parseFloat(span)>0)&&(
+          <button style={{...s.chip(false),marginTop:8,cursor:"pointer"}} onClick={()=>addLoad(parseFloat(span)/2)}>+ {tx.plAddLoad}</button>
+        )}
+      </>}
     </div>
-    {res&&(<div style={s.card}><div style={s.cardTitle}><span>◆</span> {tx.plResults} — {labels[rig]}</div>
-      <div style={s.diagWrap}><div style={{fontSize:10,color:t.textSecondary,letterSpacing:2,textTransform:"uppercase",marginBottom:12,fontWeight:700}}>{tx.plVisual}</div><PointLoadDiagram rigType={rig} numPoints={pts} pointLoad={res.pL} unit={unit}/></div>
-      <div style={{...s.g3,marginTop:20}}>
-        <div style={s.res}><div style={s.resVal}>{res.pL}</div><div style={s.resLbl}>{uW} {tx.plPerPoint}</div></div>
-        <div style={s.res}><div style={{...s.resVal,color:danger}}>{res.dL}</div><div style={s.resLbl}>{tx.plDesignLoad} (5:1 SF)</div></div>
-        <div style={s.res}><div style={{...s.resVal,color:success}}>{pts}</div><div style={s.resLbl}>{tx.plHoistPoints}</div></div>
-      </div>
-      {Object.keys(res.det).length>0&&<div style={{marginTop:20}}><div style={s.secTitle}>{tx.plSystemDetails}</div><div style={{display:"flex",gap:12,flexWrap:"wrap"}}>{Object.entries(res.det).map(([k,v])=><div key={k} style={s.pill}><span style={{color:t.textSecondary,fontSize:10,textTransform:"uppercase",letterSpacing:1}}>{k.replace(/([A-Z])/g,' $1')}: </span><span style={{color:t.accent,fontWeight:700}}>{v}</span></div>)}</div></div>}
+
+    {/* RESULTS */}
+    {res&&(<div data-r="card" style={s.card}><div style={s.cardTitle}><span>◆</span> {tx.plResults} — {labels[rig]}</div>
+
+      {/* Interactive diagram for straight beam loading */}
+      {res.beam?(<div style={s.diagWrap}>
+        <div style={{fontSize:10,color:t.textSecondary,letterSpacing:2,textTransform:"uppercase",marginBottom:12,fontWeight:700}}>{tx.plVisual}</div>
+        <InteractivePointLoadDiagram
+          spanLength={res.spanLength} hoistPositions={res.hoistPositions}
+          loads={loadMode==="custom"?customLoads:
+            // For even mode, show N representative loads (not the N*4 internal UDL approximation)
+            Array.from({length:parseInt(pts)||1},(_,i)=>{const N=parseInt(pts)||1;const S=res.spanLength;return{id:i,position:N===1?S/2:(S*i)/(N-1),weight:res.totalLoad/N};})}
+          reactions={res.reactions} maxReaction={res.maxReaction}
+          unit={unit} loadMode={loadMode}
+          onAddLoad={addLoad} onUpdateLoad={updateLoad} onDeleteLoad={deleteLoad}
+          svgRef={svgRef}/>
+      </div>):(
+        <div style={s.diagWrap}><div style={{fontSize:10,color:t.textSecondary,letterSpacing:2,textTransform:"uppercase",marginBottom:12,fontWeight:700}}>{tx.plVisual}</div><PointLoadDiagram rigType={rig} numPoints={pts} pointLoad={res.pL} unit={unit}/></div>
+      )}
+
+      {/* Reaction cards for beam loading */}
+      {res.beam&&res.reactions&&res.reactions.length>0&&(<>
+        <div style={{marginTop:20}}><div style={s.secTitle}>{tx.plReactions}</div>
+          <div style={{display:"flex",gap:10,flexWrap:"wrap",marginTop:8}}>
+            {res.reactions.map((r,i)=>{
+              const isMax=res.maxReaction>0&&Math.abs(r-res.maxReaction)<0.01;
+              const col=rxColor(r,res.maxReaction);
+              return(<div key={i} style={{...s.res,position:"relative",border:`2px solid ${col}`,borderRadius:8,padding:"10px 14px",minWidth:90,textAlign:"center"}}>
+                {isMax&&<div style={{position:"absolute",top:-8,right:-4,background:danger,color:"#fff",fontSize:8,fontWeight:900,padding:"1px 6px",borderRadius:4,letterSpacing:1}}>{tx.plMaxReaction}</div>}
+                <div style={{fontSize:22,fontWeight:900,color:col}}>{r.toFixed(0)}</div>
+                <div style={{fontSize:9,color:t.textSecondary,marginTop:2}}>R{i+1} ({uW})</div>
+                <div style={{fontSize:8,color:t.textSecondary}}>{res.hoistPositions[i].toFixed(1)} {uD}</div>
+              </div>);
+            })}
+          </div>
+        </div>
+        {/* Summary row */}
+        <div data-r="g3" style={{...s.g3,marginTop:20}}>
+          <div style={s.res}><div style={{...s.resVal,color:danger}}>{res.dL}</div><div style={s.resLbl}>{tx.plDesignLoad} (5:1 SF)</div></div>
+          <div style={s.res}><div style={{...s.resVal,color:success}}>{res.hoistPositions.length}</div><div style={s.resLbl}>{tx.plHoistPoints}</div></div>
+          <div style={s.res}><div style={s.resVal}>{res.totalLoad.toFixed(0)}</div><div style={s.resLbl}>{tx.plTotalLoad} ({uW})</div></div>
+        </div>
+      </>)}
+
+      {/* Legacy cards for curved/circular */}
+      {!res.beam&&(<>
+        <div data-r="g3" style={{...s.g3,marginTop:20}}>
+          <div style={s.res}><div style={s.resVal}>{res.pL}</div><div style={s.resLbl}>{uW} {tx.plPerPoint}</div></div>
+          <div style={s.res}><div style={{...s.resVal,color:danger}}>{res.dL}</div><div style={s.resLbl}>{tx.plDesignLoad} (5:1 SF)</div></div>
+          <div style={s.res}><div style={{...s.resVal,color:success}}>{pts}</div><div style={s.resLbl}>{tx.plHoistPoints}</div></div>
+        </div>
+        {Object.keys(res.det).length>0&&<div style={{marginTop:20}}><div style={s.secTitle}>{tx.plSystemDetails}</div><div style={{display:"flex",gap:12,flexWrap:"wrap"}}>{Object.entries(res.det).map(([k,v])=><div key={k} style={s.pill}><span style={{color:t.textSecondary,fontSize:10,textTransform:"uppercase",letterSpacing:1}}>{k.replace(/([A-Z])/g,' $1')}: </span><span style={{color:t.accent,fontWeight:700}}>{v}</span></div>)}</div></div>}
+      </>)}
+
       {res.notes.length>0&&<div style={{marginTop:20}}><div style={s.secTitle}>{tx.plNotes}</div>{res.notes.map((n,i)=><div key={i} style={s.note}>{n}</div>)}</div>}
     </div>)}
   </div>);
@@ -825,15 +1222,15 @@ function PullSheetTab(){
   const sendBtnColor=sendStatus==="sent"?success:sendStatus==="error"?danger:t.secondary;
 
   return(<div>
-    <div style={s.card}>
+    <div data-r="card" style={s.card}>
       <div style={s.cardTitle}><span style={{fontSize:18}}>📋</span> {tx.psTitle}</div>
-      <div style={s.g2}>
+      <div data-r="g2" style={s.g2}>
         <Field label={tx.psProject}><Inp type="text" value={pn} onChange={setPn} placeholder="..."/></Field>
         <Field label={tx.psVenue}><Inp type="text" value={vn} onChange={setVn} placeholder="..."/></Field>
       </div>
 
       {/* Show Date / Return Date / Country */}
-      <div style={{...s.g3,marginTop:16}}>
+      <div data-r="g3" style={{...s.g3,marginTop:16}}>
         <Field label={<>{tx.psShowDate} <span style={{color:danger,fontSize:10}}>*</span></>}>
           <input type="date" style={s.input} value={showDate} onChange={e=>setShowDate(e.target.value)}/>
         </Field>
@@ -849,7 +1246,7 @@ function PullSheetTab(){
 
       {/* Motor Counts */}
       <div style={s.secTitle}>{tx.psMotorCounts}</div>
-      <div style={s.g4}>
+      <div data-r="g4" style={s.g4}>
         {MOTOR_TYPES.map(ty=>{const isH=parseFloat(ty)>1;return(
           <div key={ty} style={s.mCard}>
             <div style={{fontSize:13,fontWeight:700,color:t.accent,marginBottom:4}}>{ty}</div>
@@ -863,20 +1260,24 @@ function PullSheetTab(){
         <span style={{fontSize:11,color:t.textSecondary}}>{tx.psOnSystem} {cs} {tx.psSystem}</span>
       </div>
 
-      {/* Chain System + D8 Toggle — horizontal row */}
-      <div style={{display:"flex",alignItems:"center",gap:16,marginTop:16,flexWrap:"wrap"}}>
-        <div style={{display:"flex",alignItems:"center",gap:8}}>
-          <span style={{fontSize:10,color:t.textSecondary,letterSpacing:1.5,textTransform:"uppercase",fontWeight:600}}>{tx.psChainSystem}:</span>
-          <Chips options={CHAIN_SYSTEMS} value={cs} onChange={setCs}/>
-        </div>
-        <button style={{...s.chip(d8),background:d8?`${danger}25`:s.chip(false).background,color:d8?danger:t.textSecondary,border:d8?`2px solid ${danger}`:`1px solid ${t.border}`,fontWeight:d8?900:500,fontSize:12,padding:"9px 18px",letterSpacing:1.5}} onClick={()=>setD8(!d8)}>
+      {/* Chain System */}
+      <div style={s.secTitle}>{tx.psChainSystem}</div>
+      <Field label={tx.psSystemType}><Chips options={CHAIN_SYSTEMS} value={cs} onChange={setCs}/></Field>
+
+      {/* D8 / D8+ Toggle */}
+      <div style={{marginTop:20,marginBottom:8}}>
+        <button style={{...s.chip(d8),background:d8?`${danger}25`:s.chip(false).background,color:d8?danger:t.textSecondary,border:d8?`2px solid ${danger}`:`1px solid ${t.border}`,fontWeight:d8?900:500,fontSize:12,padding:"10px 20px",letterSpacing:1.5}} onClick={()=>setD8(!d8)}>
           {d8?"⚠ ":"🔒 "}{tx.psD8}
         </button>
       </div>
+      {d8&&<div style={{background:`${danger}18`,border:`2px solid ${danger}`,borderRadius:6,padding:"10px 16px",marginBottom:16,display:"flex",alignItems:"center",gap:10}}>
+        <span style={{fontSize:20}}>⚠</span>
+        <span style={{color:danger,fontWeight:900,fontSize:13,letterSpacing:1.5,textTransform:"uppercase"}}>{tx.psD8Warn}</span>
+      </div>}
     </div>
 
     {/* ── ADD-ONS SECTION ── */}
-    <div style={s.card}>
+    <div data-r="card" style={s.card}>
       <div style={s.cardTitle}><span style={{fontSize:16}}>+</span> {tx.psAddons}</div>
       <div style={{fontSize:11,color:t.textSecondary,marginBottom:16}}>{tx.psAddonSub}</div>
       {ADDON_GROUPS.map(g=>(
@@ -894,13 +1295,13 @@ function PullSheetTab(){
     </div>
 
     {/* ── NAME / EMAIL / EXPORT / SEND ── */}
-    <div style={s.card}>
+    <div data-r="card" style={s.card}>
       <div style={s.cardTitle}><span style={{fontSize:16}}>📧</span> {tx.psSendQuote}</div>
-      <div style={s.g2}>
+      <div data-r="g2" style={s.g2}>
         <Field label={<>{tx.psName} <span style={{color:danger,fontSize:10}}>*</span></>}><Inp type="text" value={userName} onChange={setUserName} placeholder="..."/></Field>
         <Field label={<>{tx.psEmail} <span style={{color:danger,fontSize:10}}>*</span></>}><Inp type="email" value={userEmail} onChange={setUserEmail} placeholder="name@example.com"/></Field>
       </div>
-      <div style={{display:"flex",gap:12,marginTop:20,flexWrap:"wrap",alignItems:"center"}}>
+      <div data-r="export-row" style={{display:"flex",gap:12,marginTop:20,flexWrap:"wrap",alignItems:"center"}}>
         <button style={s.exportBtn} onClick={handleExport} disabled={!hasData}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
           {tx.psExportPDF}
@@ -919,7 +1320,7 @@ function PullSheetTab(){
 
     {/* ── PULL SHEET OUTPUT ── */}
     {hasData?(
-      <div style={s.card}>
+      <div data-r="card" style={s.card}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:20,flexWrap:"wrap",gap:8}}>
           <div style={{...s.cardTitle,marginBottom:0,paddingBottom:0,borderBottom:"none"}}><span>◆</span> {tx.psPullSheet}</div>
           <div style={{display:"flex",gap:10,alignItems:"center"}}>
@@ -948,8 +1349,8 @@ function PullSheetTab(){
               <span style={{fontSize:14,fontWeight:700,color:t.accent}}>{l.ty} {tx.psMotors}</span>
               <span style={s.badge(success)}>× {l.c}</span>
             </div>
-            <table style={s.tbl}><thead><tr><th style={s.th}>{tx.psSize}</th><th style={s.th}>{tx.psItem}</th><th style={{...s.th,textAlign:"right"}}>{tx.psQty}</th></tr></thead>
-              <tbody>{l.items.map(({catId,name,qty},idx)=><tr key={idx}><td style={s.tdId}>{catId}</td><td style={s.td}>{name}</td><td style={s.tdA}>{qty}</td></tr>)}</tbody></table>
+            <div data-r="tbl-wrap" style={{overflowX:"auto"}}><table style={s.tbl}><thead><tr><th style={s.th}>{tx.psSize}</th><th style={s.th}>{tx.psItem}</th><th style={{...s.th,textAlign:"right"}}>{tx.psQty}</th></tr></thead>
+              <tbody>{l.items.map(({catId,name,qty},idx)=><tr key={idx}><td style={s.tdId}>{catId}</td><td style={s.td}>{name}</td><td style={s.tdA}>{qty}</td></tr>)}</tbody></table></div>
           </div>
         ))}</>}
 
@@ -957,20 +1358,20 @@ function PullSheetTab(){
         {addonItems.length>0&&<>
           <div style={s.secTitle}>{tx.psAddons}</div>
           <div style={s.bCard}>
-            <table style={s.tbl}><thead><tr><th style={s.th}>{tx.psSize}</th><th style={s.th}>{tx.psItem}</th><th style={{...s.th,textAlign:"right"}}>{tx.psQty}</th></tr></thead>
-              <tbody>{addonItems.map(({catId,name,qty},idx)=><tr key={idx}><td style={s.tdId}>{catId}</td><td style={s.td}>{name}</td><td style={s.tdA}>{qty}</td></tr>)}</tbody></table>
+            <div data-r="tbl-wrap" style={{overflowX:"auto"}}><table style={s.tbl}><thead><tr><th style={s.th}>{tx.psSize}</th><th style={s.th}>{tx.psItem}</th><th style={{...s.th,textAlign:"right"}}>{tx.psQty}</th></tr></thead>
+              <tbody>{addonItems.map(({catId,name,qty},idx)=><tr key={idx}><td style={s.tdId}>{catId}</td><td style={s.td}>{name}</td><td style={s.tdA}>{qty}</td></tr>)}</tbody></table></div>
           </div>
         </>}
 
         {/* Grand totals */}
         <div style={s.secTitle}>{tx.psGrandTotals}</div>
-        <div style={s.gtWrap}>
+        <div style={s.gtWrap}><div data-r="tbl-wrap" style={{overflowX:"auto"}}>
           <table style={s.tbl}><thead><tr><th style={s.th}>{tx.psSize}</th><th style={s.th}>{tx.psItem}</th><th style={{...s.th,textAlign:"right"}}>{tx.psQty}</th></tr></thead>
             <tbody>
               {grandTotals.map(([catId,{name,qty}],i)=><tr key={i}><td style={s.tdId}>{catId}</td><td style={s.td}>{name}</td><td style={s.tdA}>{qty}</td></tr>)}
               {tot>0&&<tr style={{background:`${t.accent}10`}}><td style={{...s.td,fontWeight:700,color:t.accent}} colSpan={2}>{tx.psTotalChain} ({cs})</td><td style={{...s.tdA,fontSize:18}}>{tot}</td></tr>}
             </tbody></table>
-        </div>
+        </div></div>
       </div>
     ):(
       <div style={{...s.card,...s.empty}}><div style={{fontSize:48,marginBottom:12,opacity:.3}}>⛓</div><div style={{fontSize:14}}>{tx.psEmpty}</div></div>
@@ -1001,12 +1402,12 @@ function BridleTab(){
     if(!res||res.err)return null;const c=res.n;const items=calcHoistGear(ht,c);return items;
   },[res,ht]);
   return(<div>
-    <div style={s.card}><div style={s.cardTitle}><span style={{fontSize:18}}>△</span> {tx.brTitle}</div>
+    <div data-r="card" style={s.card}><div style={s.cardTitle}><span style={{fontSize:18}}>△</span> {tx.brTitle}</div>
       <Chips options={["imperial","metric"]} value={unit} onChange={setUnit}/>
       <div style={s.secTitle}>{tx.brType}</div>
       <Field label={tx.brConfig}><div style={{display:"flex",gap:8,flexWrap:"wrap"}}>{bOpts.map(b=><button key={b.k} style={s.chip(bt===b.k)} onClick={()=>setBt(b.k)}>{b.l}</button>)}</div></Field>
       <div style={s.secTitle}>{tx.brDimensions}</div>
-      <div style={s.g2}>
+      <div data-r="g2" style={s.g2}>
         <Field label={`${tx.brBeamSpacing} (${dL})`}><Inp value={bs} onChange={setBs} placeholder="0"/></Field>
         <Field label={`${tx.brLoadWeight} (${wL})`}><Inp value={lw} onChange={setLw} placeholder="0"/></Field>
         <Field label={`${tx.brPickSpacing} (${dL})`}><Inp value={ps} onChange={setPs} placeholder="0"/></Field>
@@ -1017,15 +1418,15 @@ function BridleTab(){
       <Field label={tx.brMotorRating}><Chips options={MOTOR_TYPES} value={ht} onChange={setHt}/></Field>
     </div>
     {res&&!res.err&&(<>
-      <div style={s.card}><div style={s.cardTitle}><span>◆</span> {tx.brResults} — {bOpts.find(b=>b.k===bt)?.l}</div>
+      <div data-r="card" style={s.card}><div style={s.cardTitle}><span>◆</span> {tx.brResults} — {bOpts.find(b=>b.k===bt)?.l}</div>
         {res.sw&&<div style={s.warnBox(danger)}><span style={{fontSize:20}}>⚠</span><div><div style={{color:danger,fontWeight:700,fontSize:13}}>{tx.brAngleWarn}</div><div style={{color:t.textSecondary,fontSize:12}}>{tx.brAngleWarnText}</div></div></div>}
         <div style={s.diagWrap}><div style={{fontSize:10,color:t.textSecondary,letterSpacing:2,textTransform:"uppercase",marginBottom:12,fontWeight:700}}>{tx.brVisual}</div><BridleDiagram bridleType={bt} result={res} unit={unit}/></div>
-        <div style={{...s.g3,marginTop:20}}>
+        <div data-r="g3" style={{...s.g3,marginTop:20}}>
           <div style={s.res}><div style={s.resVal}>{res.ll}</div><div style={s.resLbl}>{tx.brLegLength} ({dL})</div></div>
           <div style={s.res}><div style={{...s.resVal,color:res.sw?danger:success}}>{res.ia}°</div><div style={s.resLbl}>{tx.brIncAngle}</div></div>
           <div style={s.res}><div style={s.resVal}>{res.ah}</div><div style={s.resLbl}>{tx.brApexHeight} ({dL})</div></div>
         </div>
-        <div style={{...s.g3,marginTop:12}}>
+        <div data-r="g3" style={{...s.g3,marginTop:12}}>
           <div style={s.res}><div style={s.resVal}>{res.lpl}</div><div style={s.resLbl}>{wL} {tx.brPerLeg}</div></div>
           <div style={s.res}><div style={{...s.resVal,color:warning}}>{res.hf}</div><div style={s.resLbl}>{tx.brHorizForce} ({wL})</div></div>
           <div style={s.res}><div style={{...s.resVal,color:success}}>{res.n}</div><div style={s.resLbl}>{tx.brLegs}</div></div>
@@ -1034,9 +1435,9 @@ function BridleTab(){
         <div style={{marginTop:24}}><div style={s.secTitle}>{tx.brNotes}</div><div style={s.note}>{tx.brNote1}</div><div style={s.note}>{tx.brNote2}</div>{bt==="4"&&<div style={s.note}>{tx.brNote3}</div>}</div>
       </div>
       {bg&&(
-        <div style={s.card}><div style={s.cardTitle}><span>⛓</span> {tx.brGearList} — {ht}</div>
-          <table style={s.tbl}><thead><tr><th style={s.th}>{tx.psSize}</th><th style={s.th}>{tx.psItem}</th><th style={{...s.th,textAlign:"right"}}>{tx.psQty}</th></tr></thead>
-            <tbody>{bg.map(({catId,name,qty},idx)=><tr key={idx}><td style={s.tdId}>{catId}</td><td style={s.td}>{name}</td><td style={s.tdA}>{qty}</td></tr>)}</tbody></table>
+        <div data-r="card" style={s.card}><div style={s.cardTitle}><span>⛓</span> {tx.brGearList} — {ht}</div>
+          <div data-r="tbl-wrap" style={{overflowX:"auto"}}><table style={s.tbl}><thead><tr><th style={s.th}>{tx.psSize}</th><th style={s.th}>{tx.psItem}</th><th style={{...s.th,textAlign:"right"}}>{tx.psQty}</th></tr></thead>
+            <tbody>{bg.map(({catId,name,qty},idx)=><tr key={idx}><td style={s.tdId}>{catId}</td><td style={s.td}>{name}</td><td style={s.tdA}>{qty}</td></tr>)}</tbody></table></div>
         </div>
       )}
     </>)}
@@ -1370,6 +1771,171 @@ function generateMarkoutPDF({points,unit,paperSize,fileName,tx,theme}){
   doc2.save(`WYP_Markout_Data_${fileName||"export"}.pdf`);
 }
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// LOAD-IN MARKOUT PDF — Tape-Strip View
+// ═══════════════════════════════════════════════════════════════════════════════
+function generateLoadInPDF({points,unit,paperSize,fileName,tx,theme}){
+  const hexToRgb=h=>{const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);return[r,g,b];};
+  const ac=[237,0,0],sc2=theme==="usa"?[0,40,104]:[0,80,240];
+  const isImp=unit==="imperial";
+  const fmt=isImp?"letter":"a4";
+  const doc=new jsPDF({orientation:"portrait",unit:"mm",format:fmt});
+  const pw=isImp?215.9:210,ph=isImp?279.4:297;
+  const ml=15,mt=15,mr=15,mb=15;
+  const usableW=pw-ml-mr,usableH=ph-mt-mb;
+
+  // Filter out Stage points
+  const loadInPts=points.filter(p=>p.type!=="Stage");
+  if(loadInPts.length===0){doc.save(`WYP_LoadIn_${fileName||"export"}.pdf`);return;}
+
+  const getXv=p=>unit==="imperial"?p.xft:p.xm;
+  const getYv=p=>unit==="imperial"?p.yft:p.ym;
+  const uL=unit==="imperial"?"ft":"m";
+  const wL=unit==="imperial"?"lbs":"kgs";
+
+  // Data ranges
+  const xVals=loadInPts.map(getXv),yVals=loadInPts.map(getYv);
+  const dataMinX=Math.min(...xVals),dataMaxX=Math.max(...xVals);
+  const dataMinY=Math.min(...yVals),dataMaxY=Math.max(...yVals);
+  const dataRangeY=(dataMaxY-dataMinY)||1;
+  const absMaxX=Math.max(Math.abs(dataMinX),Math.abs(dataMaxX))||1;
+
+  // Layout constants
+  const headerH=22,footerH=10;
+  const clX=ml+usableW/2;
+  const stripTop=mt+headerH+10;
+  const stripBot=ph-mb-footerH-6;
+  const stripH=stripBot-stripTop;
+
+  // Box dimensions
+  const boxW=28,boxH=14;
+
+  // Grid step
+  const gridStep=unit==="imperial"?10:5;
+
+  // Scaling
+  const rawScale=stripH/dataRangeY;
+  const autoScale=Math.min(6,Math.max(0.5,rawScale))*0.85;
+  const totalYmm=dataRangeY*autoScale;
+  const pagesNeeded=Math.max(1,Math.ceil(totalYmm/stripH));
+
+  // X scale: half page minus box width minus margin
+  const halfW=(usableW/2)-boxW/2-6;
+  const xScale=halfW/absMaxX;
+
+  // Mapping functions
+  const yToMM=(yVal,pageOffset)=>stripTop+((yVal-dataMinY)*autoScale)-pageOffset;
+  const xToMM=(xVal)=>clX+(xVal*xScale);
+
+  // Total weight for footer
+  const totW=isImp?loadInPts.reduce((s,p)=>s+p.lbs,0):loadInPts.reduce((s,p)=>s+p.kgs,0);
+
+  for(let page=0;page<pagesNeeded;page++){
+    if(page>0)doc.addPage();
+    const pageYOffset=page*stripH;
+
+    // ── HEADER ──
+    [ac,[255,255,255],sc2,[255,255,255],ac].forEach((c,i)=>{doc.setFillColor(c[0],c[1],c[2]);doc.rect(pw/5*i,0,pw/5,3,"F");});
+    doc.setFont("helvetica","bold");doc.setFontSize(14);doc.setTextColor(...ac);
+    doc.text("WYP ASSIST",ml,mt+6);
+    doc.setFontSize(9);doc.setTextColor(60,60,60);
+    doc.text(tx.moLoadIn||"Load-In Markout",ml+52,mt+6);
+    doc.setFontSize(7.5);doc.setTextColor(120,120,120);doc.setFont("helvetica","normal");
+    doc.text(`${fileName||"Export"}  |  ${loadInPts.length} points  |  ${isImp?"Imperial (ft/lbs)":"Metric (m/kg)"}  |  ${new Date().toLocaleDateString()}${pagesNeeded>1?`  |  Page ${page+1}/${pagesNeeded}`:""}`,ml,mt+13);
+
+    // ── CENTER LINE ──
+    doc.setDrawColor(...ac);doc.setLineWidth(0.8);
+    doc.setLineDashPattern([4,2],0);
+    doc.line(clX,stripTop-6,clX,stripBot+4);
+    doc.setLineDashPattern([],0);
+
+    // CL label
+    doc.setFontSize(8);doc.setFont("helvetica","bold");doc.setTextColor(...ac);
+    doc.text(tx.moCL||"CL",clX,stripTop-8,{align:"center"});
+
+    // SL / SR labels
+    doc.setFontSize(9);doc.setFont("helvetica","bold");doc.setTextColor(...sc2);
+    doc.text(tx.moSR||"SR",clX-24,stripTop-8,{align:"right"});
+    doc.text(tx.moSL||"SL",clX+24,stripTop-8,{align:"left"});
+
+    // DOWNSTAGE / UPSTAGE labels
+    doc.setFontSize(6);doc.setFont("helvetica","bold");doc.setTextColor(...ac);
+    doc.text(tx.moDownstage||"DOWNSTAGE",clX,stripTop-2,{align:"center"});
+    doc.text(tx.moUpstage||"UPSTAGE",clX,stripBot+10,{align:"center"});
+
+    // ── Y GRID TICKS ──
+    doc.setFont("helvetica","normal");doc.setFontSize(5.5);
+    const yGridStart=Math.floor(dataMinY/gridStep)*gridStep;
+    const yGridEnd=Math.ceil(dataMaxY/gridStep)*gridStep;
+    for(let yg=yGridStart;yg<=yGridEnd;yg+=gridStep){
+      const ymm=yToMM(yg,pageYOffset);
+      if(ymm>=stripTop&&ymm<=stripBot){
+        doc.setDrawColor(180,180,180);doc.setLineWidth(0.15);
+        doc.setLineDashPattern([1,1],0);
+        doc.line(ml+8,ymm,pw-mr-8,ymm);
+        doc.setLineDashPattern([],0);
+        doc.setTextColor(150,150,150);
+        doc.text(`${yg} ${uL}`,clX+3,ymm-1.5);
+      }
+    }
+
+    // ── POINT BOXES ──
+    loadInPts.forEach(p=>{
+      const yMM=yToMM(getYv(p),pageYOffset);
+      if(yMM<stripTop-boxH||yMM>stripBot+boxH)return;
+
+      const xMM=xToMM(getXv(p));
+      const bx=xMM-boxW/2;
+      const by=yMM-boxH/2;
+
+      const rgb=hexToRgb(moColor(p.type));
+      // Light fill (blend toward white at 15% strength)
+      const lR=Math.round(rgb[0]*0.15+255*0.85);
+      const lG=Math.round(rgb[1]*0.15+255*0.85);
+      const lB=Math.round(rgb[2]*0.15+255*0.85);
+      doc.setFillColor(lR,lG,lB);
+      doc.rect(bx,by,boxW,boxH,"F");
+      // Border
+      doc.setDrawColor(rgb[0],rgb[1],rgb[2]);doc.setLineWidth(0.4);
+      doc.rect(bx,by,boxW,boxH,"S");
+
+      // Label (bold, type color)
+      doc.setFont("helvetica","bold");doc.setFontSize(6);
+      doc.setTextColor(rgb[0],rgb[1],rgb[2]);
+      doc.text(p.label,bx+boxW/2,by+5,{align:"center"});
+
+      // Type abbreviation
+      const typeAbbr=p.type.length>14?p.type.substring(0,13)+"..":p.type;
+      doc.setFont("helvetica","normal");doc.setFontSize(4.5);
+      doc.setTextColor(80,80,80);
+      doc.text(typeAbbr,bx+boxW/2,by+9,{align:"center"});
+
+      // Weight
+      const wt=isImp?p.lbs:p.kgs;
+      if(wt){
+        doc.setFontSize(4.5);doc.setTextColor(120,120,120);
+        doc.text(`${wt} ${wL}`,bx+boxW/2,by+12.5,{align:"center"});
+      }
+
+      // Leader line from box to CL
+      doc.setDrawColor(200,200,200);doc.setLineWidth(0.15);
+      doc.setLineDashPattern([0.5,0.5],0);
+      const xv=getXv(p);
+      if(xv>0){doc.line(bx,yMM,clX+1,yMM);}
+      else if(xv<0){doc.line(bx+boxW,yMM,clX-1,yMM);}
+      doc.setLineDashPattern([],0);
+    });
+
+    // ── FOOTER BAR ──
+    const fY=ph-mb-footerH;
+    doc.setFillColor(...ac);doc.rect(ml,fY,usableW,8,"F");
+    doc.setFontSize(6);doc.setFont("helvetica","bold");doc.setTextColor(255,255,255);
+    doc.text(`${tx.moTotalPts}: ${loadInPts.length}  |  ${tx.moTotalWeight}: ${totW.toLocaleString()} ${wL}  |  WYP Assist v1.0`,ml+3,fY+5.5);
+  }
+
+  doc.save(`WYP_LoadIn_${fileName||"export"}.pdf`);
+}
+
 // ── Column Mapper UI ──
 function ColumnMapper({rawCSV,onApply,onCancel}){
   const{s,t}=useTheme();
@@ -1379,11 +1945,11 @@ function ColumnMapper({rawCSV,onApply,onCancel}){
   // Preview first 3 data rows
   const preview=rawCSV.rows.slice(0,3);
   return(
-    <div style={s.card}>
+    <div data-r="card" style={s.card}>
       <div style={s.cardTitle}><span style={{fontSize:16}}>🔗</span> MAP CSV COLUMNS</div>
       <div style={{fontSize:11,color:t.textSecondary,marginBottom:16}}>Match your CSV headers to the fields below. X and Y Position are required.</div>
       {/* Preview table */}
-      <div style={{overflowX:"auto",marginBottom:20}}>
+      <div data-r="tbl-wrap" style={{overflowX:"auto",WebkitOverflowScrolling:"touch",marginBottom:20}}>
         <table style={{...s.tbl,fontSize:11}}>
           <thead><tr>
             {rawCSV.headers.map((h,i)=><th key={i} style={{...s.th,fontSize:9,whiteSpace:"nowrap",minWidth:60}}><span style={{color:t.accent,marginRight:4}}>#{i}</span>{h}</th>)}
@@ -1477,34 +2043,46 @@ function MarkoutTab(){
   const doSort=col=>{if(sortCol===col)setSortDir(-sortDir);else{setSortCol(col);setSortDir(1);}};
   const types=[...new Set(points.filter(p=>p.type!=="Stage").map(p=>p.type))];
   const handleExport=()=>{if(!hasData)return;generateMarkoutPDF({points,unit,paperSize:paper,fileName,tx,theme:lang});};
+  const handleExportLoadIn=()=>{if(!hasData)return;generateLoadInPDF({points,unit,paperSize:paper,fileName,tx,theme:lang});};
   return(<div>
-    <div style={s.card}><div style={s.cardTitle}><span style={{fontSize:18}}>📐</span> {tx.moTitle}</div>
-      <div style={{display:"flex",gap:16,flexWrap:"wrap",alignItems:"flex-end",marginBottom:20}}>
+    <div data-r="card" style={s.card}><div style={s.cardTitle}><span style={{fontSize:18}}>📐</span> {tx.moTitle}</div>
+      <div data-r="mo-toolbar" style={{display:"flex",gap:16,flexWrap:"wrap",alignItems:"flex-end",marginBottom:20}}>
         <div style={s.fg}><label style={s.label}>{tx.moImportCSV}</label>
-          <label style={{...s.exportBtn,cursor:"pointer",display:"inline-flex",alignItems:"center",gap:8}}>
-            <span>📂</span> {tx.moImportCSV}
-            <input type="file" accept=".csv" onChange={handleFile} style={{display:"none"}}/>
-          </label>
+          <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+            <label style={{...s.exportBtn,cursor:"pointer",display:"inline-flex",alignItems:"center",gap:8}}>
+              <span>📂</span> {tx.moImportCSV}
+              <input type="file" accept=".csv" onChange={handleFile} style={{display:"none"}}/>
+            </label>
+            <button style={{...s.exportBtn,background:t.secondary}} onClick={downloadMarkoutTemplate}><span>📄</span> {tx.moTemplate}</button>
+          </div>
         </div>
         <div style={s.fg}><label style={s.label}>{tx.moUnit}</label><Chips options={["imperial","metric"]} value={unit} onChange={setUnit}/></div>
         <div style={s.fg}><label style={s.label}>{tx.moPaper}</label><Chips options={["archD","a1"]} value={paper} onChange={setPaper}/></div>
-        {hasData&&<button style={s.exportBtn} onClick={handleExport}><span>⬇</span> {tx.moExportPDF}</button>}
-        {hasData&&<button style={{...s.exportBtn,background:pushed?success:t.secondary}} onClick={handlePushToPull}><span>{pushed?"✓":"📋"}</span> {pushed?tx.moPushPullDone:tx.moPushPull}</button>}
       </div>
+      {hasData&&<div data-r="mo-actions" style={{display:"flex",gap:10,flexWrap:"wrap",marginBottom:20}}>
+        <button style={s.exportBtn} onClick={handleExport}><span>⬇</span> {tx.moExportPDF}</button>
+        <button style={{...s.exportBtn,background:t.secondary}} onClick={handleExportLoadIn}><span>📋</span> {tx.moExportLoadIn}</button>
+        <button style={{...s.exportBtn,background:pushed?success:t.secondary}} onClick={handlePushToPull}><span>{pushed?"✓":"📋"}</span> {pushed?tx.moPushPullDone:tx.moPushPull}</button>
+      </div>}
       {hasData&&<div style={{display:"flex",gap:16,flexWrap:"wrap"}}>
         <div style={s.res}><div style={s.resVal}>{points.length}</div><div style={s.resLbl}>{tx.moTotalPts}</div></div>
         <div style={s.res}><div style={{...s.resVal,color:success}}>{totWeight.toLocaleString()}</div><div style={s.resLbl}>{tx.moTotalWeight} ({wL})</div></div>
         <div style={s.res}><div style={{...s.resVal,color:t.accent}}>{types.length}</div><div style={s.resLbl}>{tx.moType}s</div></div>
       </div>}
       {fileName&&<div style={{marginTop:12,fontSize:11,color:t.textSecondary,letterSpacing:1}}>📄 {fileName}.csv{rawCSV&&` · ${rawCSV.rows.length} rows · delimiter: "${rawCSV.delimiter==="\t"?"tab":rawCSV.delimiter}"`}</div>}
+      <div style={{marginTop:12,padding:"10px 16px",background:t.surfaceLight,border:`1px solid ${t.border}`,borderRadius:6,display:"flex",alignItems:"center",gap:10,cursor:"pointer",fontSize:11,color:t.textSecondary,letterSpacing:0.5}} onClick={()=>window.open("https://app-help.vectorworks.net/2026/eng/VW2026_Guide/Hoists/Creating_hoist_reports.htm","_blank")}>
+        <span style={{fontSize:14}}>🔗</span>
+        <span>{tx.moVwHelp}</span>
+        <span style={{marginLeft:"auto",fontSize:9,opacity:0.5}}>↗</span>
+      </div>
     </div>
     {/* Column Mapper */}
     {showMapper&&rawCSV&&<ColumnMapper rawCSV={rawCSV} onApply={handleMappingApply} onCancel={handleMappingCancel}/>}
-    {hasData&&<div style={s.card}><div style={s.cardTitle}><span>◆</span> {tx.moTitle} — {fileName}</div>
+    {hasData&&<div data-r="card" style={s.card}><div style={s.cardTitle}><span>◆</span> {tx.moTitle} — {fileName}</div>
       <MarkoutVisualizer points={points} unit={unit} theme={t} tx={tx}/>
     </div>}
-    {hasData&&<div style={s.card}><div style={s.cardTitle}><span>📊</span> {tx.moLabel} {tx.moType} — {points.length} {tx.moTotalPts.toLowerCase()}</div>
-      <div style={{overflowX:"auto"}}>
+    {hasData&&<div data-r="card" style={s.card}><div style={s.cardTitle}><span>📊</span> {tx.moLabel} {tx.moType} — {points.length} {tx.moTotalPts.toLowerCase()}</div>
+      <div data-r="tbl-wrap" style={{overflowX:"auto",WebkitOverflowScrolling:"touch"}}>
         <table style={s.tbl}><thead><tr>
           {[{k:"num",l:tx.moNum},{k:"label",l:tx.moLabel},{k:unit==="imperial"?"yft":"ym",l:`${tx.moY} (${uL})`},{k:unit==="imperial"?"xft":"xm",l:`${tx.moX} (${uL})`},{k:"type",l:tx.moType},{k:unit==="imperial"?"lbs":"kgs",l:`${tx.moLoad} (${wL})`},{k:"notes",l:tx.moNotes}].map(c=>
             <th key={c.k} style={{...s.th,cursor:"pointer",userSelect:"none"}} onClick={()=>doSort(c.k)}>{c.l}{sortCol===c.k?(sortDir===1?" ▲":" ▼"):""}</th>
@@ -1550,24 +2128,53 @@ export default function WYPAssist(){
           button:hover{opacity:0.92;filter:brightness(1.1)}button:active{transform:scale(0.97);filter:brightness(0.95)}
           input[type=number]::-webkit-inner-spin-button{opacity:1}
           ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:${theme.bg}}::-webkit-scrollbar-thumb{background:${theme.border};border-radius:3px}
+          @media(max-width:768px){
+            [data-r="header-inner"]{flex-direction:column!important;padding:12px 14px!important;gap:10px!important;align-items:stretch!important}
+            [data-r="header-nav-wrap"]{flex-wrap:wrap!important;flex-shrink:1!important;justify-content:center!important}
+            [data-r="header-nav-wrap"] nav{flex-wrap:wrap!important;justify-content:center!important;gap:4px!important}
+            [data-r="header-nav-wrap"] nav button{padding:8px 8px!important;font-size:9px!important;flex:1 1 auto!important;min-width:0!important}
+            [data-r="header-nav-wrap"] [data-r="lang-wrap"]{justify-content:center!important}
+            [data-r="main-area"]{padding:16px 10px!important}
+            [data-r="card"]{padding:16px 12px!important}
+            [data-r="g2"]{grid-template-columns:1fr!important}
+            [data-r="g3"]{grid-template-columns:1fr!important}
+            [data-r="g4"]{grid-template-columns:1fr 1fr!important}
+            [data-r="mo-toolbar"]{flex-direction:column!important;align-items:stretch!important}
+            [data-r="mo-actions"]{flex-direction:column!important}
+            [data-r="mo-actions"] button{width:100%!important;justify-content:center!important}
+            [data-r="res-row"]{grid-template-columns:1fr!important}
+            [data-r="custom-load-row"]{flex-wrap:wrap!important}
+            [data-r="custom-load-row"] input{flex:1!important;min-width:60px!important}
+            [data-r="export-row"]{flex-direction:column!important}
+            [data-r="export-row"] button{width:100%!important;justify-content:center!important}
+            [data-r="tbl-wrap"]{overflow-x:auto!important;-webkit-overflow-scrolling:touch!important}
+            [data-r="tbl-wrap"] table{min-width:600px!important}
+          }
+          @media(max-width:480px){
+            [data-r="g4"]{grid-template-columns:1fr!important}
+            [data-r="header-nav-wrap"] nav button{font-size:8px!important;padding:7px 6px!important;letter-spacing:0.5px!important}
+            [data-r="logo-text"]{font-size:18px!important}
+            [data-r="logo-sub"]{font-size:7px!important;letter-spacing:2px!important}
+          }
         `}</style>
         <FlagStripe theme={lang}/>
-        <header style={styles.header}><div style={styles.headerInner}>
+        <header style={styles.header}><div data-r="header-inner" style={styles.headerInner}>
           <div style={styles.logo}>
             <div style={styles.logoIcon}><span style={{fontFamily:"'Orbitron',sans-serif"}}>W</span></div>
-            <div><div style={{...styles.logoText,fontFamily:"'Orbitron',sans-serif"}}>{tx.appName}</div><div style={styles.logoSub}>{tx.appSub}</div></div>
+            <div><div data-r="logo-text" style={{...styles.logoText,fontFamily:"'Orbitron',sans-serif"}}>{tx.appName}</div><div data-r="logo-sub" style={styles.logoSub}>{tx.appSub}</div></div>
           </div>
-          <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"nowrap",flexShrink:0}}>
+          <div data-r="header-nav-wrap" style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap",flexShrink:1}}>
             <nav style={styles.nav}>{tabList.map(tb=><button key={tb.id} style={styles.navBtn(tab===tb.id)} onClick={()=>setTab(tb.id)}>{tb.icon} {tb.label}</button>)}</nav>
-            <div style={{height:28,width:1,background:theme.border,flexShrink:0}}/>
-            <div style={{display:"flex",gap:6,flexShrink:0}}>
-              <button style={styles.langBtn(lang==="usa")} onClick={()=>setLang("usa")}><span>🇺🇸</span><span style={{fontSize:11}}>EN</span></button>
-              <button style={styles.langBtn(lang==="pr")} onClick={()=>setLang("pr")}><span>🇵🇷</span><span style={{fontSize:11}}>ES</span></button>
-            </div>
+            <div data-r="lang-divider" style={{height:28,width:1,background:theme.border,flexShrink:0}}/>
+            <button data-r="lang-toggle" style={{...styles.langBtn(true),position:"relative"}} onClick={()=>setLang(lang==="usa"?"pr":"usa")}>
+              <span>{lang==="usa"?"🇺🇸":"🇵🇷"}</span>
+              <span style={{fontSize:11}}>{lang==="usa"?"EN":"ES"}</span>
+              <span style={{fontSize:8,opacity:0.5,marginLeft:2}}>▾</span>
+            </button>
           </div>
         </div></header>
         <FlagStripe theme={lang}/>
-        <main style={styles.main}>
+        <main data-r="main-area" style={styles.main}>
           <div style={styles.disc}>{tx.disclaimer}</div>
           {tab==="load"&&<PointLoadTab/>}
           {tab==="pull"&&<PullSheetTab/>}

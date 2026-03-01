@@ -19,10 +19,12 @@ describe("WYPAssist — app rendering", () => {
     expect(nav.textContent).toMatch(/Markout/);
   });
 
-  it("renders language toggle buttons", () => {
+  it("renders language toggle button", () => {
     render(<WYPAssist />);
     expect(screen.getByText("EN")).toBeInTheDocument();
-    expect(screen.getByText("ES")).toBeInTheDocument();
+    // Language is now a single toggle button (EN ▾ / ES ▾)
+    const langBtn = screen.getByText("EN").closest("button");
+    expect(langBtn).toBeInTheDocument();
   });
 
   it("shows Point Load tab content by default", () => {
@@ -60,10 +62,12 @@ describe("WYPAssist — tab navigation", () => {
 });
 
 describe("WYPAssist — language toggle", () => {
-  it("switches to Spanish when ES is clicked", async () => {
+  it("switches to Spanish when language toggle is clicked", async () => {
     const user = userEvent.setup();
     render(<WYPAssist />);
-    await user.click(screen.getByText("ES"));
+    // Language toggle is now a single button showing current lang; clicking toggles to the other
+    const langBtn = screen.getByText("EN").closest("button");
+    await user.click(langBtn);
     expect(screen.getByText(/Herramientas de Aparejo/)).toBeInTheDocument();
   });
 });
