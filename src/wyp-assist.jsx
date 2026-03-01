@@ -153,7 +153,7 @@ const i18n = {
   usa: {
     appName:"WYP ASSIST",appSub:"Entertainment Rigging Tools",tabLoad:"Point Load",tabPull:"Pull Sheet",tabBridle:"Bridle Calc",
     disclaimer:"⚠ All calculations are estimates for planning purposes. Always verify with a qualified structural engineer and follow local codes. Safety factor of 5:1 minimum for overhead rigging.",
-    footer1:"WYP Assist v1.0",footer2:"Professional rigging calculations for entertainment industry",
+    footer1:"WYP Assist v1.0.4",footer2:"© 2025 WYP Assist. All rights reserved. Patent Pending.",
     plTitle:"Hoist Point Load Calculator",plSystemType:"System Type",plTotalLoad:"Total Load",plNumPoints:"Number of Hoist Points",plSpanLength:"Span Length",plChordAngle:"Chord Angle",plRadius:"Radius",plArcAngle:"Arc Angle (° — 360 for full circle)",plDropHeight:"Drop Height",plResults:"Results",plPerPoint:"per point",plDesignLoad:"Design Load",plHoistPoints:"Hoist Points",plSystemDetails:"System Details",plNotes:"Notes",plConfig:"Rigging Configuration",plVisual:"System Diagram",plLoadMode:"Loading Mode",plLoadEven:"Even Distribution",plLoadCustom:"Custom Loads",plHoistSpacing:"Hoist Spacing",plHoistEven:"Even Spacing",plHoistCustom:"Custom Positions",plHoistPositions:"Hoist Positions",plClickToAdd:"Click on the truss to place a load. Drag to reposition.",plLoadList:"Applied Loads",plPosition:"Position",plWeight:"Weight",plReactions:"Support Reactions",plBeamAnalysis:"Continuous beam analysis (Three-Moment Theorem)",plAddLoad:"Add Load",plMaxReaction:"MAX",plDeleteLoad:"Remove",
     straight:"Straight",curved:"Curved",circular:"Circular",vertical:"Vertical",
     straightNote:"Even distribution assumed along straight truss/pipe",straightNote2:"End points ~60% avg, mid points ~115% avg (beam loading)",curvedNote1:"Curve correction factor",curvedNote2:"Outer points carry proportionally higher loads on curves",circularEndNote:"end points carry ~20% more",circularNote:"Circular rigs distribute load evenly when full 360°",verticalNote1:"Vertical loads include 1.25x dynamic factor for movement",verticalNote2:"Account for shock loading during accel/decel",openArc:"Open arc",
@@ -169,7 +169,7 @@ const i18n = {
   pr: {
     appName:"WYP ASSIST",appSub:"Herramientas de Aparejo para Entretenimiento",tabLoad:"Carga Puntual",tabPull:"Hoja de Tiro",tabBridle:"Calc. Brida",
     disclaimer:"⚠ Todos los cálculos son estimaciones para planificación. Verifique con un ingeniero estructural calificado. Factor de seguridad mínimo de 5:1.",
-    footer1:"WYP Assist v1.0",footer2:"Cálculos profesionales de aparejo para entretenimiento",
+    footer1:"WYP Assist v1.0.4",footer2:"© 2025 WYP Assist. Todos los derechos reservados. Patente Pendiente.",
     plTitle:"Calculadora de Carga Puntual",plSystemType:"Tipo de Sistema",plTotalLoad:"Carga Total",plNumPoints:"Número de Puntos",plSpanLength:"Longitud del Tramo",plChordAngle:"Ángulo de Cuerda",plRadius:"Radio",plArcAngle:"Ángulo de Arco (° — 360 para círculo)",plDropHeight:"Altura de Caída",plResults:"Resultados",plPerPoint:"por punto",plDesignLoad:"Carga de Diseño",plHoistPoints:"Puntos de Polipasto",plSystemDetails:"Detalles del Sistema",plNotes:"Notas",plConfig:"Configuración de Aparejo",plVisual:"Diagrama del Sistema",plLoadMode:"Modo de Carga",plLoadEven:"Distribución Uniforme",plLoadCustom:"Cargas Personalizadas",plHoistSpacing:"Espaciado de Polipastos",plHoistEven:"Espaciado Uniforme",plHoistCustom:"Posiciones Personalizadas",plHoistPositions:"Posiciones de Polipastos",plClickToAdd:"Clic en el truss para colocar carga. Arrastre para mover.",plLoadList:"Cargas Aplicadas",plPosition:"Posición",plWeight:"Peso",plReactions:"Reacciones en Apoyos",plBeamAnalysis:"Análisis de viga continua (Teorema de Tres Momentos)",plAddLoad:"Agregar Carga",plMaxReaction:"MÁX",plDeleteLoad:"Eliminar",
     straight:"Recto",curved:"Curvo",circular:"Circular",vertical:"Vertical",
     straightNote:"Distribución uniforme a lo largo de truss/tubo recto",straightNote2:"Puntos finales ~60%, puntos medios ~115%",curvedNote1:"Factor de corrección de curva",curvedNote2:"Puntos exteriores cargan más en curvas",circularEndNote:"puntos finales ~20% más",circularNote:"Circular distribuye carga uniforme a 360°",verticalNote1:"Cargas verticales: factor dinámico 1.25x",verticalNote2:"Considere carga de impacto en aceleración",openArc:"Arco abierto",
@@ -636,13 +636,13 @@ export function generateEvenLoads(totalWeight, numPoints, spanLength) {
 // ═══════════════════════════════════════════════════════════════════════════════
 function mkS(t) {
   return {
-    app:{fontFamily:"'IBM Plex Mono','Fira Code',monospace",background:t.bg,color:t.textPrimary,minHeight:"100vh"},
-    header:{background:t.headerGradient,borderBottom:`3px solid ${t.accent}`,position:"sticky",top:0,zIndex:100},
+    app:{fontFamily:"'IBM Plex Mono','Fira Code',monospace",background:t.bg,color:t.textPrimary,minHeight:"100vh",overflowX:"hidden",width:"100%"},
+    header:{background:t.headerGradient,borderBottom:`3px solid ${t.accent}`,position:"sticky",top:0,zIndex:100,overflow:"hidden",width:"100%"},
     headerInner:{maxWidth:1260,margin:"0 auto",padding:"16px 28px",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:12},
     logo:{display:"flex",alignItems:"center",gap:14},
-    logoIcon:{width:48,height:48,background:t.accentGradient,borderRadius:6,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:900,fontSize:20,color:"#fff",boxShadow:`0 4px 20px ${t.accent}40`},
+    logoIcon:{width:48,height:48,borderRadius:"50%",objectFit:"contain"},
     logoText:{fontSize:24,fontWeight:900,letterSpacing:3,color:t.textPrimary},
-    logoSub:{fontSize:9,color:t.textSecondary,letterSpacing:4,textTransform:"uppercase",marginTop:2},
+    logoSub:{fontSize:9,color:t.textSecondary,letterSpacing:4,textTransform:"uppercase",marginTop:2,whiteSpace:"normal",lineHeight:1.4},
     nav:{display:"flex",gap:4,flexWrap:"wrap",flexShrink:1},
     navBtn:(a)=>({padding:"10px 12px",textAlign:"center",whiteSpace:"nowrap",background:a?`linear-gradient(180deg,${t.accent} 0%,${t.accent}CC 100%)`:"transparent",color:a?"#fff":t.textSecondary,border:a?`2px solid ${t.accent}`:`2px solid ${t.border}`,borderRadius:2,cursor:"pointer",fontFamily:"inherit",fontSize:10,fontWeight:a?900:600,letterSpacing:1.2,textTransform:"uppercase",transition:"all .15s",boxShadow:a?`0 2px 8px ${t.accent}50,inset 0 1px 0 rgba(255,255,255,0.15)`:"none",textShadow:a?"0 1px 2px rgba(0,0,0,0.3)":"none",borderBottom:a?`2px solid ${t.accent}80`:`2px solid ${t.border}`}),
     langBtn:(a)=>({padding:"8px 10px",background:a?t.secondary:"transparent",color:a?"#fff":t.textSecondary,border:a?`2px solid ${t.secondary}`:`2px solid ${t.border}`,borderRadius:2,cursor:"pointer",fontFamily:"inherit",fontSize:12,fontWeight:a?800:500,transition:"all .15s",display:"flex",alignItems:"center",gap:4,boxShadow:a?`0 2px 8px ${t.secondary}40,inset 0 1px 0 rgba(255,255,255,0.15)`:"none",letterSpacing:a?1:0}),
@@ -676,7 +676,7 @@ function mkS(t) {
     bCard:{marginBottom:20,padding:16,background:t.surfaceLight,borderRadius:6,border:`1px solid ${t.border}`},
     gtWrap:{background:`linear-gradient(135deg,${t.surfaceLight} 0%,${t.surface} 100%)`,borderRadius:6,border:`2px solid ${t.accent}30`,padding:20},
     warnBox:(c)=>({background:`${c}12`,border:`1px solid ${c}40`,borderRadius:6,padding:14,marginBottom:20,display:"flex",gap:10,alignItems:"center"}),
-    disc:{marginBottom:24,padding:"12px 16px",background:`${t.accent}08`,border:`1px solid ${t.accent}20`,borderRadius:6,fontSize:11,color:t.textSecondary,letterSpacing:0.5},
+    disc:{marginBottom:24,padding:"12px 16px",background:`${t.accent}08`,border:`1px solid ${t.accent}20`,borderRadius:6,fontSize:11,color:t.textSecondary,letterSpacing:0.5,wordBreak:"break-word",overflowWrap:"break-word"},
     diagWrap:{background:t.surfaceLight,border:`1px solid ${t.border}`,borderRadius:8,padding:20,marginTop:16,marginBottom:8},
     exportBtn:{padding:"13px 30px",background:`linear-gradient(180deg,${t.accent} 0%,${t.accent}CC 100%)`,color:"#fff",border:`2px solid ${t.accent}`,borderRadius:2,cursor:"pointer",fontFamily:"inherit",fontSize:12,fontWeight:900,letterSpacing:2,textTransform:"uppercase",display:"inline-flex",alignItems:"center",gap:8,transition:"all .15s",boxShadow:`0 3px 12px ${t.accent}40,inset 0 1px 0 rgba(255,255,255,0.2)`,textShadow:"0 1px 2px rgba(0,0,0,0.3)"},
     addonGroup:{background:t.surfaceLight,border:`1px solid ${t.border}`,borderRadius:6,padding:16,marginBottom:12},
@@ -2128,14 +2128,20 @@ export default function WYPAssist(){
           button:hover{opacity:0.92;filter:brightness(1.1)}button:active{transform:scale(0.97);filter:brightness(0.95)}
           input[type=number]::-webkit-inner-spin-button{opacity:1}
           ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:${theme.bg}}::-webkit-scrollbar-thumb{background:${theme.border};border-radius:3px}
+          @media(max-width:900px){
+            [data-r="header-inner"]{padding:14px 16px!important;gap:10px!important}
+            [data-r="header-nav-wrap"] nav button{padding:8px 10px!important;font-size:9px!important;white-space:nowrap!important}
+            [data-r="logo-sub"]{font-size:8px!important;letter-spacing:3px!important}
+          }
           @media(max-width:768px){
             [data-r="header-inner"]{flex-direction:column!important;padding:12px 14px!important;gap:10px!important;align-items:stretch!important}
-            [data-r="header-nav-wrap"]{flex-wrap:wrap!important;flex-shrink:1!important;justify-content:center!important}
-            [data-r="header-nav-wrap"] nav{flex-wrap:wrap!important;justify-content:center!important;gap:4px!important}
-            [data-r="header-nav-wrap"] nav button{padding:8px 8px!important;font-size:9px!important;flex:1 1 auto!important;min-width:0!important}
-            [data-r="header-nav-wrap"] [data-r="lang-wrap"]{justify-content:center!important}
+            [data-r="header-nav-wrap"]{flex-wrap:wrap!important;flex-shrink:1!important;justify-content:center!important;gap:4px!important;width:100%!important}
+            [data-r="header-nav-wrap"] nav{flex-wrap:wrap!important;justify-content:center!important;gap:4px!important;width:100%!important}
+            [data-r="header-nav-wrap"] nav button{padding:8px 8px!important;font-size:9px!important;flex:1 1 auto!important;min-width:0!important;white-space:nowrap!important}
+            [data-r="lang-divider"]{display:none!important}
+            [data-r="lang-toggle"]{padding:8px 10px!important;font-size:9px!important}
             [data-r="main-area"]{padding:16px 10px!important}
-            [data-r="card"]{padding:16px 12px!important}
+            [data-r="card"]{padding:16px 12px!important;overflow-x:hidden!important}
             [data-r="g2"]{grid-template-columns:1fr!important}
             [data-r="g3"]{grid-template-columns:1fr!important}
             [data-r="g4"]{grid-template-columns:1fr 1fr!important}
@@ -2149,19 +2155,20 @@ export default function WYPAssist(){
             [data-r="export-row"] button{width:100%!important;justify-content:center!important}
             [data-r="tbl-wrap"]{overflow-x:auto!important;-webkit-overflow-scrolling:touch!important}
             [data-r="tbl-wrap"] table{min-width:600px!important}
+            [data-r="logo-sub"]{font-size:7.5px!important;letter-spacing:2px!important;white-space:normal!important}
           }
           @media(max-width:480px){
             [data-r="g4"]{grid-template-columns:1fr!important}
             [data-r="header-nav-wrap"] nav button{font-size:8px!important;padding:7px 6px!important;letter-spacing:0.5px!important}
             [data-r="logo-text"]{font-size:18px!important}
-            [data-r="logo-sub"]{font-size:7px!important;letter-spacing:2px!important}
+            [data-r="logo-sub"]{font-size:7px!important;letter-spacing:1.5px!important;white-space:normal!important}
           }
         `}</style>
         <FlagStripe theme={lang}/>
         <header style={styles.header}><div data-r="header-inner" style={styles.headerInner}>
           <div style={styles.logo}>
-            <div style={styles.logoIcon}><span style={{fontFamily:"'Orbitron',sans-serif"}}>W</span></div>
-            <div><div data-r="logo-text" style={{...styles.logoText,fontFamily:"'Orbitron',sans-serif"}}>{tx.appName}</div><div data-r="logo-sub" style={styles.logoSub}>{tx.appSub}</div></div>
+            <img src="/wyp-logo-192.png" alt="WYP" style={styles.logoIcon}/>
+            <div style={{minWidth:0,flex:1}}><div data-r="logo-text" style={{...styles.logoText,fontFamily:"'Orbitron',sans-serif"}}>{tx.appName}</div><div data-r="logo-sub" style={styles.logoSub}>{tx.appSub}</div></div>
           </div>
           <div data-r="header-nav-wrap" style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap",flexShrink:1}}>
             <nav style={styles.nav}>{tabList.map(tb=><button key={tb.id} style={styles.navBtn(tab===tb.id)} onClick={()=>setTab(tb.id)}>{tb.icon} {tb.label}</button>)}</nav>
@@ -2181,7 +2188,7 @@ export default function WYPAssist(){
           {tab==="bridle"&&<BridleTab/>}
           {tab==="markout"&&<MarkoutTab/>}
           <footer style={{textAlign:"center",padding:"40px 0 20px",borderTop:`1px solid ${theme.border}`,marginTop:40}}>
-            <div style={{fontSize:24,marginBottom:8}}>{lang==="usa"?"🇺🇸":"🇵🇷"}</div>
+            <img src="/wyp-logo-192.png" alt="WYP" style={{width:32,height:32,borderRadius:"50%",marginBottom:8}}/>
             <div style={{fontSize:11,color:theme.textSecondary,letterSpacing:2,textTransform:"uppercase"}}>{tx.footer1}</div>
             <div style={{fontSize:10,color:`${theme.textSecondary}60`,marginTop:4}}>{tx.footer2}</div>
           </footer>
