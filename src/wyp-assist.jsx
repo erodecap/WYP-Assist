@@ -153,33 +153,77 @@ const i18n = {
   usa: {
     appName:"WYP ASSIST",appSub:"Entertainment Rigging Tools",tabLoad:"Point Load",tabPull:"Pull Sheet",tabBridle:"Bridle Calc",
     disclaimer:"⚠ All calculations are estimates for planning purposes. Always verify with a qualified structural engineer and follow local codes. Safety factor of 5:1 minimum for overhead rigging.",
-    footer1:"WYP Assist v1.0.4",footer2:"© 2025 WYP Assist. All rights reserved. Patent Pending.",
-    plTitle:"Hoist Point Load Calculator",plSystemType:"System Type",plTotalLoad:"Total Load",plNumPoints:"Number of Hoist Points",plSpanLength:"Span Length",plChordAngle:"Chord Angle",plRadius:"Radius",plArcAngle:"Arc Angle (° — 360 for full circle)",plDropHeight:"Drop Height",plResults:"Results",plPerPoint:"per point",plDesignLoad:"Design Load",plHoistPoints:"Hoist Points",plSystemDetails:"System Details",plNotes:"Notes",plConfig:"Rigging Configuration",plVisual:"System Diagram",plLoadMode:"Loading Mode",plLoadEven:"Even Distribution",plLoadCustom:"Custom Loads",plHoistSpacing:"Hoist Spacing",plHoistEven:"Even Spacing",plHoistCustom:"Custom Positions",plHoistPositions:"Hoist Positions",plClickToAdd:"Click on the truss to place a load. Drag to reposition.",plLoadList:"Applied Loads",plPosition:"Position",plWeight:"Weight",plReactions:"Support Reactions",plBeamAnalysis:"Continuous beam analysis (Three-Moment Theorem)",plAddLoad:"Add Load",plMaxReaction:"MAX",plDeleteLoad:"Remove",
+    footer1:"WYP Assist v1.1.0",footer2:"© 2025 WYP Assist. All rights reserved. Patent Pending.",
+    plTitle:"Point Load Estimator",plSystemType:"System Type",plTotalLoad:"Total Load",plNumPoints:"Number of Points",plSpanLength:"Span Length",plChordAngle:"Included Angle",plRadius:"Radius",plArcAngle:"Arc Angle (° — 360 for full circle)",plDropHeight:"Drop Height",plResults:"Results",plPerPoint:"per point",plDesignLoad:"Design Load",plHoistPoints:"Points",plSystemDetails:"System Details",plNotes:"Notes",plConfig:"Rigging Configuration",plVisual:"System Diagram",plLoadMode:"Loading Mode",plLoadEven:"Even Distribution",plLoadCustom:"Custom Loads",plHoistSpacing:"Point Spacing",plHoistEven:"Even Spacing",plHoistCustom:"Custom Positions",plHoistPositions:"Point Positions",plClickToAdd:"Click on the truss to place a load. Drag to reposition.",plLoadList:"Applied Loads",plPosition:"Position",plWeight:"Weight",plReactions:"Support Reactions",plBeamAnalysis:"Continuous beam analysis (Three-Moment Theorem)",plAddLoad:"Add Load",plMaxReaction:"MAX",plDeleteLoad:"Remove",plInterior:"Interior Point",plEndPoint:"End Point",
     straight:"Straight",curved:"Curved",circular:"Circular",vertical:"Vertical",
-    straightNote:"Even distribution assumed along straight truss/pipe",straightNote2:"End points ~60% avg, mid points ~115% avg (beam loading)",curvedNote1:"Curve correction factor",curvedNote2:"Outer points carry proportionally higher loads on curves",circularEndNote:"end points carry ~20% more",circularNote:"Circular rigs distribute load evenly when full 360°",verticalNote1:"Vertical loads include 1.25x dynamic factor for movement",verticalNote2:"Account for shock loading during accel/decel",openArc:"Open arc",
+    straightNote:"Even distribution assumed along straight truss/pipe",straightNote2:"End points ~60% avg, mid points ~115% avg (beam loading)",curvedNote1:"End points carry half the load of interior points (tributary method)",curvedNote2:"Design load based on maximum interior point",curvedCustomNote:"Custom point weights — design to maximum point",circularEndNote:"end points carry ~20% more",circularNote:"Circular rigs distribute load evenly when full 360°",verticalNote1:"Vertical loads include 1.25x dynamic factor for movement",verticalNote2:"Account for shock loading during accel/decel",openArc:"Open arc",
     psTitle:"Pull Sheet Generator",psProject:"Project Name",psVenue:"Venue",psChainSystem:"Chain Hoist System",psSystemType:"System Type",psMotorCounts:"Motor Counts",psHardware:"Hardware",psSteelCable:"Steel",psTotalHoists:"Total Hoists",psOnSystem:"on",psSystem:"system",psPullSheet:"Pull Sheet",psProject2:"Project",psVenue2:"Venue",psChainSys2:"Chain System",psBreakdown:"Breakdown by Motor Type",psMotors:"Motors",psItem:"Item",psSize:"Cat. ID",psQty:"Qty",
     psGrandTotals:"Grand Totals — All Gear",psTotalChain:"Total Chain Hoists",psEmpty:"Add motors above to generate your pull sheet",psExportPDF:"Export PDF",psShowDate:"Show Date",psReturnDate:"Return Date",psCountry:"Country / Region",psD8:"D8 / D8+ Rated",psD8Warn:"\u26A0 D8/D8+ RATED SYSTEM REQUIRED",psSendQuote:"Send for Quote",psName:"Your Name",psEmail:"Your Email",psRequired:"Required",psSending:"Sending\u2026",psSent:"Sent \u2713",psSendFail:"Failed \u2014 Retry",
     psAddons:"Additional Equipment",psAddonSub:"Add quantities for optional gear",
-    brTitle:"Bridle Calculator",brType:"Bridle Type",brConfig:"Configuration",brDimensions:"Dimensions",brBeamSpacing:"Distance Between Beams",brLoadWeight:"Load Weight",brPickSpacing:"Pick Point Spacing",brHeadroom:"Available Headroom",brThirdLeg:"Third Leg Offset",brHoistType:"Hoist Type (for gear list)",brMotorRating:"Motor Rating",brResults:"Bridle Results",brLegLength:"Leg Length",brIncAngle:"Included Angle",brApexHeight:"Apex Height",brPerLeg:"per Leg",brHorizForce:"Horizontal Force",brLegs:"Legs",brThirdLegLen:"Third Leg Length",brNotes:"Rigging Notes",brVisual:"Bridle Diagram",
+    brTitle:"Bridle Calculator",brType:"Bridle Type",brConfig:"Configuration",brDimensions:"Dimensions",brBeamSpacing:"Distance Between Beams",brLoadWeight:"Load Weight",brDistFromA:"Pick Point Distance from Beam A",brHeadroom:"Available Headroom",brThirdLeg:"Third Leg Offset",brHoistType:"Hoist Type (for gear list)",brMotorRating:"Motor Rating",brResults:"Bridle Results",brLegLength:"Leg Length",brLegA:"Leg A",brLegB:"Leg B",brIncAngle:"Included Angle",brApexHeight:"Apex Height",brPerLeg:"per Leg",brHorizForce:"Horizontal Force",brLegs:"Legs",brThirdLegLen:"Third Leg Length",brNotes:"Rigging Notes",brVisual:"Bridle Diagram",brSteelPieces:"Steel Pieces",brBeamConn:"Beam Connection",brAutoHoist:"Recommended Hoist",
     brNote1:"Always verify beam/structure capacity before loading. Angles above 90° significantly increase leg tension.",brNote2:"Horizontal forces must be resolved by the structure. Confirm breast line capacity if used.",brNote3:"Arena bridles: ensure all four attachment points are at equal elevation.",brGearList:"Bridle Gear List",brAngleWarn:"ANGLE WARNING",brAngleWarnText:"Included angle exceeds 120°. Leg loads increase dramatically. Consider wider beam spacing or more headroom.",brError:"Beam spacing must be > pick point spacing.",brEmpty:"Enter dimensions above to calculate bridle geometry",
     twoLeg:"2-Leg",threeLeg:"3-Leg",arena:"Arena (4-Leg)",sameSpreahalf:"Same as half-spread",
     gridIron:"Grid / Iron",beam:"Beam",load:"Load",
+    waiverTitle:"Rigging Estimation Tool — Safety Acknowledgment",
+    waiverBody1:"This tool provides preliminary rigging load estimates for planning purposes only.",
+    waiverBody2:"Calculations generated by this tool are derived from simplified formulas commonly available in engineering reference materials and do not constitute structural engineering analysis or certification.",
+    waiverBody3:"This tool does not evaluate venue structural capacity, rigging hardware ratings, installation practices, dynamic loading, shock loading, or other real-world variables that may affect safety.",
+    waiverBody4:"Rigging and overhead suspension involve serious life-safety risks, including the potential for equipment failure, property damage, severe injury, or death.",
+    waiverBody5:"Before any rigging or structural suspension work is performed:",
+    waiverBullet1:"All loads must be verified independently",
+    waiverBullet2:"Rigging systems must comply with ANSI E1 entertainment technology standards",
+    waiverBullet3:"All installations must follow venue rigging policies and manufacturer load ratings",
+    waiverBullet4:"Structural loads should be reviewed and approved by a licensed Professional Engineer (P.E.) or qualified structural engineer where required",
+    waiverBody6:"The operators of this website make no representations regarding the accuracy, completeness, or suitability of the calculations generated by this tool.",
+    waiverBody7:"Use of this tool is entirely at the user's own risk.",
+    waiverAgreeTitle:"By continuing, you acknowledge and agree that:",
+    waiverAgree1:"This calculator provides estimates only",
+    waiverAgree2:"Results are not engineered or certified",
+    waiverAgree3:"You are solely responsible for verifying all loads and calculations",
+    waiverAgree4:"You assume all risk associated with any use of the outputs",
+    waiverCheckbox:"I acknowledge and accept these terms and wish to proceed",
+    waiverBtn:"Proceed to Calculator",
+    resultDiscTitle:"Estimation Only — Not Engineered",
+    resultDiscBody:"Results shown are preliminary estimates based on simplified formulas and do not account for all structural, installation, or operational variables. These values must not be used as certified rigging loads. All loads must be independently verified and should be reviewed by a qualified structural engineer where required. Rigging operations must comply with ANSI E1 standards, venue policies, and manufacturer load ratings. Use of these estimates is entirely at the user's own risk.",
+    footerDisclaimer:"All calculations, estimates, diagrams, and outputs generated by this website are provided for conceptual planning and educational purposes only. The calculator uses simplified mathematical models derived from commonly available engineering formulas and does not perform full structural analysis. Results may not account for critical real-world factors including dynamic loading, rigging hardware limitations, installation practices, structural fatigue, or venue-specific structural conditions. Nothing on this website constitutes engineering advice, structural certification, or professional consultation. Rigging systems and overhead loads should be reviewed and approved by a licensed Professional Engineer where required and must comply with ANSI E1 Entertainment Technology Standards, OSHA regulations, local building codes, and venue rigging policies. The owners and operators of this website assume no liability for any use of the information or calculations provided. All use of this tool is at the user's sole risk.",
     tabMarkout:"Markout",moTitle:"Markout Generator",moImportCSV:"Import CSV",moExportPDF:"Export PDF",moUnit:"Units",moPaper:"Paper Size",moTotalPts:"Total Points",moTotalWeight:"Total Weight",moUpstage:"UPSTAGE",moDownstage:"DOWNSTAGE",moStageLeft:"STAGE LEFT",moStageRight:"STAGE RIGHT",moCL:"CL",moLabel:"Label",moType:"Type",moLoad:"Load",moNotes:"Notes",moTrim:"Trim",moCable:"Cable",moEmpty:"Import a CSV file to generate your markout sheet",moLegend:"Legend",moNum:"#",moY:"Y",moX:"X",moPushPull:"Push to Pull Sheet",moPushPullDone:"Sent to Pull Sheet",moTemplate:"Download Template",moVwHelp:"Create a hoist report in Vectorworks",moLoadIn:"Load-In Markout",moExportLoadIn:"Export Load-In PDF",moSL:"SL",moSR:"SR",
   },
   pr: {
     appName:"WYP ASSIST",appSub:"Herramientas de Aparejo para Entretenimiento",tabLoad:"Carga Puntual",tabPull:"Hoja de Tiro",tabBridle:"Calc. Brida",
     disclaimer:"⚠ Todos los cálculos son estimaciones para planificación. Verifique con un ingeniero estructural calificado. Factor de seguridad mínimo de 5:1.",
-    footer1:"WYP Assist v1.0.4",footer2:"© 2025 WYP Assist. Todos los derechos reservados. Patente Pendiente.",
-    plTitle:"Calculadora de Carga Puntual",plSystemType:"Tipo de Sistema",plTotalLoad:"Carga Total",plNumPoints:"Número de Puntos",plSpanLength:"Longitud del Tramo",plChordAngle:"Ángulo de Cuerda",plRadius:"Radio",plArcAngle:"Ángulo de Arco (° — 360 para círculo)",plDropHeight:"Altura de Caída",plResults:"Resultados",plPerPoint:"por punto",plDesignLoad:"Carga de Diseño",plHoistPoints:"Puntos de Polipasto",plSystemDetails:"Detalles del Sistema",plNotes:"Notas",plConfig:"Configuración de Aparejo",plVisual:"Diagrama del Sistema",plLoadMode:"Modo de Carga",plLoadEven:"Distribución Uniforme",plLoadCustom:"Cargas Personalizadas",plHoistSpacing:"Espaciado de Polipastos",plHoistEven:"Espaciado Uniforme",plHoistCustom:"Posiciones Personalizadas",plHoistPositions:"Posiciones de Polipastos",plClickToAdd:"Clic en el truss para colocar carga. Arrastre para mover.",plLoadList:"Cargas Aplicadas",plPosition:"Posición",plWeight:"Peso",plReactions:"Reacciones en Apoyos",plBeamAnalysis:"Análisis de viga continua (Teorema de Tres Momentos)",plAddLoad:"Agregar Carga",plMaxReaction:"MÁX",plDeleteLoad:"Eliminar",
+    footer1:"WYP Assist v1.1.0",footer2:"© 2025 WYP Assist. Todos los derechos reservados. Patente Pendiente.",
+    plTitle:"Estimador de Carga Puntual",plSystemType:"Tipo de Sistema",plTotalLoad:"Carga Total",plNumPoints:"Número de Puntos",plSpanLength:"Longitud del Tramo",plChordAngle:"Ángulo Incluido",plRadius:"Radio",plArcAngle:"Ángulo de Arco (° — 360 para círculo)",plDropHeight:"Altura de Caída",plResults:"Resultados",plPerPoint:"por punto",plDesignLoad:"Carga de Diseño",plHoistPoints:"Puntos",plSystemDetails:"Detalles del Sistema",plNotes:"Notas",plConfig:"Configuración de Aparejo",plVisual:"Diagrama del Sistema",plLoadMode:"Modo de Carga",plLoadEven:"Distribución Uniforme",plLoadCustom:"Cargas Personalizadas",plHoistSpacing:"Espaciado de Puntos",plHoistEven:"Espaciado Uniforme",plHoistCustom:"Posiciones Personalizadas",plHoistPositions:"Posiciones de Puntos",plClickToAdd:"Clic en el truss para colocar carga. Arrastre para mover.",plLoadList:"Cargas Aplicadas",plPosition:"Posición",plWeight:"Peso",plReactions:"Reacciones en Apoyos",plBeamAnalysis:"Análisis de viga continua (Teorema de Tres Momentos)",plAddLoad:"Agregar Carga",plMaxReaction:"MÁX",plDeleteLoad:"Eliminar",plInterior:"Punto Interior",plEndPoint:"Punto Extremo",
     straight:"Recto",curved:"Curvo",circular:"Circular",vertical:"Vertical",
-    straightNote:"Distribución uniforme a lo largo de truss/tubo recto",straightNote2:"Puntos finales ~60%, puntos medios ~115%",curvedNote1:"Factor de corrección de curva",curvedNote2:"Puntos exteriores cargan más en curvas",circularEndNote:"puntos finales ~20% más",circularNote:"Circular distribuye carga uniforme a 360°",verticalNote1:"Cargas verticales: factor dinámico 1.25x",verticalNote2:"Considere carga de impacto en aceleración",openArc:"Arco abierto",
+    straightNote:"Distribución uniforme a lo largo de truss/tubo recto",straightNote2:"Puntos finales ~60%, puntos medios ~115%",curvedNote1:"Puntos extremos llevan la mitad de carga que los interiores (método tributario)",curvedNote2:"Carga de diseño basada en punto interior máximo",curvedCustomNote:"Pesos personalizados — diseño al punto máximo",circularEndNote:"puntos finales ~20% más",circularNote:"Circular distribuye carga uniforme a 360°",verticalNote1:"Cargas verticales: factor dinámico 1.25x",verticalNote2:"Considere carga de impacto en aceleración",openArc:"Arco abierto",
     psTitle:"Generador de Hoja de Tiro",psProject:"Nombre del Proyecto",psVenue:"Lugar",psChainSystem:"Sistema de Polipasto",psSystemType:"Tipo de Sistema",psMotorCounts:"Conteo de Motores",psHardware:"Herrajes",psSteelCable:"Acero",psTotalHoists:"Total Polipastos",psOnSystem:"en",psSystem:"sistema",psPullSheet:"Hoja de Tiro",psProject2:"Proyecto",psVenue2:"Lugar",psChainSys2:"Sistema de Cadena",psBreakdown:"Desglose por Tipo de Motor",psMotors:"Motores",psItem:"Artículo",psSize:"Cat. ID",psQty:"Cant.",
     psGrandTotals:"Totales Generales — Todo el Equipo",psTotalChain:"Total Polipastos",psEmpty:"Agregue motores para generar la hoja",psExportPDF:"Exportar PDF",psShowDate:"Fecha del Show",psReturnDate:"Fecha de Devolución",psCountry:"País / Región",psD8:"D8 / D8+ Clasificado",psD8Warn:"\u26A0 SE REQUIERE SISTEMA CLASIFICADO D8/D8+",psSendQuote:"Enviar para Cotización",psName:"Tu Nombre",psEmail:"Tu Correo",psRequired:"Requerido",psSending:"Enviando\u2026",psSent:"Enviado \u2713",psSendFail:"Error \u2014 Reintentar",
     psAddons:"Equipo Adicional",psAddonSub:"Agregue cantidades para equipo opcional",
-    brTitle:"Calculadora de Brida",brType:"Tipo de Brida",brConfig:"Configuración",brDimensions:"Dimensiones",brBeamSpacing:"Distancia Entre Vigas",brLoadWeight:"Peso de Carga",brPickSpacing:"Espaciado de Puntos",brHeadroom:"Altura Disponible",brThirdLeg:"Desplazamiento 3ra Pata",brHoistType:"Tipo de Polipasto (para equipo)",brMotorRating:"Capacidad del Motor",brResults:"Resultados de Brida",brLegLength:"Longitud de Pata",brIncAngle:"Ángulo Incluido",brApexHeight:"Altura del Ápice",brPerLeg:"por Pata",brHorizForce:"Fuerza Horizontal",brLegs:"Patas",brThirdLegLen:"Longitud 3ra Pata",brNotes:"Notas de Aparejo",brVisual:"Diagrama de Brida",
+    brTitle:"Calculadora de Brida",brType:"Tipo de Brida",brConfig:"Configuración",brDimensions:"Dimensiones",brBeamSpacing:"Distancia Entre Vigas",brLoadWeight:"Peso de Carga",brDistFromA:"Distancia del Punto de Carga desde Viga A",brHeadroom:"Altura Disponible",brThirdLeg:"Desplazamiento 3ra Pata",brHoistType:"Tipo de Polipasto (para equipo)",brMotorRating:"Capacidad del Motor",brResults:"Resultados de Brida",brLegLength:"Longitud de Pata",brLegA:"Pata A",brLegB:"Pata B",brIncAngle:"Ángulo Incluido",brApexHeight:"Altura del Ápice",brPerLeg:"por Pata",brHorizForce:"Fuerza Horizontal",brLegs:"Patas",brThirdLegLen:"Longitud 3ra Pata",brNotes:"Notas de Aparejo",brVisual:"Diagrama de Brida",brSteelPieces:"Piezas de Acero",brBeamConn:"Conexión a Viga",brAutoHoist:"Polipasto Recomendado",
     brNote1:"Verifique capacidad de viga/estructura. Ángulos >90° aumentan tensión.",brNote2:"Fuerzas horizontales resueltas por la estructura. Confirme línea de pecho.",brNote3:"Arena: cuatro puntos a misma elevación.",brGearList:"Lista de Equipo de Brida",brAngleWarn:"ADVERTENCIA DE ÁNGULO",brAngleWarnText:"Ángulo >120°. Cargas aumentan dramáticamente.",brError:"Espaciado de vigas debe ser > espaciado de puntos.",brEmpty:"Ingrese dimensiones para calcular",
     twoLeg:"2-Patas",threeLeg:"3-Patas",arena:"Arena (4-Patas)",sameSpreahalf:"Igual que mitad de extensión",
     gridIron:"Parrilla",beam:"Viga",load:"Carga",
+    waiverTitle:"Herramienta de Estimación de Aparejo — Reconocimiento de Seguridad",
+    waiverBody1:"Esta herramienta proporciona estimaciones preliminares de carga de aparejo solo para fines de planificación.",
+    waiverBody2:"Los cálculos generados por esta herramienta se derivan de fórmulas simplificadas disponibles en materiales de referencia de ingeniería y no constituyen un análisis o certificación de ingeniería estructural.",
+    waiverBody3:"Esta herramienta no evalúa la capacidad estructural del lugar, las clasificaciones del equipo de aparejo, las prácticas de instalación, la carga dinámica, la carga de impacto u otras variables del mundo real que puedan afectar la seguridad.",
+    waiverBody4:"El aparejo y la suspensión aérea implican riesgos graves para la vida, incluyendo la posibilidad de falla del equipo, daños a la propiedad, lesiones graves o muerte.",
+    waiverBody5:"Antes de realizar cualquier trabajo de aparejo o suspensión estructural:",
+    waiverBullet1:"Todas las cargas deben ser verificadas de forma independiente",
+    waiverBullet2:"Los sistemas de aparejo deben cumplir con los estándares ANSI E1 de tecnología de entretenimiento",
+    waiverBullet3:"Todas las instalaciones deben seguir las políticas de aparejo del lugar y las clasificaciones de carga del fabricante",
+    waiverBullet4:"Las cargas estructurales deben ser revisadas y aprobadas por un Ingeniero Profesional (P.E.) licenciado o ingeniero estructural calificado cuando sea necesario",
+    waiverBody6:"Los operadores de este sitio web no hacen representaciones sobre la precisión, integridad o idoneidad de los cálculos generados por esta herramienta.",
+    waiverBody7:"El uso de esta herramienta es completamente bajo el propio riesgo del usuario.",
+    waiverAgreeTitle:"Al continuar, usted reconoce y acepta que:",
+    waiverAgree1:"Esta calculadora proporciona solo estimaciones",
+    waiverAgree2:"Los resultados no están diseñados ni certificados",
+    waiverAgree3:"Usted es el único responsable de verificar todas las cargas y cálculos",
+    waiverAgree4:"Usted asume todo el riesgo asociado con cualquier uso de los resultados",
+    waiverCheckbox:"Reconozco y acepto estos términos y deseo continuar",
+    waiverBtn:"Proceder a la Calculadora",
+    resultDiscTitle:"Solo Estimación — No Diseñado",
+    resultDiscBody:"Los resultados mostrados son estimaciones preliminares basadas en fórmulas simplificadas y no tienen en cuenta todas las variables estructurales, de instalación u operativas. Estos valores no deben utilizarse como cargas de aparejo certificadas. Todas las cargas deben ser verificadas de forma independiente y revisadas por un ingeniero estructural calificado cuando sea necesario. Las operaciones de aparejo deben cumplir con los estándares ANSI E1, las políticas del lugar y las clasificaciones de carga del fabricante. El uso de estas estimaciones es completamente bajo el propio riesgo del usuario.",
+    footerDisclaimer:"Todos los cálculos, estimaciones, diagramas y resultados generados por este sitio web se proporcionan únicamente con fines de planificación conceptual y educativos. La calculadora utiliza modelos matemáticos simplificados derivados de fórmulas de ingeniería comúnmente disponibles y no realiza un análisis estructural completo. Los resultados pueden no tener en cuenta factores críticos del mundo real, incluyendo carga dinámica, limitaciones del equipo de aparejo, prácticas de instalación, fatiga estructural o condiciones estructurales específicas del lugar. Nada en este sitio web constituye asesoramiento de ingeniería, certificación estructural o consulta profesional. Los sistemas de aparejo y las cargas aéreas deben ser revisados y aprobados por un Ingeniero Profesional licenciado cuando sea necesario y deben cumplir con los Estándares de Tecnología de Entretenimiento ANSI E1, las regulaciones de OSHA, los códigos de construcción locales y las políticas de aparejo del lugar. Los propietarios y operadores de este sitio web no asumen ninguna responsabilidad por cualquier uso de la información o los cálculos proporcionados. Todo uso de esta herramienta es bajo el propio riesgo del usuario.",
     tabMarkout:"Marcado",moTitle:"Generador de Marcado",moImportCSV:"Importar CSV",moExportPDF:"Exportar PDF",moUnit:"Unidades",moPaper:"Tamaño Papel",moTotalPts:"Total Puntos",moTotalWeight:"Peso Total",moUpstage:"FONDO",moDownstage:"FRENTE",moStageLeft:"IZQUIERDA",moStageRight:"DERECHA",moCL:"LC",moLabel:"Etiqueta",moType:"Tipo",moLoad:"Carga",moNotes:"Notas",moTrim:"Trim",moCable:"Cable",moEmpty:"Importe un archivo CSV para generar su hoja de marcado",moLegend:"Leyenda",moNum:"#",moY:"Y",moX:"X",moPushPull:"Enviar a Hoja de Tiro",moPushPullDone:"Enviado a Hoja de Tiro",moTemplate:"Descargar Plantilla",moVwHelp:"Crear reporte de polipastos en Vectorworks",moLoadIn:"Marcado de Carga",moExportLoadIn:"Exportar PDF de Carga",moSL:"IZ",moSR:"DE",
   },
 };
@@ -499,6 +543,68 @@ export function calcHoistGear(motorType, count) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// BRIDLE STEEL PIECE CALCULATOR
+// ═══════════════════════════════════════════════════════════════════════════════
+// Available steel cable lengths (feet) and STAC chain for fine-tuning
+const STEEL_LENGTHS=[50,30,20,10,5,2]; // descending for greedy
+const CHAIN_LEN=3; // STAC chain section = 3ft
+const CHAIN_LINK=4/12; // 4 inches = 0.333 ft per link
+
+/**
+ * Calculate optimal steel cable + chain combination for a target leg length.
+ * Beam connection is always 5' spanset+burlap+shackle (not counted in leg steel).
+ * Returns {steels:[{len,qty}], chains:number, links:number, totalLen:number}
+ */
+function calcSteelPieces(targetFt,isHeavy){
+  if(targetFt<=0)return{steels:[],chains:0,links:0,totalLen:0};
+  let remaining=targetFt;const steels=[];
+  // Greedy: use largest steel pieces first
+  for(const len of STEEL_LENGTHS){
+    if(remaining>=len){const qty=Math.floor(remaining/len);steels.push({len,qty});remaining-=qty*len;}
+  }
+  // Use STAC chain sections for remaining length (3' sections)
+  let chains=0;
+  if(remaining>=CHAIN_LEN){chains=Math.floor(remaining/CHAIN_LEN);remaining-=chains*CHAIN_LEN;}
+  // Use chain links (4" each) for fine remainder
+  let links=0;
+  if(remaining>0.01){links=Math.ceil(remaining/CHAIN_LINK);remaining=0;}
+  const totalLen=steels.reduce((s,p)=>s+p.len*p.qty,0)+chains*CHAIN_LEN+links*CHAIN_LINK;
+  // Catalog IDs for gear list
+  const prefix=isHeavy?"steel12":"steel38";
+  const catMap=isHeavy?{2:"RIG17-25",5:"RIG17-30",10:"RIG17-40",20:"RIG17-50",30:"RIG17-60",50:"RIG17-70"}
+    :{2:"RIG10-50",5:"RIG10-55",10:"RIG10-60",20:"RIG10-65",30:"RIG10-70",50:"RIG10-75"};
+  const gearItems=steels.map(s=>({catId:catMap[s.len],name:CAT[catMap[s.len]]?.name||`Steel ${s.len}'`,qty:s.qty}));
+  if(chains>0)gearItems.push({catId:"RIG11-20",name:CAT["RIG11-20"]?.name||"S.T.A.C. Chain 3'",qty:chains});
+  return{steels,chains,links,totalLen,gearItems,prefix};
+}
+
+/**
+ * Build full bridle gear list for one leg (beam connection + steel pieces).
+ * Beam connection: 1x Spanset 5' + 1x Burlap + 1x Shackle, wrapped around beam.
+ */
+function calcBridleLegGear(legLenFt,isHeavy){
+  const shackleId=isHeavy?"RIG17-10":"RIG10-00";const shackleName=CAT[shackleId]?.name;
+  const pearId=isHeavy?"RIG17-20":"RIG10-05";const pearName=CAT[pearId]?.name;
+  const items=[];
+  // Beam connection: spanset 5' + burlap + shackle
+  // Beam connection: 5' steel cable wrapped with burlap around beam to a shackle
+  const beamSteelId=isHeavy?"RIG17-30":"RIG10-55";
+  items.push({catId:beamSteelId,name:CAT[beamSteelId]?.name||"Steel 5' Cable",qty:1,note:"Beam wrap"});
+  items.push({catId:"RIG11-30",name:"Burlap",qty:1,note:"Beam wrap"});
+  items.push({catId:shackleId,name:shackleName,qty:1,note:"Beam to leg"});
+  // Steel pieces for leg
+  const sp=calcSteelPieces(legLenFt,isHeavy);
+  sp.gearItems.forEach(g=>{items.push({...g,note:"Leg steel"});});
+  // Shackles between steel pieces (n_pieces - 1 connectors + 1 at bottom)
+  const nPieces=sp.steels.reduce((s,p)=>s+p.qty,0)+sp.chains;
+  if(nPieces>1)items.push({catId:shackleId,name:shackleName,qty:nPieces-1,note:"Steel connectors"});
+  // Bottom shackle + pear ring at apex
+  items.push({catId:shackleId,name:shackleName,qty:1,note:"Apex connection"});
+  items.push({catId:pearId,name:pearName,qty:1,note:"Apex pear ring"});
+  return{items,steelPieces:sp};
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // CONTINUOUS BEAM SOLVER (Three-Moment Theorem)
 // ═══════════════════════════════════════════════════════════════════════════════
 
@@ -814,26 +920,288 @@ function InteractivePointLoadDiagram({spanLength,hoistPositions,loads,reactions,
   );
 }
 
-function PointLoadDiagram({rigType,numPoints,pointLoad,unit}){
+function PointLoadDiagram({rigType,numPoints,pointLoad,unit,pointLoads,curvedDims}){
   const{t,tx}=useTheme();const N=parseInt(numPoints)||3;const pL=parseFloat(pointLoad)||0;
   const uW=unit==="imperial"?"lbs":"kg";const w=520,h=320;const ac=t.accent,dim=t.textSecondary,sec=t.secondary;
   if(rigType==="straight"){const padX=60,tY=80,sp=(w-padX*2)/Math.max(N-1,1);const pts=Array.from({length:N},(_,i)=>padX+i*sp);
     return(<svg viewBox={`0 0 ${w} ${h}`} style={{width:"100%",maxWidth:540}}><defs><marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill={ac}/></marker></defs><rect x={padX-10} y={20} width={w-padX*2+20} height={12} rx={2} fill={dim} opacity={0.3}/><text x={w/2} y={16} textAnchor="middle" fill={dim} fontSize="10" fontFamily="inherit" letterSpacing="2">{tx.gridIron}</text>{pts.map((x,i)=><line key={`ch${i}`} x1={x} y1={32} x2={x} y2={tY-8} stroke={dim} strokeWidth={1.5} strokeDasharray="4 3"/>)}<rect x={padX-6} y={tY-8} width={w-padX*2+12} height={16} rx={3} fill="none" stroke={ac} strokeWidth={2}/><text x={w/2} y={tY+4} textAnchor="middle" fill={ac} fontSize="9" fontFamily="inherit" fontWeight="700">TRUSS</text>{pts.map((x,i)=>(<g key={i}><circle cx={x} cy={tY+8} r={5} fill={ac}/><line x1={x} y1={tY+18} x2={x} y2={tY+80} stroke={ac} strokeWidth={2} markerEnd="url(#ah)"/><rect x={x-28} y={tY+86} width={56} height={22} rx={3} fill={ac} opacity={0.15}/><text x={x} y={tY+101} textAnchor="middle" fill={ac} fontSize="10" fontFamily="inherit" fontWeight="700">{pL} {uW}</text><text x={x} y={tY+120} textAnchor="middle" fill={dim} fontSize="9" fontFamily="inherit">P{i+1}</text></g>))}<line x1={pts[0]} y1={h-30} x2={pts[pts.length-1]} y2={h-30} stroke={dim} strokeWidth={1}/><text x={w/2} y={h-16} textAnchor="middle" fill={dim} fontSize="10" fontFamily="inherit">{N} points</text></svg>);}
-  if(rigType==="curved"){const cx=w/2,cy=60,r=160;const startA=Math.PI*0.85,endA=Math.PI*0.15;const pts=Array.from({length:N},(_,i)=>{const ang=startA+(endA-startA)*(i/Math.max(N-1,1));return{x:cx+r*Math.cos(ang),y:cy+r*Math.sin(ang)};});const arcS={x:cx+r*Math.cos(startA),y:cy+r*Math.sin(startA)},arcE={x:cx+r*Math.cos(endA),y:cy+r*Math.sin(endA)};
-    return(<svg viewBox={`0 0 ${w} ${h}`} style={{width:"100%",maxWidth:540}}><defs><marker id="ah2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill={ac}/></marker></defs><rect x={40} y={10} width={w-80} height={12} rx={2} fill={dim} opacity={0.3}/><text x={w/2} y={8} textAnchor="middle" fill={dim} fontSize="10" fontFamily="inherit" letterSpacing="2">{tx.gridIron}</text><path d={`M ${arcS.x} ${arcS.y} A ${r} ${r} 0 0 0 ${arcE.x} ${arcE.y}`} fill="none" stroke={ac} strokeWidth={2.5}/>{pts.map((p,i)=>(<g key={i}><line x1={p.x} y1={22} x2={p.x} y2={p.y-6} stroke={dim} strokeWidth={1.2} strokeDasharray="4 3"/><circle cx={p.x} cy={p.y} r={5} fill={ac}/><line x1={p.x} y1={p.y+8} x2={p.x} y2={p.y+65} stroke={ac} strokeWidth={2} markerEnd="url(#ah2)"/><text x={p.x} y={p.y+82} textAnchor="middle" fill={ac} fontSize="10" fontFamily="inherit" fontWeight="700">{pL} {uW}</text></g>))}</svg>);}
-  if(rigType==="circular"){const cx=w/2,cy=h/2-10,r=100;const pts=Array.from({length:N},(_,i)=>{const a=(Math.PI*2*i)/N-Math.PI/2;return{x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)};});
-    return(<svg viewBox={`0 0 ${w} ${h}`} style={{width:"100%",maxWidth:540}}><defs><marker id="ah3" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill={ac}/></marker></defs><circle cx={cx} cy={cy} r={r} fill="none" stroke={ac} strokeWidth={2.5}/>{pts.map((p,i)=>{const dx=(p.x-cx)/r,dy=(p.y-cy)/r;const ax=p.x+dx*55,ay=p.y+dy*55;return(<g key={i}><circle cx={p.x} cy={p.y} r={5} fill={ac}/><line x1={p.x+dx*8} y1={p.y+dy*8} x2={ax-dx*6} y2={ay-dy*6} stroke={ac} strokeWidth={1.5} markerEnd="url(#ah3)"/><text x={ax+dx*8} y={ay+dy*4+4} textAnchor="middle" fill={ac} fontSize="9" fontFamily="inherit" fontWeight="700">{pL}</text></g>);})}<text x={cx} y={h-8} textAnchor="middle" fill={dim} fontSize="10" fontFamily="inherit">{N} points · 360°</text></svg>);}
+  if(rigType==="curved"){
+    const cW=580,cH=580;const hasPerPt=pointLoads&&pointLoads.length===N;
+    const uD=unit==="imperial"?"ft":"m";
+    const cd=curvedDims||{};const rVal=cd.radius||0;const aDeg=cd.angleDeg||90;
+    const arcL=cd.arcLen||0;const chordL=cd.chordLen||0;
+    const aRad=aDeg*Math.PI/180;
+    const warning=t.warning||"#f0ad4e";
+
+    // ─── PLAN VIEW ───
+    const topY0=30;const topCx=cW/2;
+    const topArcR=130;// larger arc for better label spacing
+    const visAngle=Math.min(Math.max(aRad,0.35),Math.PI*1.6);
+    // Center the arc: for small angles the arc is near the top, for large angles it pushes down
+    const topCy=topY0+topArcR+40;
+    // Points along arc
+    const topPts=Array.from({length:N},(_,i)=>{
+      const frac=N===1?0.5:i/(N-1);
+      const a=-visAngle/2+frac*visAngle-Math.PI/2;
+      return{x:topCx+topArcR*Math.cos(a),y:topCy+topArcR*Math.sin(a)};
+    });
+    const topStart=topPts[0],topEnd=topPts[N-1];
+    const topLargeArc=visAngle>Math.PI?1:0;
+    // Bounding box of plan view for positioning
+    const topMinY=Math.min(...topPts.map(p=>p.y));
+    const topMaxY=Math.max(...topPts.map(p=>p.y),topCy);
+    const planBottom=topMaxY+50;// leave room for stage front label
+
+    // ─── ELEVATION VIEW ───
+    const sideY0=planBottom+24;const sideGridY=sideY0+22;
+    const sidePad=70,sideSpan=cW-sidePad*2;
+    const maxChain=55,minChain=18;
+    const sidePts=Array.from({length:N},(_,i)=>{
+      const frac=N===1?0.5:i/(N-1);
+      const x=sidePad+frac*sideSpan;
+      const d=Math.abs(frac-0.5)*2;
+      return{x,y:sideGridY+10+minChain+(maxChain-minChain)*d*d};
+    });
+    const loadDrop=44;
+    const botY=Math.max(...sidePts.map(p=>p.y))+loadDrop+44;
+    const svgH=Math.max(cH,botY+10);
+
+    // Container styles for the two views
+    const ctnr={background:t.surfaceLight,border:`1px solid ${t.border}`,borderRadius:6,padding:"14px 10px 10px"};
+    const ctnrTitle={fontSize:10,color:dim,letterSpacing:2,textTransform:"uppercase",fontWeight:700,marginBottom:8,textAlign:"center"};
+    // Plan view SVG dimensions (self-contained)
+    const planH=planBottom+10;
+    // Elevation SVG dimensions (self-contained, reset Y origin)
+    const eGridY=30;
+    const eSidePts=Array.from({length:N},(_,i)=>{
+      const frac=N===1?0.5:i/(N-1);
+      const x=sidePad+frac*sideSpan;
+      const d=Math.abs(frac-0.5)*2;
+      return{x,y:eGridY+10+minChain+(maxChain-minChain)*d*d};
+    });
+    const eLoadDrop=loadDrop;
+    const eBotY=Math.max(...eSidePts.map(p=>p.y))+eLoadDrop+38+(N>4?18:0)+18;
+    const elevH=eBotY+6;
+
+    return(<div style={{display:"flex",flexDirection:"column",gap:12}}>
+      {/* ═══ PLAN VIEW CONTAINER ═══ */}
+      <div style={ctnr}>
+        <div style={ctnrTitle}>Plan View</div>
+        <svg viewBox={`0 0 ${cW} ${planH}`} style={{width:"100%",maxWidth:600}}>
+          {/* Arc truss */}
+          <path d={`M ${topStart.x} ${topStart.y} A ${topArcR} ${topArcR} 0 ${topLargeArc} 1 ${topEnd.x} ${topEnd.y}`} fill="none" stroke={ac} strokeWidth={3}/>
+          {/* Pick points — labels pushed outward radially */}
+          {topPts.map((p,i)=>{const ptW=hasPerPt?pointLoads[i]:pL;
+            const dx=(p.x-topCx)/topArcR;const dy=(p.y-topCy)/topArcR;
+            const lbl=32;const lx=p.x+dx*lbl;const ly=p.y+dy*lbl;
+            const anc=Math.abs(dx)<0.2?"middle":dx<0?"end":"start";
+            return(<g key={`tp${i}`}>
+              <circle cx={p.x} cy={p.y} r={5} fill={ac}/>
+              <line x1={p.x+dx*7} y1={p.y+dy*7} x2={p.x+dx*20} y2={p.y+dy*20} stroke={dim} strokeWidth={0.6}/>
+              <text x={lx} y={ly-1} textAnchor={anc} fill={ac} fontSize="9" fontFamily="inherit" fontWeight="700">{ptW} {uW}</text>
+              <text x={lx} y={ly+10} textAnchor={anc} fill={dim} fontSize="8" fontFamily="inherit">P{i+1}</text>
+            </g>);})}
+          {/* Chord dashed line */}
+          <line x1={topStart.x} y1={topStart.y} x2={topEnd.x} y2={topEnd.y} stroke={dim} strokeWidth={0.8} strokeDasharray="5 3"/>
+          {/* Radius line: center → mid-arc */}
+          <line x1={topCx} y1={topCy} x2={topPts[Math.floor(N/2)].x} y2={topPts[Math.floor(N/2)].y} stroke={dim} strokeWidth={0.7} strokeDasharray="3 2"/>
+          <circle cx={topCx} cy={topCy} r={3} fill="none" stroke={dim} strokeWidth={0.8}/>
+          {/* Angle arc near center */}
+          {aDeg>0&&(()=>{const annR=28;const a1=-visAngle/2-Math.PI/2;const a2=visAngle/2-Math.PI/2;
+            return<g>
+              <path d={`M ${topCx+annR*Math.cos(a1)} ${topCy+annR*Math.sin(a1)} A ${annR} ${annR} 0 ${topLargeArc} 1 ${topCx+annR*Math.cos(a2)} ${topCy+annR*Math.sin(a2)}`} fill="none" stroke={warning} strokeWidth={1} opacity={0.7}/>
+              <text x={topCx} y={topCy+annR+4} textAnchor="middle" fill={warning} fontSize="9" fontFamily="inherit" fontWeight="700">{aDeg}°</text>
+            </g>;
+          })()}
+          {/* Dimension legend — top-right */}
+          {(()=>{const bx=cW-16;const by=topMinY+10;
+            return<g>
+              <text x={bx} y={by} textAnchor="end" fill={dim} fontSize="8.5" fontFamily="inherit" fontStyle="italic">R = {rVal.toFixed(1)} {uD}</text>
+              {arcL>0&&<text x={bx} y={by+13} textAnchor="end" fill={ac} fontSize="8.5" fontFamily="inherit" fontWeight="600">Arc = {arcL.toFixed(1)} {uD}</text>}
+              {chordL>0&&<text x={bx} y={by+26} textAnchor="end" fill={dim} fontSize="8.5" fontFamily="inherit" fontStyle="italic">Chord = {chordL.toFixed(1)} {uD}</text>}
+            </g>;
+          })()}
+          {/* Stage front reference line */}
+          <line x1={topCx-topArcR-50} y1={planBottom-16} x2={topCx+topArcR+50} y2={planBottom-16} stroke={dim} strokeWidth={0.5} strokeDasharray="6 4"/>
+          <text x={topCx} y={planBottom-4} textAnchor="middle" fill={dim} fontSize="8" fontFamily="inherit" letterSpacing="1.5">STAGE FRONT</text>
+        </svg>
+      </div>
+
+      {/* ═══ ELEVATION VIEW CONTAINER ═══ */}
+      <div style={ctnr}>
+        <div style={ctnrTitle}>Elevation View</div>
+        <svg viewBox={`0 0 ${cW} ${elevH}`} style={{width:"100%",maxWidth:600}}>
+          <defs>
+            <marker id="ah2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill={ac}/></marker>
+            <marker id="dimA" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto"><polygon points="0 0,6 2,0 4" fill={dim}/></marker>
+            <marker id="dimB" markerWidth="6" markerHeight="4" refX="0" refY="2" orient="auto"><polygon points="6 0,0 2,6 4" fill={dim}/></marker>
+          </defs>
+          {/* Grid iron */}
+          <rect x={sidePad-14} y={14} width={sideSpan+28} height={8} rx={2} fill={dim} opacity={0.2}/>
+          <text x={cW/2} y={10} textAnchor="middle" fill={dim} fontSize="8" fontFamily="inherit" letterSpacing="1">{tx.gridIron}</text>
+          {/* Chain lines */}
+          {eSidePts.map((p,i)=><line key={`sch${i}`} x1={p.x} y1={22} x2={p.x} y2={p.y-5} stroke={dim} strokeWidth={1} strokeDasharray="4 3"/>)}
+          {/* Truss curve */}
+          {(()=>{
+            if(eSidePts.length<3)return<line x1={eSidePts[0].x} y1={eSidePts[0].y} x2={eSidePts[N-1].x} y2={eSidePts[N-1].y} stroke={ac} strokeWidth={2.5}/>;
+            const pathD=eSidePts.reduce((acc,p,i)=>{
+              if(i===0)return`M ${p.x} ${p.y}`;
+              if(i===eSidePts.length-1)return acc+` L ${p.x} ${p.y}`;
+              const mx=(eSidePts[i-1].x+p.x)/2;const my=(eSidePts[i-1].y+p.y)/2;
+              return acc+` Q ${eSidePts[i-1].x} ${eSidePts[i-1].y} ${mx} ${my}`;
+            },"");
+            return<path d={pathD} fill="none" stroke={ac} strokeWidth={2.5}/>;
+          })()}
+          {/* Loads */}
+          {eSidePts.map((p,i)=>{const ptW=hasPerPt?pointLoads[i]:pL;
+            const alt=N>4&&i%2===1;const drop=alt?eLoadDrop+18:eLoadDrop;
+            return(<g key={`sp${i}`}>
+              <circle cx={p.x} cy={p.y} r={3.5} fill={ac}/>
+              <line x1={p.x} y1={p.y+6} x2={p.x} y2={p.y+drop-4} stroke={ac} strokeWidth={1.5} markerEnd="url(#ah2)"/>
+              <rect x={p.x-26} y={p.y+drop} width={52} height={17} rx={3} fill={ac} opacity={0.12}/>
+              <text x={p.x} y={p.y+drop+12} textAnchor="middle" fill={ac} fontSize="8.5" fontFamily="inherit" fontWeight="700">{ptW} {uW}</text>
+              <text x={p.x} y={p.y+drop+25} textAnchor="middle" fill={dim} fontSize="7.5" fontFamily="inherit">P{i+1}</text>
+            </g>);})}
+          {/* Bottom dimension line */}
+          {(()=>{const dy=Math.max(...eSidePts.map(p=>p.y))+eLoadDrop+38+(N>4?18:0);
+            return<g>
+              <line x1={eSidePts[0].x} y1={dy} x2={eSidePts[N-1].x} y2={dy} stroke={dim} strokeWidth={0.7} markerStart="url(#dimB)" markerEnd="url(#dimA)"/>
+              <line x1={eSidePts[0].x} y1={dy-4} x2={eSidePts[0].x} y2={dy+4} stroke={dim} strokeWidth={0.6}/>
+              <line x1={eSidePts[N-1].x} y1={dy-4} x2={eSidePts[N-1].x} y2={dy+4} stroke={dim} strokeWidth={0.6}/>
+              <text x={cW/2} y={dy+14} textAnchor="middle" fill={dim} fontSize="9" fontFamily="inherit">{N} {tx.plHoistPoints}{arcL>0?` · Arc: ${arcL.toFixed(1)} ${uD}`:""}</text>
+            </g>;
+          })()}
+        </svg>
+      </div>
+    </div>);
+  }
+  if(rigType==="circular"){const cx=w/2,cy=h/2-10,r=100;const hasPerPt=pointLoads&&pointLoads.length===N;const pts=Array.from({length:N},(_,i)=>{const a=(Math.PI*2*i)/N-Math.PI/2;return{x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)};});
+    return(<svg viewBox={`0 0 ${w} ${h}`} style={{width:"100%",maxWidth:540}}><defs><marker id="ah3" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill={ac}/></marker></defs><circle cx={cx} cy={cy} r={r} fill="none" stroke={ac} strokeWidth={2.5}/>{pts.map((p,i)=>{const dx=(p.x-cx)/r,dy=(p.y-cy)/r;const ax=p.x+dx*55,ay=p.y+dy*55;const ptW=hasPerPt?pointLoads[i]:pL;return(<g key={i}><circle cx={p.x} cy={p.y} r={5} fill={ac}/><line x1={p.x+dx*8} y1={p.y+dy*8} x2={ax-dx*6} y2={ay-dy*6} stroke={ac} strokeWidth={1.5} markerEnd="url(#ah3)"/><text x={ax+dx*8} y={ay+dy*4+4} textAnchor="middle" fill={ac} fontSize="9" fontFamily="inherit" fontWeight="700">{ptW}</text></g>);})}<text x={cx} y={h-8} textAnchor="middle" fill={dim} fontSize="10" fontFamily="inherit">{N} points · 360°</text></svg>);}
   return(<svg viewBox={`0 0 ${w} ${h}`} style={{width:"100%",maxWidth:540}}><defs><marker id="ah4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill={ac}/></marker></defs><rect x={80} y={20} width={w-160} height={14} rx={2} fill={dim} opacity={0.3}/><text x={w/2} y={16} textAnchor="middle" fill={dim} fontSize="10" fontFamily="inherit" letterSpacing="2">{tx.gridIron}</text>{Array.from({length:Math.min(N,4)},(_,i)=>{const x=140+i*70;return(<g key={i}><line x1={x} y1={34} x2={x} y2={60} stroke={dim} strokeWidth={1.2} strokeDasharray="4 3"/><rect x={x-8} y={60} width={16} height={24} rx={2} fill={sec} opacity={0.6}/><text x={x} y={76} textAnchor="middle" fill="#fff" fontSize="7" fontFamily="inherit">M</text><line x1={x} y1={84} x2={x} y2={230} stroke={dim} strokeWidth={1.5} strokeDasharray="6 2"/><circle cx={x} cy={230} r={4} fill={ac}/></g>);})}<rect x={120} y={240} width={Math.min(N,4)*70+20} height={14} rx={3} fill="none" stroke={ac} strokeWidth={2}/><line x1={w/2} y1={256} x2={w/2} y2={290} stroke={ac} strokeWidth={2} markerEnd="url(#ah4)"/><text x={w/2} y={306} textAnchor="middle" fill={ac} fontSize="11" fontFamily="inherit" fontWeight="700">{pL} {uW}/pt</text></svg>);
 }
 
 function BridleDiagram({bridleType,result,unit}){
   const{t,tx}=useTheme();if(!result||result.err) return null;
-  const ac=t.accent,sec=t.secondary,dim=t.textSecondary;
-  const dL=unit==="imperial"?"ft":"m",wL=unit==="imperial"?"lbs":"kg";const w=520,h=360;
-  if(bridleType==="2"||bridleType==="3"){const beamY=50,apexY=160,loadY=280,cx=w/2,spread=140,lB=cx-spread,rB=cx+spread;const legs=bridleType==="2"?[{bx:lB},{bx:rB}]:[{bx:lB},{bx:rB},{bx:cx}];
-    return(<svg viewBox={`0 0 ${w} ${h}`} style={{width:"100%",maxWidth:540}}><defs><marker id="bah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill={ac}/></marker></defs><rect x={lB-30} y={beamY-6} width={60} height={12} rx={2} fill={sec} opacity={0.6}/><rect x={rB-30} y={beamY-6} width={60} height={12} rx={2} fill={sec} opacity={0.6}/><text x={lB} y={beamY-12} textAnchor="middle" fill={dim} fontSize="9" fontFamily="inherit">{tx.beam} A</text><text x={rB} y={beamY-12} textAnchor="middle" fill={dim} fontSize="9" fontFamily="inherit">{tx.beam} B</text>{bridleType==="3"&&<><rect x={cx-20} y={beamY-6} width={40} height={12} rx={2} fill={sec} opacity={0.4}/><text x={cx} y={beamY-12} textAnchor="middle" fill={dim} fontSize="9" fontFamily="inherit">C</text></>}{legs.map((leg,i)=><line key={i} x1={leg.bx} y1={beamY+6} x2={cx} y2={apexY} stroke={ac} strokeWidth={2.5}/>)}{legs.map((leg,i)=><circle key={`c${i}`} cx={leg.bx} cy={beamY+6} r={5} fill={ac}/>)}<circle cx={cx} cy={apexY} r={7} fill={ac} stroke="#fff" strokeWidth={1.5}/><text x={cx+14} y={apexY+4} fill={ac} fontSize="9" fontFamily="inherit" fontWeight="700">APEX</text><line x1={cx} y1={apexY+7} x2={cx} y2={loadY-14} stroke={dim} strokeWidth={1.5} strokeDasharray="5 3"/><rect x={cx-50} y={loadY-14} width={100} height={28} rx={4} fill="none" stroke={ac} strokeWidth={2}/><text x={cx} y={loadY+5} textAnchor="middle" fill={ac} fontSize="11" fontFamily="inherit" fontWeight="700">{result.lpl} {wL}</text><line x1={cx} y1={loadY+16} x2={cx} y2={loadY+40} stroke={ac} strokeWidth={2} markerEnd="url(#bah)"/><path d={`M ${cx-25} ${apexY-20} A 30 30 0 0 1 ${cx+25} ${apexY-20}`} fill="none" stroke={warning} strokeWidth={1.5}/><text x={cx} y={apexY-28} textAnchor="middle" fill={warning} fontSize="10" fontFamily="inherit" fontWeight="700">{result.ia}°</text><text x={(lB+cx)/2-20} y={(beamY+apexY)/2} fill={ac} fontSize="10" fontFamily="inherit" fontWeight="600" transform={`rotate(-45 ${(lB+cx)/2-20} ${(beamY+apexY)/2})`}>L={result.ll} {dL}</text><line x1={lB} y1={h-22} x2={rB} y2={h-22} stroke={dim} strokeWidth={1}/><text x={cx} y={h-8} textAnchor="middle" fill={dim} fontSize="9" fontFamily="inherit">{tx.brBeamSpacing}</text></svg>);}
-  const cx=w/2,cy=h/2-20,sp=100;const corners=[[-sp,-sp],[sp,-sp],[sp,sp],[-sp,sp]].map(([dx,dy])=>({x:cx+dx,y:cy+dy}));
-  return(<svg viewBox={`0 0 ${w} ${h}`} style={{width:"100%",maxWidth:540}}><text x={cx} y={20} textAnchor="middle" fill={dim} fontSize="10" fontFamily="inherit" letterSpacing="2">ARENA — TOP VIEW</text><rect x={cx-sp} y={cy-sp} width={sp*2} height={sp*2} fill="none" stroke={dim} strokeWidth={1} strokeDasharray="6 3"/>{corners.map((c,i)=>(<g key={i}><line x1={c.x} y1={c.y} x2={cx} y2={cy} stroke={ac} strokeWidth={2.5}/><circle cx={c.x} cy={c.y} r={8} fill={sec} opacity={0.6}/><text x={c.x} y={c.y+4} textAnchor="middle" fill="#fff" fontSize="8" fontFamily="inherit" fontWeight="700">{String.fromCharCode(65+i)}</text></g>))}<circle cx={cx} cy={cy} r={20} fill={ac} opacity={0.2} stroke={ac} strokeWidth={2}/><text x={cx} y={cy+4} textAnchor="middle" fill={ac} fontSize="10" fontFamily="inherit" fontWeight="700">{tx.load}</text><text x={cx} y={cy+38} textAnchor="middle" fill={ac} fontSize="11" fontFamily="inherit" fontWeight="700">{result.lpl} {wL}/leg</text><text x={cx} y={h-10} textAnchor="middle" fill={dim} fontSize="9" fontFamily="inherit">L={result.ll} {dL} · {result.ia}°</text></svg>);
+  const ac=t.accent,sec=t.secondary,dim=t.textSecondary,warn="#E67E22";
+  const dL=unit==="imperial"?"ft":"m",wL=unit==="imperial"?"lbs":"kg";
+  // Shackle component — draws a U-shape shackle at position
+  const Shackle=({x,y,size=8,rot=0})=>(<g transform={`translate(${x},${y}) rotate(${rot})`}><path d={`M ${-size/2} ${-size*0.3} L ${-size/2} ${size*0.3} A ${size/2} ${size/2} 0 0 0 ${size/2} ${size*0.3} L ${size/2} ${-size*0.3}`} fill="none" stroke="#AAA" strokeWidth={1.8}/><line x1={-size/2-2} y1={-size*0.3} x2={size/2+2} y2={-size*0.3} stroke="#AAA" strokeWidth={2}/><circle cx={0} cy={-size*0.3} r={1.5} fill="#AAA"/></g>);
+  // Pear ring component
+  const PearRing=({x,y,size=7})=>(<g><ellipse cx={x} cy={y-size*0.2} rx={size*0.45} ry={size*0.5} fill="none" stroke="#CCC" strokeWidth={1.8}/><ellipse cx={x} cy={y+size*0.5} rx={size*0.3} ry={size*0.3} fill="none" stroke="#CCC" strokeWidth={1.5}/></g>);
+
+  if(bridleType==="2"||bridleType==="3"){
+    const w=540,h=420;const beamY=48,apexY=200,loadY=320;
+    const spread=160,lB=w/2-spread,rB=w/2+spread;
+    // Apex X position: proportional to dA/D between beams
+    const hsA=result.hsA||0,hsB=result.hsB||0,D=hsA+hsB||1;
+    const apexX=lB+((hsA/D)*(rB-lB));
+    return(<div style={{display:"flex",flexDirection:"column",gap:12}}>
+      <div style={{background:t.surfaceLight,border:`1px solid ${t.border}`,borderRadius:6,padding:"14px 10px 10px"}}>
+        <div style={{fontSize:10,color:dim,letterSpacing:2,textTransform:"uppercase",fontWeight:700,marginBottom:8,textAlign:"center"}}>Front Elevation — Bridle Assembly</div>
+        <svg viewBox={`0 0 ${w} ${h}`} style={{width:"100%",maxWidth:560}}>
+          <defs><marker id="bdah" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill={ac}/></marker><marker id="bdim" markerWidth="6" markerHeight="4" refX="3" refY="2" orient="auto"><polygon points="0 0,6 2,0 4" fill={dim}/></marker><marker id="bdimR" markerWidth="6" markerHeight="4" refX="3" refY="2" orient="auto-start-reverse"><polygon points="0 0,6 2,0 4" fill={dim}/></marker></defs>
+          {/* Grid iron / beam bars */}
+          <rect x={lB-50} y={beamY-10} width={spread*2+100} height={8} rx={1} fill={sec} opacity={0.35}/>
+          <line x1={lB-50} y1={beamY+2} x2={rB+50} y2={beamY+2} stroke={sec} strokeWidth={0.5} opacity={0.5}/>
+          <text x={w/2} y={beamY-16} textAnchor="middle" fill={`${dim}80`} fontSize="8" fontFamily="inherit" letterSpacing="2">{tx.gridIron}</text>
+          {/* Beam bars */}
+          <rect x={lB-28} y={beamY-4} width={56} height={12} rx={2} fill={sec} opacity={0.7}/>
+          <rect x={rB-28} y={beamY-4} width={56} height={12} rx={2} fill={sec} opacity={0.7}/>
+          <text x={lB} y={beamY-16} textAnchor="middle" fill={dim} fontSize="9" fontFamily="inherit" fontWeight="600">{tx.beam} A</text>
+          <text x={rB} y={beamY-16} textAnchor="middle" fill={dim} fontSize="9" fontFamily="inherit" fontWeight="600">{tx.beam} B</text>
+          {bridleType==="3"&&<><rect x={w/2-22} y={beamY-4} width={44} height={12} rx={2} fill={sec} opacity={0.5}/><text x={w/2} y={beamY-16} textAnchor="middle" fill={dim} fontSize="9" fontFamily="inherit" fontWeight="600">C</text></>}
+          {/* Shackles + burlap at beam points */}
+          <Shackle x={lB} y={beamY+18} size={9}/>
+          <Shackle x={rB} y={beamY+18} size={9}/>
+          {bridleType==="3"&&<Shackle x={w/2} y={beamY+18} size={9}/>}
+          <text x={lB+16} y={beamY+22} fill="#AAA" fontSize="7" fontFamily="inherit">Steel+Burlap</text>
+          {/* Steel cable legs — asymmetric to apex */}
+          <line x1={lB} y1={beamY+28} x2={apexX} y2={apexY-12} stroke={ac} strokeWidth={2.5} strokeLinecap="round"/>
+          <line x1={rB} y1={beamY+28} x2={apexX} y2={apexY-12} stroke={ac} strokeWidth={2.5} strokeLinecap="round"/>
+          {bridleType==="3"&&<line x1={w/2} y1={beamY+28} x2={apexX} y2={apexY-12} stroke={ac} strokeWidth={2} strokeDasharray="6 3"/>}
+          {/* Leg A label */}
+          {(()=>{const mx=(lB+apexX)/2-14,my=(beamY+28+apexY-12)/2;const ang=Math.atan2(apexY-12-(beamY+28),apexX-lB)*180/Math.PI;return <text x={mx} y={my} fill={ac} fontSize="9" fontFamily="inherit" fontWeight="700" transform={`rotate(${ang} ${mx} ${my})`} textAnchor="middle">A: {result.llA} {dL}</text>;})()}
+          {/* Leg B label */}
+          {(()=>{const mx=(rB+apexX)/2+14,my=(beamY+28+apexY-12)/2;const ang=Math.atan2(apexY-12-(beamY+28),apexX-rB)*180/Math.PI;return <text x={mx} y={my} fill={ac} fontSize="9" fontFamily="inherit" fontWeight="700" transform={`rotate(${ang} ${mx} ${my})`} textAnchor="middle">B: {result.llB} {dL}</text>;})()}
+          {/* Apex hardware */}
+          <Shackle x={apexX} y={apexY-6} size={10} rot={180}/>
+          <PearRing x={apexX} y={apexY+8} size={8}/>
+          <circle cx={apexX} cy={apexY} r={4} fill={ac}/>
+          <text x={apexX+20} y={apexY-8} fill="#AAA" fontSize="7" fontFamily="inherit">Shackle</text>
+          <text x={apexX+20} y={apexY+12} fill="#AAA" fontSize="7" fontFamily="inherit">Pear Ring</text>
+          {/* Included angle arc */}
+          {(()=>{const r=32;const tA=Math.atan2(hsA,parseFloat(result.ah)),tB=Math.atan2(hsB,parseFloat(result.ah));const x1=apexX-r*Math.sin(tA),y1=apexY-r*Math.cos(tA);const x2=apexX+r*Math.sin(tB),y2=apexY-r*Math.cos(tB);return<><path d={`M ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2}`} fill="none" stroke={warn} strokeWidth={1.5}/><text x={apexX} y={apexY-38} textAnchor="middle" fill={warn} fontSize="10" fontFamily="inherit" fontWeight="700">{result.ia}°</text></>;})()}
+          {/* Drop line to pick point */}
+          <line x1={apexX} y1={apexY+20} x2={apexX} y2={loadY-20} stroke={dim} strokeWidth={1.5} strokeDasharray="5 3"/>
+          <text x={apexX+10} y={(apexY+20+loadY-20)/2} fill={dim} fontSize="8" fontFamily="inherit">Chain</text>
+          {/* Load box */}
+          <rect x={apexX-60} y={loadY-18} width={120} height={32} rx={4} fill={`${ac}12`} stroke={ac} strokeWidth={2}/>
+          <text x={apexX} y={loadY-2} textAnchor="middle" fill={ac} fontSize="9" fontFamily="inherit" fontWeight="600">PICK POINT</text>
+          <text x={apexX} y={loadY+10} textAnchor="middle" fill={ac} fontSize="11" fontFamily="inherit" fontWeight="800">{result.W} {wL}</text>
+          <line x1={apexX} y1={loadY+16} x2={apexX} y2={loadY+40} stroke={ac} strokeWidth={2} markerEnd="url(#bdah)"/>
+          {/* DIMENSIONS */}
+          {/* Beam spacing */}
+          <line x1={lB} y1={h-40} x2={rB} y2={h-40} stroke={dim} strokeWidth={0.8} markerStart="url(#bdimR)" markerEnd="url(#bdim)"/>
+          <line x1={lB} y1={h-48} x2={lB} y2={h-34} stroke={dim} strokeWidth={0.5}/>
+          <line x1={rB} y1={h-48} x2={rB} y2={h-34} stroke={dim} strokeWidth={0.5}/>
+          <text x={w/2} y={h-44} textAnchor="middle" fill={dim} fontSize="8" fontFamily="inherit">{tx.brBeamSpacing}</text>
+          {/* Distance from Beam A */}
+          <line x1={lB} y1={h-20} x2={apexX} y2={h-20} stroke={`${ac}80`} strokeWidth={0.8} markerStart="url(#bdimR)" markerEnd="url(#bdim)"/>
+          <line x1={lB} y1={h-28} x2={lB} y2={h-14} stroke={`${ac}80`} strokeWidth={0.5}/>
+          <line x1={apexX} y1={h-28} x2={apexX} y2={h-14} stroke={`${ac}80`} strokeWidth={0.5}/>
+          <text x={(lB+apexX)/2} y={h-8} textAnchor="middle" fill={`${ac}80`} fontSize="8" fontFamily="inherit">{tx.brDistFromA}</text>
+          {/* Headroom */}
+          <line x1={rB+48} y1={beamY+4} x2={rB+48} y2={apexY} stroke={dim} strokeWidth={0.8} markerStart="url(#bdimR)" markerEnd="url(#bdim)"/>
+          <line x1={rB+40} y1={beamY+4} x2={rB+56} y2={beamY+4} stroke={dim} strokeWidth={0.5}/>
+          <line x1={rB+40} y1={apexY} x2={rB+56} y2={apexY} stroke={dim} strokeWidth={0.5}/>
+          <text x={rB+60} y={(beamY+apexY)/2+3} fill={dim} fontSize="8" fontFamily="inherit">{result.ah} {dL}</text>
+        </svg>
+      </div>
+      {/* PARTS LEGEND */}
+      <div style={{background:t.surfaceLight,border:`1px solid ${t.border}`,borderRadius:6,padding:"12px 14px"}}>
+        <div style={{fontSize:10,color:dim,letterSpacing:2,textTransform:"uppercase",fontWeight:700,marginBottom:8}}>Bridle Components (per leg)</div>
+        <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
+          {[{label:"Steel 5'",desc:"Beam wrap",color:"#888"},{label:"Burlap",desc:"Beam protection",color:"#8B7355"},{label:"Shackle",desc:"Beam to leg",color:"#AAA"},{label:"Steel Cable",desc:"Leg",color:ac},{label:"Shackle + Pear Ring",desc:"Apex",color:"#CCC"}].map((p,i)=>
+            <div key={i} style={{display:"flex",alignItems:"center",gap:6,padding:"6px 10px",background:t.surface,borderRadius:4,border:`1px solid ${t.border}`,fontSize:10}}>
+              <div style={{width:10,height:10,borderRadius:2,background:p.color,flexShrink:0}}/>
+              <div><span style={{color:t.textPrimary,fontWeight:600}}>{p.label}</span><span style={{color:dim,marginLeft:4}}>{p.desc}</span></div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>);
+  }
+  // ARENA (4-leg) — top view
+  const w=520,h=380;const cx=w/2,cy=h/2-10,sp=110;const corners=[[-sp,-sp],[sp,-sp],[sp,sp],[-sp,sp]].map(([dx,dy])=>({x:cx+dx,y:cy+dy}));
+  return(<div style={{display:"flex",flexDirection:"column",gap:12}}>
+    <div style={{background:t.surfaceLight,border:`1px solid ${t.border}`,borderRadius:6,padding:"14px 10px 10px"}}>
+      <div style={{fontSize:10,color:dim,letterSpacing:2,textTransform:"uppercase",fontWeight:700,marginBottom:8,textAlign:"center"}}>Arena — Top View</div>
+      <svg viewBox={`0 0 ${w} ${h}`} style={{width:"100%",maxWidth:540}}>
+        <defs><marker id="bdim4" markerWidth="6" markerHeight="4" refX="3" refY="2" orient="auto"><polygon points="0 0,6 2,0 4" fill={dim}/></marker><marker id="bdim4R" markerWidth="6" markerHeight="4" refX="3" refY="2" orient="auto-start-reverse"><polygon points="0 0,6 2,0 4" fill={dim}/></marker></defs>
+        <rect x={cx-sp} y={cy-sp} width={sp*2} height={sp*2} fill="none" stroke={dim} strokeWidth={1} strokeDasharray="6 3"/>
+        {corners.map((c,i)=>{const ang=Math.atan2(cy-c.y,cx-c.x);const legMx=(c.x+cx)/2,legMy=(c.y+cy)/2;const lbl=String.fromCharCode(65+i);return(<g key={i}><line x1={c.x} y1={c.y} x2={cx} y2={cy} stroke={ac} strokeWidth={2.5}/><circle cx={c.x} cy={c.y} r={10} fill={sec} opacity={0.6}/><text x={c.x} y={c.y+4} textAnchor="middle" fill="#fff" fontSize="9" fontFamily="inherit" fontWeight="700">{lbl}</text><Shackle x={c.x+Math.cos(ang)*16} y={c.y+Math.sin(ang)*16} size={7} rot={ang*180/Math.PI+90}/></g>);})}
+        <circle cx={cx} cy={cy} r={22} fill={`${ac}18`} stroke={ac} strokeWidth={2}/>
+        <PearRing x={cx} y={cy} size={6}/>
+        <text x={cx} y={cy+4} textAnchor="middle" fill={ac} fontSize="9" fontFamily="inherit" fontWeight="700">{tx.load}</text>
+        <text x={cx} y={cy+40} textAnchor="middle" fill={ac} fontSize="11" fontFamily="inherit" fontWeight="800">{result.lpl} {wL}/leg</text>
+        {/* Dimensions */}
+        <line x1={cx-sp} y1={h-30} x2={cx+sp} y2={h-30} stroke={dim} strokeWidth={0.8} markerStart="url(#bdim4R)" markerEnd="url(#bdim4)"/>
+        <text x={cx} y={h-18} textAnchor="middle" fill={dim} fontSize="8" fontFamily="inherit">{tx.brBeamSpacing}</text>
+        <text x={cx} y={h-6} textAnchor="middle" fill={dim} fontSize="9" fontFamily="inherit">L={result.ll} {dL} · {result.ia}°</text>
+      </svg>
+    </div>
+    <div style={{background:t.surfaceLight,border:`1px solid ${t.border}`,borderRadius:6,padding:"12px 14px"}}>
+      <div style={{fontSize:10,color:dim,letterSpacing:2,textTransform:"uppercase",fontWeight:700,marginBottom:8}}>Bridle Components (per leg)</div>
+      <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
+        {[{label:"Shackle",desc:"Beam connection",color:"#AAA"},{label:"Steel Cable",desc:result.ll+" "+dL,color:ac},{label:"Shackle",desc:"Apex connection",color:"#AAA"},{label:"Pear Ring",desc:"Apex hardware",color:"#CCC"}].map((p,i)=>
+          <div key={i} style={{display:"flex",alignItems:"center",gap:6,padding:"6px 10px",background:t.surface,borderRadius:4,border:`1px solid ${t.border}`,fontSize:10}}>
+            <div style={{width:10,height:10,borderRadius:2,background:p.color,flexShrink:0}}/>
+            <div><span style={{color:t.textPrimary,fontWeight:600}}>{p.label}</span><span style={{color:dim,marginLeft:4}}>{p.desc}</span></div>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -950,6 +1318,7 @@ function PointLoadTab(){
   const[hoistMode,setHoistMode]=useState("even"); // "even" | "custom"
   const[customLoads,setCustomLoads]=useState([]); // [{id,position,weight}]
   const[customHoists,setCustomHoists]=useState(""); // comma-separated positions string
+  const[pointWeights,setPointWeights]=useState([]); // per-point weights for curved/circular custom mode
   const nextLoadId=useRef(1);
   const svgRef=useRef(null);
 
@@ -1001,13 +1370,25 @@ function PointLoadTab(){
         beam:true,reactions,moments,maxReaction,hoistPositions:hoistPos,
         beamLoads,totalLoad,spanLength:S};
     }
-    // Curved / circular — legacy W/N
-    const W=parseFloat(load);if(!W||!N||N<1)return null;let pL,notes=[],det={};
-    if(rig==="curved"){const a=(parseFloat(chord)||0)*Math.PI/180;const cf=a>0?(2*Math.sin(a/2))/a:1;pL=(W/N)/cf;det.curveFactor=cf.toFixed(3);notes.push(`${tx.curvedNote1}: ${cf.toFixed(3)}`);notes.push(tx.curvedNote2);}
-    else if(rig==="circular"){const r=parseFloat(rad)||0,a=parseFloat(arc)||360;det.circumference=(a*Math.PI/180*r).toFixed(1);det.arcAngle=a;pL=W/N;if(a<360){det.endPointLoad=(pL*1.2).toFixed(1);notes.push(`${tx.openArc} (${a}°): ${tx.circularEndNote}`);}notes.push(tx.circularNote);}
+    // Curved / circular
+    if(!N||N<1)return null;const W=parseFloat(load);if(loadMode==="even"&&!W)return null;let pL,notes=[],det={};
+    if(rig==="curved"){const a=(parseFloat(chord)||0)*Math.PI/180;const R=parseFloat(rad)||0;const arcLen=R>0&&a>0?R*a:0;const chordLen=R>0&&a>0?2*R*Math.sin(a/2):0;
+      if(!arcLen||arcLen<=0)return null;
+      const hoistPos=Array.from({length:N},(_,i)=>N===1?arcLen/2:(arcLen*i)/(N-1));
+      let beamLoads;
+      if(loadMode==="custom"){beamLoads=customLoads.map(l=>({position:l.position,weight:l.weight}));}
+      else{if(!W)return null;const nPts=Math.max(N*4,8);beamLoads=generateEvenLoads(W,nPts,arcLen);}
+      const{reactions,moments,maxReaction}=solveBeamReactions(hoistPos,beamLoads);
+      const totalLoad=beamLoads.reduce((sm,l)=>sm+l.weight,0);
+      det.arcLength=arcLen.toFixed(1)+" "+(unit==="imperial"?"ft":"m");det.chordLength=chordLen.toFixed(1)+" "+(unit==="imperial"?"ft":"m");
+      notes.push(tx.plBeamAnalysis);
+      return{pL:(maxReaction||0).toFixed(1),dL:((maxReaction||0)*5).toFixed(1),notes,det,beam:true,curved:true,reactions,moments,maxReaction:maxReaction||0,hoistPositions:hoistPos,beamLoads,totalLoad,spanLength:arcLen,pointLoads:reactions.map(r=>parseFloat(r.toFixed(1))),curvedDims:{radius:R,angleDeg:parseFloat(chord)||0,arcLen,chordLen}};}
+    else if(rig==="circular"){const r=parseFloat(rad)||0,a=parseFloat(arc)||360;det.circumference=(a*Math.PI/180*r).toFixed(1);det.arcAngle=a;
+      if(loadMode==="custom"){const pLoads=Array.from({length:N},(_,i)=>pointWeights[i]||0);const maxW=Math.max(...pLoads,0);notes.push(tx.curvedCustomNote||"Custom point weights — design to maximum point");return{pL:maxW.toFixed(1),dL:(maxW*5).toFixed(1),notes,det,beam:false,pointLoads:pLoads,customMode:true};}
+      pL=W/N;if(a<360){det.endPointLoad=(pL*1.2).toFixed(1);notes.push(`${tx.openArc} (${a}°): ${tx.circularEndNote}`);}notes.push(tx.circularNote);}
     else{pL=W/N;notes.push(tx.straightNote);}
     return{pL:pL.toFixed(1),dL:(pL*5).toFixed(1),notes,det,beam:false};
-  },[rig,load,pts,span,chord,rad,arc,drop,tx,loadMode,hoistMode,customLoads,customHoists]);
+  },[rig,load,pts,span,chord,rad,arc,drop,tx,loadMode,hoistMode,customLoads,customHoists,pointWeights,unit]);
 
   // Reaction color helper
   const rxColor=(r,max)=>{
@@ -1022,28 +1403,62 @@ function PointLoadTab(){
       <div style={s.secTitle}>{tx.plConfig}</div>
       <Field label={tx.plSystemType}><div style={{display:"flex",gap:8,flexWrap:"wrap"}}>{RIG_KEYS.map(k=><button key={k} style={s.chip(rig===k)} onClick={()=>setRig(k)}>{labels[k]}</button>)}</div></Field>
       <div data-r="g3" style={s.g3}>
-        {(rig!=="straight"||loadMode==="even")&&<Field label={`${tx.plTotalLoad} (${uW})`}><Inp value={load} onChange={setLoad} placeholder="0"/></Field>}
+        {loadMode==="even"&&<Field label={`${tx.plTotalLoad} (${uW})`}><Inp value={load} onChange={setLoad} placeholder="0"/></Field>}
         <Field label={tx.plNumPoints}><Inp value={pts} onChange={setPts} placeholder="0" step="1"/></Field>
         {rig==="straight"&&<Field label={`${tx.plSpanLength} (${uD})`}><Inp value={span} onChange={setSpan} placeholder="0"/></Field>}
-        {rig==="curved"&&<Field label={`${tx.plChordAngle} (°)`}><Inp value={chord} onChange={setChord} placeholder="0"/></Field>}
+        {rig==="curved"&&<Field label={`${tx.plRadius} (${uD})`}><Inp value={rad} onChange={setRad} placeholder="0"/></Field>}
         {rig==="circular"&&<Field label={`${tx.plRadius} (${uD})`}><Inp value={rad} onChange={setRad} placeholder="0"/></Field>}
       </div>
+      {rig==="curved"&&<Field label={`${tx.plChordAngle} (°)`} style={{marginTop:8}}><Inp value={chord} onChange={setChord} placeholder="0"/></Field>}
       {rig==="circular"&&<Field label={tx.plArcAngle} style={{marginTop:8}}><Inp value={arc} onChange={setArc} placeholder="360"/></Field>}
 
-      {/* Straight rig: load mode + hoist spacing toggles */}
-      {rig==="straight"&&<>
+      {/* Curved: show computed arc length */}
+      {rig==="curved"&&(parseFloat(rad)||0)>0&&(parseFloat(chord)||0)>0&&(
+        <div style={{marginTop:8,padding:"6px 12px",background:t.surfaceLight,borderRadius:4,border:`1px solid ${t.border}`,fontSize:11,color:t.textSecondary}}>
+          Arc Length: <span style={{color:t.accent,fontWeight:700}}>{((parseFloat(rad)||0)*((parseFloat(chord)||0)*Math.PI/180)).toFixed(1)} {uD}</span>
+          {" · "}Chord: <span style={{color:t.accent,fontWeight:700}}>{(2*(parseFloat(rad)||0)*Math.sin(((parseFloat(chord)||0)*Math.PI/180)/2)).toFixed(1)} {uD}</span>
+        </div>
+      )}
+
+      {/* Circular: loading mode toggle + per-point weights */}
+      {rig==="circular"&&<>
+        <div style={{marginTop:16}}>
+          <Field label={tx.plLoadMode}><div style={{display:"flex",gap:8}}>
+            <button style={s.chip(loadMode==="even")} onClick={()=>setLoadMode("even")}>{tx.plLoadEven}</button>
+            <button style={s.chip(loadMode==="custom")} onClick={()=>setLoadMode("custom")}>{tx.plLoadCustom}</button>
+          </div></Field>
+        </div>
+        {loadMode==="custom"&&(parseInt(pts)||0)>0&&(
+          <div style={{marginTop:12}}>
+            <div style={s.secTitle}>{tx.plLoadList||"Point Weights"}</div>
+            <div style={{display:"flex",flexDirection:"column",gap:4}}>
+              {Array.from({length:parseInt(pts)||0},(_,i)=>(
+                <div key={i} style={{display:"flex",gap:8,alignItems:"center",background:t.surfaceLight,padding:"4px 8px",borderRadius:4,border:`1px solid ${t.border}`}}>
+                  <span style={{color:t.textSecondary,fontSize:10,minWidth:30,flexShrink:0}}>P{i+1}</span>
+                  <input type="number" style={{...s.input,flex:1,margin:0,padding:"3px 6px"}} value={pointWeights[i]!=null?pointWeights[i]:""} onChange={e=>{const v=[...pointWeights];while(v.length<=i)v.push(0);v[i]=parseFloat(e.target.value)||0;setPointWeights(v);}} placeholder="0"/>
+                  <span style={{color:t.textSecondary,fontSize:10,flexShrink:0}}>{uW}</span>
+                </div>
+              ))}
+              <div style={{color:t.textSecondary,fontSize:11,marginTop:4,fontWeight:600}}>{tx.plTotalLoad}: {pointWeights.slice(0,parseInt(pts)||0).reduce((sm,w)=>sm+(w||0),0).toFixed(0)} {uW}</div>
+            </div>
+          </div>
+        )}
+      </>}
+
+      {/* Straight & Curved: load mode + spacing toggles + position-based custom loads */}
+      {(rig==="straight"||rig==="curved")&&<>
         <div style={{marginTop:16,display:"flex",gap:24,flexWrap:"wrap"}}>
           <Field label={tx.plLoadMode}><div style={{display:"flex",gap:8}}>
             <button style={s.chip(loadMode==="even")} onClick={()=>setLoadMode("even")}>{tx.plLoadEven}</button>
             <button style={s.chip(loadMode==="custom")} onClick={()=>setLoadMode("custom")}>{tx.plLoadCustom}</button>
           </div></Field>
-          <Field label={tx.plHoistSpacing}><div style={{display:"flex",gap:8}}>
+          {rig==="straight"&&<Field label={tx.plHoistSpacing}><div style={{display:"flex",gap:8}}>
             <button style={s.chip(hoistMode==="even")} onClick={()=>setHoistMode("even")}>{tx.plHoistEven}</button>
             <button style={s.chip(hoistMode==="custom")} onClick={()=>setHoistMode("custom")}>{tx.plHoistCustom}</button>
-          </div></Field>
+          </div></Field>}
         </div>
-        {/* Custom hoist positions input */}
-        {hoistMode==="custom"&&<Field label={`${tx.plHoistPositions} (${uD}) — comma separated`} style={{marginTop:8}}>
+        {/* Custom point positions input (straight only) */}
+        {rig==="straight"&&hoistMode==="custom"&&<Field label={`${tx.plHoistPositions} (${uD}) — comma separated`} style={{marginTop:8}}>
           <input style={s.input} type="text" value={customHoists} onChange={e=>setCustomHoists(e.target.value)} placeholder={`e.g. 0, 10, 20, 30`}/>
         </Field>}
         {/* Custom load list table */}
@@ -1064,8 +1479,8 @@ function PointLoadTab(){
           </div>
         )}
         {/* Add load button for custom mode */}
-        {loadMode==="custom"&&(parseFloat(span)>0)&&(
-          <button style={{...s.chip(false),marginTop:8,cursor:"pointer"}} onClick={()=>addLoad(parseFloat(span)/2)}>+ {tx.plAddLoad}</button>
+        {loadMode==="custom"&&((rig==="straight"&&parseFloat(span)>0)||(rig==="curved"&&(parseFloat(rad)||0)>0&&(parseFloat(chord)||0)>0))&&(
+          <button style={{...s.chip(false),marginTop:8,cursor:"pointer"}} onClick={()=>{const arcL=rig==="curved"?(parseFloat(rad)||0)*((parseFloat(chord)||0)*Math.PI/180):0;addLoad(rig==="curved"?arcL/2:parseFloat(span)/2);}}>+ {tx.plAddLoad}</button>
         )}
       </>}
     </div>
@@ -1073,20 +1488,22 @@ function PointLoadTab(){
     {/* RESULTS */}
     {res&&(<div data-r="card" style={s.card}><div style={s.cardTitle}><span>◆</span> {tx.plResults} — {labels[rig]}</div>
 
-      {/* Interactive diagram for straight beam loading */}
-      {res.beam?(<div style={s.diagWrap}>
+      {/* Diagram: curved beam → front-elevation PointLoadDiagram; straight beam → interactive; others → static */}
+      {res.beam&&res.curved?(<div style={s.diagWrap}>
+        <div style={{fontSize:10,color:t.textSecondary,letterSpacing:2,textTransform:"uppercase",marginBottom:12,fontWeight:700}}>{tx.plVisual}</div>
+        <PointLoadDiagram rigType="curved" numPoints={pts} pointLoad={res.pL} unit={unit} pointLoads={res.pointLoads} curvedDims={res.curvedDims}/>
+      </div>):res.beam?(<div style={s.diagWrap}>
         <div style={{fontSize:10,color:t.textSecondary,letterSpacing:2,textTransform:"uppercase",marginBottom:12,fontWeight:700}}>{tx.plVisual}</div>
         <InteractivePointLoadDiagram
           spanLength={res.spanLength} hoistPositions={res.hoistPositions}
           loads={loadMode==="custom"?customLoads:
-            // For even mode, show N representative loads (not the N*4 internal UDL approximation)
             Array.from({length:parseInt(pts)||1},(_,i)=>{const N=parseInt(pts)||1;const S=res.spanLength;return{id:i,position:N===1?S/2:(S*i)/(N-1),weight:res.totalLoad/N};})}
           reactions={res.reactions} maxReaction={res.maxReaction}
           unit={unit} loadMode={loadMode}
           onAddLoad={addLoad} onUpdateLoad={updateLoad} onDeleteLoad={deleteLoad}
           svgRef={svgRef}/>
       </div>):(
-        <div style={s.diagWrap}><div style={{fontSize:10,color:t.textSecondary,letterSpacing:2,textTransform:"uppercase",marginBottom:12,fontWeight:700}}>{tx.plVisual}</div><PointLoadDiagram rigType={rig} numPoints={pts} pointLoad={res.pL} unit={unit}/></div>
+        <div style={s.diagWrap}><div style={{fontSize:10,color:t.textSecondary,letterSpacing:2,textTransform:"uppercase",marginBottom:12,fontWeight:700}}>{tx.plVisual}</div><PointLoadDiagram rigType={rig} numPoints={pts} pointLoad={res.pL} unit={unit} pointLoads={res.pointLoads}/></div>
       )}
 
       {/* Reaction cards for beam loading */}
@@ -1113,17 +1530,33 @@ function PointLoadTab(){
         </div>
       </>)}
 
-      {/* Legacy cards for curved/circular */}
+      {/* Cards for curved/circular */}
       {!res.beam&&(<>
-        <div data-r="g3" style={{...s.g3,marginTop:20}}>
+        {res.customMode?(<div style={{display:"flex",gap:10,flexWrap:"wrap",marginTop:20}}>
+          <div style={s.res}><div style={s.resVal}>{res.pL}</div><div style={s.resLbl}>{uW} {tx.plMaxReaction||"MAX"}</div></div>
+          <div style={s.res}><div style={{...s.resVal,color:danger}}>{res.dL}</div><div style={s.resLbl}>{tx.plDesignLoad} (5:1 SF)</div></div>
+          <div style={s.res}><div style={{...s.resVal,color:success}}>{pts}</div><div style={s.resLbl}>{tx.plHoistPoints}</div></div>
+          <div style={s.res}><div style={s.resVal}>{res.pointLoads?res.pointLoads.reduce((a,b)=>a+b,0).toFixed(0):0}</div><div style={s.resLbl}>{tx.plTotalLoad} ({uW})</div></div>
+        </div>):res.pointLoads&&res.endLoad?(<div style={{display:"flex",gap:10,flexWrap:"wrap",marginTop:20}}>
+          <div style={s.res}><div style={s.resVal}>{res.interiorLoad}</div><div style={s.resLbl}>{uW} {tx.plInterior}</div></div>
+          <div style={s.res}><div style={s.resVal}>{res.endLoad}</div><div style={s.resLbl}>{uW} {tx.plEndPoint}</div></div>
+          <div style={s.res}><div style={{...s.resVal,color:danger}}>{res.dL}</div><div style={s.resLbl}>{tx.plDesignLoad} (5:1 SF)</div></div>
+          <div style={s.res}><div style={{...s.resVal,color:success}}>{pts}</div><div style={s.resLbl}>{tx.plHoistPoints}</div></div>
+        </div>):(<div data-r="g3" style={{...s.g3,marginTop:20}}>
           <div style={s.res}><div style={s.resVal}>{res.pL}</div><div style={s.resLbl}>{uW} {tx.plPerPoint}</div></div>
           <div style={s.res}><div style={{...s.resVal,color:danger}}>{res.dL}</div><div style={s.resLbl}>{tx.plDesignLoad} (5:1 SF)</div></div>
           <div style={s.res}><div style={{...s.resVal,color:success}}>{pts}</div><div style={s.resLbl}>{tx.plHoistPoints}</div></div>
-        </div>
+        </div>)}
         {Object.keys(res.det).length>0&&<div style={{marginTop:20}}><div style={s.secTitle}>{tx.plSystemDetails}</div><div style={{display:"flex",gap:12,flexWrap:"wrap"}}>{Object.entries(res.det).map(([k,v])=><div key={k} style={s.pill}><span style={{color:t.textSecondary,fontSize:10,textTransform:"uppercase",letterSpacing:1}}>{k.replace(/([A-Z])/g,' $1')}: </span><span style={{color:t.accent,fontWeight:700}}>{v}</span></div>)}</div></div>}
       </>)}
 
       {res.notes.length>0&&<div style={{marginTop:20}}><div style={s.secTitle}>{tx.plNotes}</div>{res.notes.map((n,i)=><div key={i} style={s.note}>{n}</div>)}</div>}
+
+      {/* Results disclaimer */}
+      <div style={{marginTop:24,padding:"14px 18px",background:`${danger}08`,border:`1px solid ${danger}25`,borderRadius:6}}>
+        <div style={{fontSize:11,fontWeight:700,color:danger,letterSpacing:1,textTransform:"uppercase",marginBottom:6}}>{tx.resultDiscTitle}</div>
+        <div style={{fontSize:10,color:t.textSecondary,lineHeight:1.7}}>{tx.resultDiscBody}</div>
+      </div>
     </div>)}
   </div>);
 }
@@ -1387,20 +1820,62 @@ function BridleTab(){
   const bOpts=[{k:"2",l:tx.twoLeg},{k:"3",l:tx.threeLeg},{k:"4",l:tx.arena}];
   const[bt,setBt]=useState("2");const[unit,setUnit]=useState("imperial");
   const[bs,setBs]=useState("");const[lw,setLw]=useState("");
-  const[ps,setPs]=useState("");const[hr,setHr]=useState("");
+  const[dA,setDA]=useState("");const[hr,setHr]=useState("");
   const[ht,setHt]=useState(".5 Ton");const[tlo,setTlo]=useState("");
   const dL=unit==="imperial"?"ft":"m",wL=unit==="imperial"?"lbs":"kg";
+  const MOTOR_CAPS={".25 Ton":500,".5 Ton":1000,"1 Ton":2000,"2 Ton":4000};
+  // Asymmetric bridle calculation
   const res=useMemo(()=>{
-    const D=parseFloat(bs),W=parseFloat(lw),P=parseFloat(ps),H=parseFloat(hr);
-    if(!D||!W||!P||!H)return null;const hs=(D-P)/2;if(hs<0)return{err:tx.brError};
-    const ll=Math.sqrt(hs*hs+H*H),ia=2*Math.atan2(hs,H)*180/Math.PI;
-    const n=bt==="2"?2:bt==="3"?3:4;const lpl=(W/n)*(ll/H),hf=(W/n)*(hs/H);
-    const base={ll:ll.toFixed(2),ia:ia.toFixed(1),ah:H.toFixed(2),lpl:lpl.toFixed(1),hf:hf.toFixed(1),n,W,sw:ia>120};
-    if(bt==="3"){const o=parseFloat(tlo)||hs;base.tll=Math.sqrt(o*o+H*H).toFixed(2);}return base;
-  },[bt,bs,lw,ps,hr,tlo,tx]);
-  const bg=useMemo(()=>{
-    if(!res||res.err)return null;const c=res.n;const items=calcHoistGear(ht,c);return items;
-  },[res,ht]);
+    const D=parseFloat(bs),W=parseFloat(lw),A=parseFloat(dA),H=parseFloat(hr);
+    if(!D||!W||!H)return null;if(A===undefined||isNaN(A)||A<0)return null;
+    if(A>D)return{err:"Distance from Beam A cannot exceed beam spacing."};
+    const n=bt==="2"?2:bt==="3"?3:4;
+    if(bt==="4"){
+      // Arena: symmetric, A = half beam spacing
+      const hs=D/2;const ll=Math.sqrt(hs*hs+H*H),ia=2*Math.atan2(hs,H)*180/Math.PI;
+      const lpl=(W/4)*(ll/H),hf=(W/4)*(hs/H);
+      return{ll:ll.toFixed(2),llA:ll.toFixed(2),llB:ll.toFixed(2),ia:ia.toFixed(1),ah:H.toFixed(2),lpl:lpl.toFixed(1),lplA:lpl.toFixed(1),lplB:lpl.toFixed(1),hf:hf.toFixed(1),n:4,W,maxLpl:lpl,sw:ia>120,symmetric:true,llARaw:ll,llBRaw:ll};
+    }
+    // 2-leg or 3-leg: asymmetric
+    const hsA=A,hsB=D-A;
+    const llA=Math.sqrt(hsA*hsA+H*H),llB=Math.sqrt(hsB*hsB+H*H);
+    const thetaA=Math.atan2(hsA,H),thetaB=Math.atan2(hsB,H);
+    const ia=(thetaA+thetaB)*180/Math.PI;
+    // Per-leg tension (moment balance about each beam)
+    const vA=W*(D-A)/D, vB=W*A/D;// vertical component at each beam
+    const tA=vA*(llA/H), tB=vB*(llB/H);// tension = V / cos(theta) = V * L/H
+    const hf=W*A*(D-A)/(D*H);// horizontal force (equal both sides)
+    const maxLpl=Math.max(tA,tB);
+    const base={llA:llA.toFixed(2),llB:llB.toFixed(2),ll:Math.max(llA,llB).toFixed(2),ia:ia.toFixed(1),ah:H.toFixed(2),lplA:tA.toFixed(1),lplB:tB.toFixed(1),lpl:maxLpl.toFixed(1),hf:hf.toFixed(1),n,W,maxLpl,sw:ia>120,symmetric:Math.abs(hsA-hsB)<0.01,llARaw:llA,llBRaw:llB,hsA,hsB};
+    if(bt==="3"){const o=parseFloat(tlo)||A;base.tll=Math.sqrt(o*o+H*H).toFixed(2);base.tllRaw=Math.sqrt(o*o+H*H);}
+    return base;
+  },[bt,bs,lw,dA,hr,tlo,tx]);
+  // Auto-select hoist based on max per-leg load
+  // Auto-select hoist based on pick point weight (total load W), not per-leg tension
+  const autoHoist=useMemo(()=>{
+    if(!res||res.err)return null;
+    const pickLbs=unit==="imperial"?res.W:res.W*2.205;
+    const sorted=MOTOR_TYPES.map(m=>({type:m,cap:MOTOR_CAPS[m]})).sort((a,b)=>a.cap-b.cap);
+    let selected=sorted[sorted.length-1];
+    for(const m of sorted){if(m.cap>=pickLbs){selected=m;break;}}
+    const pct=(pickLbs/selected.cap)*100;
+    return{type:selected.type,cap:selected.cap,pct:pct.toFixed(0),pickLbs:pickLbs.toFixed(0),over80:pct>80,overCap:pct>100};
+  },[res,unit]);
+  useEffect(()=>{if(autoHoist)setHt(autoHoist.type);},[autoHoist?.type]);
+  // Steel piece breakdown per leg + combined gear list
+  const isHeavy=parseFloat(ht)>1;
+  const legGear=useMemo(()=>{
+    if(!res||res.err)return null;
+    const gA=calcBridleLegGear(res.llARaw,isHeavy);
+    const gB=calcBridleLegGear(res.llBRaw,isHeavy);
+    const gC=res.tllRaw?calcBridleLegGear(res.tllRaw,isHeavy):null;
+    // Combine all items into a totals map
+    const totals={};const addItem=(it,mult)=>{const k=it.catId;if(!totals[k])totals[k]={catId:it.catId,name:it.name,qty:0};totals[k].qty+=it.qty*mult;};
+    const legCount=res.n===4?4:1;// arena: 4 identical legs
+    if(res.n===4){gA.items.forEach(it=>addItem(it,4));}
+    else{gA.items.forEach(it=>addItem(it,1));gB.items.forEach(it=>addItem(it,1));if(gC)gC.items.forEach(it=>addItem(it,1));}
+    return{legA:gA,legB:gB,legC:gC,totals:Object.values(totals)};
+  },[res,isHeavy]);
   return(<div>
     <div data-r="card" style={s.card}><div style={s.cardTitle}><span style={{fontSize:18}}>△</span> {tx.brTitle}</div>
       <Chips options={["imperial","metric"]} value={unit} onChange={setUnit}/>
@@ -1410,34 +1885,84 @@ function BridleTab(){
       <div data-r="g2" style={s.g2}>
         <Field label={`${tx.brBeamSpacing} (${dL})`}><Inp value={bs} onChange={setBs} placeholder="0"/></Field>
         <Field label={`${tx.brLoadWeight} (${wL})`}><Inp value={lw} onChange={setLw} placeholder="0"/></Field>
-        <Field label={`${tx.brPickSpacing} (${dL})`}><Inp value={ps} onChange={setPs} placeholder="0"/></Field>
+        {bt!=="4"&&<Field label={`${tx.brDistFromA} (${dL})`}><Inp value={dA} onChange={setDA} placeholder="0"/></Field>}
         <Field label={`${tx.brHeadroom} (${dL})`}><Inp value={hr} onChange={setHr} placeholder="0"/></Field>
       </div>
       {bt==="3"&&<Field label={`${tx.brThirdLeg} (${dL})`}><Inp value={tlo} onChange={setTlo} placeholder={tx.sameSpreahalf}/></Field>}
       <div style={{...s.secTitle,marginTop:24}}>{tx.brHoistType}</div>
       <Field label={tx.brMotorRating}><Chips options={MOTOR_TYPES} value={ht} onChange={setHt}/></Field>
+      {autoHoist&&<div style={{marginTop:8,padding:"10px 14px",background:autoHoist.overCap?`${danger}15`:autoHoist.over80?`${warning}12`:`${success}10`,border:`1px solid ${autoHoist.overCap?danger:autoHoist.over80?warning:success}40`,borderRadius:6,display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
+        <span style={{fontSize:14}}>{autoHoist.overCap?"⛔":autoHoist.over80?"⚠":"✓"}</span>
+        <div style={{fontSize:11,lineHeight:1.5}}>
+          <span style={{fontWeight:700,color:autoHoist.overCap?danger:autoHoist.over80?warning:success}}>{tx.brAutoHoist}: {autoHoist.type}</span>
+          <span style={{color:t.textSecondary,marginLeft:8}}>{autoHoist.pickLbs} lbs pick point = {autoHoist.pct}% of {autoHoist.cap} lbs capacity</span>
+          {autoHoist.overCap&&<div style={{color:danger,fontWeight:700,marginTop:2}}>EXCEEDS MOTOR CAPACITY — Select a larger hoist</div>}
+          {autoHoist.over80&&!autoHoist.overCap&&<div style={{color:warning,fontWeight:600,marginTop:2}}>CAUTION: Exceeds 80% rated capacity</div>}
+        </div>
+      </div>}
     </div>
     {res&&!res.err&&(<>
       <div data-r="card" style={s.card}><div style={s.cardTitle}><span>◆</span> {tx.brResults} — {bOpts.find(b=>b.k===bt)?.l}</div>
         {res.sw&&<div style={s.warnBox(danger)}><span style={{fontSize:20}}>⚠</span><div><div style={{color:danger,fontWeight:700,fontSize:13}}>{tx.brAngleWarn}</div><div style={{color:t.textSecondary,fontSize:12}}>{tx.brAngleWarnText}</div></div></div>}
         <div style={s.diagWrap}><div style={{fontSize:10,color:t.textSecondary,letterSpacing:2,textTransform:"uppercase",marginBottom:12,fontWeight:700}}>{tx.brVisual}</div><BridleDiagram bridleType={bt} result={res} unit={unit}/></div>
-        <div data-r="g3" style={{...s.g3,marginTop:20}}>
+        {/* Asymmetric leg results */}
+        {!res.symmetric&&bt!=="4"?(<>
+          <div data-r="g2" style={{...s.g2,marginTop:20}}>
+            <div style={{...s.res,border:`2px solid ${t.accent}40`}}><div style={{fontSize:9,color:t.textSecondary,letterSpacing:1,textTransform:"uppercase",marginBottom:4}}>{tx.brLegA}</div><div style={s.resVal}>{res.llA} <span style={{fontSize:11}}>{dL}</span></div><div style={s.resLbl}>{res.lplA} {wL}</div></div>
+            <div style={{...s.res,border:`2px solid ${t.accent}40`}}><div style={{fontSize:9,color:t.textSecondary,letterSpacing:1,textTransform:"uppercase",marginBottom:4}}>{tx.brLegB}</div><div style={s.resVal}>{res.llB} <span style={{fontSize:11}}>{dL}</span></div><div style={s.resLbl}>{res.lplB} {wL}</div></div>
+          </div>
+        </>):(<div data-r="g3" style={{...s.g3,marginTop:20}}>
           <div style={s.res}><div style={s.resVal}>{res.ll}</div><div style={s.resLbl}>{tx.brLegLength} ({dL})</div></div>
+          <div style={s.res}><div style={s.resVal}>{res.lpl}</div><div style={s.resLbl}>{wL} {tx.brPerLeg}</div></div>
+          <div style={s.res}><div style={{...s.resVal,color:success}}>{res.n}</div><div style={s.resLbl}>{tx.brLegs}</div></div>
+        </div>)}
+        <div data-r="g3" style={{...s.g3,marginTop:12}}>
           <div style={s.res}><div style={{...s.resVal,color:res.sw?danger:success}}>{res.ia}°</div><div style={s.resLbl}>{tx.brIncAngle}</div></div>
           <div style={s.res}><div style={s.resVal}>{res.ah}</div><div style={s.resLbl}>{tx.brApexHeight} ({dL})</div></div>
-        </div>
-        <div data-r="g3" style={{...s.g3,marginTop:12}}>
-          <div style={s.res}><div style={s.resVal}>{res.lpl}</div><div style={s.resLbl}>{wL} {tx.brPerLeg}</div></div>
           <div style={s.res}><div style={{...s.resVal,color:warning}}>{res.hf}</div><div style={s.resLbl}>{tx.brHorizForce} ({wL})</div></div>
-          <div style={s.res}><div style={{...s.resVal,color:success}}>{res.n}</div><div style={s.resLbl}>{tx.brLegs}</div></div>
         </div>
         {res.tll&&<div style={{...s.res,marginTop:12,display:"inline-block"}}><div style={s.resVal}>{res.tll}</div><div style={s.resLbl}>{tx.brThirdLegLen} ({dL})</div></div>}
+        {/* Steel piece breakdown per leg */}
+        {legGear&&!res.symmetric&&bt!=="4"&&(<div style={{marginTop:20}}>
+          <div style={s.secTitle}>{tx.brSteelPieces}</div>
+          <div data-r="g2" style={s.g2}>
+            {[{label:tx.brLegA,gear:legGear.legA,len:res.llA},{label:tx.brLegB,gear:legGear.legB,len:res.llB}].map((leg,i)=>(
+              <div key={i} style={{background:t.surfaceLight,border:`1px solid ${t.border}`,borderRadius:6,padding:12}}>
+                <div style={{fontSize:10,fontWeight:700,color:t.accent,letterSpacing:1,marginBottom:6}}>{leg.label} — {leg.len} {dL}</div>
+                <div style={{fontSize:10,color:t.textSecondary,lineHeight:1.8}}>
+                  <div style={{color:"#AAA"}}>Beam: Steel 5' + Burlap + Shackle</div>
+                  {leg.gear.steelPieces.steels.map((st,j)=><div key={j}>{st.qty}x Steel {st.len}' cable</div>)}
+                  {leg.gear.steelPieces.chains>0&&<div>{leg.gear.steelPieces.chains}x S.T.A.C. Chain 3'</div>}
+                  {leg.gear.steelPieces.links>0&&<div>{leg.gear.steelPieces.links}x Chain link (4")</div>}
+                  <div style={{color:"#AAA",marginTop:4}}>Apex: Shackle + Pear Ring</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>)}
+        {legGear&&(res.symmetric||bt==="4")&&(<div style={{marginTop:20}}>
+          <div style={s.secTitle}>{tx.brSteelPieces} (per leg)</div>
+          <div style={{background:t.surfaceLight,border:`1px solid ${t.border}`,borderRadius:6,padding:12}}>
+            <div style={{fontSize:10,color:t.textSecondary,lineHeight:1.8}}>
+              <div style={{color:"#AAA"}}>Beam: Steel 5' + Burlap + Shackle</div>
+              {legGear.legA.steelPieces.steels.map((st,j)=><div key={j}>{st.qty}x Steel {st.len}' cable</div>)}
+              {legGear.legA.steelPieces.chains>0&&<div>{legGear.legA.steelPieces.chains}x S.T.A.C. Chain 3'</div>}
+              {legGear.legA.steelPieces.links>0&&<div>{legGear.legA.steelPieces.links}x Chain link (4")</div>}
+              <div style={{color:"#AAA",marginTop:4}}>Apex: Shackle + Pear Ring</div>
+            </div>
+          </div>
+        </div>)}
         <div style={{marginTop:24}}><div style={s.secTitle}>{tx.brNotes}</div><div style={s.note}>{tx.brNote1}</div><div style={s.note}>{tx.brNote2}</div>{bt==="4"&&<div style={s.note}>{tx.brNote3}</div>}</div>
+        <div style={{marginTop:24,padding:"14px 18px",background:`${danger}08`,border:`1px solid ${danger}25`,borderRadius:6}}>
+          <div style={{fontSize:11,fontWeight:700,color:danger,letterSpacing:1,textTransform:"uppercase",marginBottom:6}}>{tx.resultDiscTitle}</div>
+          <div style={{fontSize:10,color:t.textSecondary,lineHeight:1.7}}>{tx.resultDiscBody}</div>
+        </div>
       </div>
-      {bg&&(
+      {/* Combined gear list */}
+      {legGear&&(
         <div data-r="card" style={s.card}><div style={s.cardTitle}><span>⛓</span> {tx.brGearList} — {ht}</div>
           <div data-r="tbl-wrap" style={{overflowX:"auto"}}><table style={s.tbl}><thead><tr><th style={s.th}>{tx.psSize}</th><th style={s.th}>{tx.psItem}</th><th style={{...s.th,textAlign:"right"}}>{tx.psQty}</th></tr></thead>
-            <tbody>{bg.map(({catId,name,qty},idx)=><tr key={idx}><td style={s.tdId}>{catId}</td><td style={s.td}>{name}</td><td style={s.tdA}>{qty}</td></tr>)}</tbody></table></div>
+            <tbody>{legGear.totals.map(({catId,name,qty},idx)=><tr key={idx}><td style={s.tdId}>{catId}</td><td style={s.td}>{name}</td><td style={s.tdA}>{qty}</td></tr>)}</tbody></table></div>
         </div>
       )}
     </>)}
@@ -1697,7 +2222,7 @@ function generateMarkoutPDF({points,unit,paperSize,fileName,tx,theme}){
   // Summary bar
   doc.setFillColor(...ac);doc.rect(ml,ph-mb-2,pw-ml-mr,6,"F");
   doc.setFontSize(7);doc.setFont("helvetica","bold");doc.setTextColor(255,255,255);
-  doc.text(`${tx.moTotalPts}: ${points.length}  |  ${tx.moTotalWeight}: ${totW.toLocaleString()} ${wL}  |  WYP Assist v1.0`,ml+3,ph-mb+2);
+  doc.text(`${tx.moTotalPts}: ${points.length}  |  ${tx.moTotalWeight}: ${totW.toLocaleString()} ${wL}  |  WYP Assist v1.1.0`,ml+3,ph-mb+2);
 
   doc.save(`WYP_Markout_Plot_${fileName||"export"}.pdf`);
 
@@ -1766,7 +2291,7 @@ function generateMarkoutPDF({points,unit,paperSize,fileName,tx,theme}){
   ty+=4;doc2.setFillColor(...ac);doc2.rect(ml2,ty,pw2-ml2-mr2,5,"F");
   doc2.setFontSize(6);doc2.setFont("helvetica","bold");doc2.setTextColor(255,255,255);
   doc2.text(`${tx.moTotalPts}: ${points.length}  |  ${tx.moTotalWeight}: ${totW.toLocaleString()} ${wL}`,ml2+2,ty+3.5);
-  doc2.setFontSize(4);doc2.setTextColor(160,160,160);doc2.text("WYP Assist v1.0",ml2,ph2-6);
+  doc2.setFontSize(4);doc2.setTextColor(160,160,160);doc2.text("WYP Assist v1.1.0",ml2,ph2-6);
 
   doc2.save(`WYP_Markout_Data_${fileName||"export"}.pdf`);
 }
@@ -1782,57 +2307,114 @@ function generateLoadInPDF({points,unit,paperSize,fileName,tx,theme}){
   const doc=new jsPDF({orientation:"portrait",unit:"mm",format:fmt});
   const pw=isImp?215.9:210,ph=isImp?279.4:297;
   const ml=15,mt=15,mr=15,mb=15;
-  const usableW=pw-ml-mr,usableH=ph-mt-mb;
+  const usableW=pw-ml-mr;
 
   // Filter out Stage points
   const loadInPts=points.filter(p=>p.type!=="Stage");
   if(loadInPts.length===0){doc.save(`WYP_LoadIn_${fileName||"export"}.pdf`);return;}
 
-  const getXv=p=>unit==="imperial"?p.xft:p.xm;
-  const getYv=p=>unit==="imperial"?p.yft:p.ym;
-  const uL=unit==="imperial"?"ft":"m";
-  const wL=unit==="imperial"?"lbs":"kgs";
+  const getXv=p=>isImp?p.xft:p.xm;
+  const getYv=p=>isImp?p.yft:p.ym;
+  const uL=isImp?"ft":"m";
+  const wL=isImp?"lbs":"kgs";
 
-  // Data ranges
-  const xVals=loadInPts.map(getXv),yVals=loadInPts.map(getYv);
-  const dataMinX=Math.min(...xVals),dataMaxX=Math.max(...xVals);
-  const dataMinY=Math.min(...yVals),dataMaxY=Math.max(...yVals);
-  const dataRangeY=(dataMaxY-dataMinY)||1;
-  const absMaxX=Math.max(Math.abs(dataMinX),Math.abs(dataMaxX))||1;
+  // ── Group points by Y value into rows ──
+  const yTol=isImp?0.5:0.15;
+  const sorted=[...loadInPts].sort((a,b)=>getYv(b)-getYv(a)); // descending Y → upstage first
+  const rows=[];
+  if(sorted.length>0){
+    let curPts=[sorted[0]];
+    let curY=getYv(sorted[0]);
+    for(let i=1;i<sorted.length;i++){
+      if(Math.abs(getYv(sorted[i])-curY)<=yTol){
+        curPts.push(sorted[i]);
+      } else {
+        const avgY=curPts.reduce((s,p)=>s+getYv(p),0)/curPts.length;
+        rows.push({y:avgY,points:curPts});
+        curPts=[sorted[i]];
+        curY=getYv(sorted[i]);
+      }
+    }
+    const avgY=curPts.reduce((s,p)=>s+getYv(p),0)/curPts.length;
+    rows.push({y:avgY,points:curPts});
+  }
+  // Sort each row's points by X (SR→SL, negative→positive)
+  rows.forEach(r=>r.points.sort((a,b)=>getXv(a)-getXv(b)));
 
-  // Layout constants
+  // ── Layout constants ──
   const headerH=22,footerH=10;
   const clX=ml+usableW/2;
   const stripTop=mt+headerH+10;
   const stripBot=ph-mb-footerH-6;
   const stripH=stripBot-stripTop;
 
-  // Box dimensions
-  const boxW=28,boxH=14;
+  // Box dimensions & rounded corner radius
+  const boxW=30,boxH=16,subRowGap=2,rowGap=5,cornerR=3;
+  const minBoxGap=boxW+2; // minimum center-to-center distance
+  const pageLeft=ml+2+boxW/2, pageRight=pw-mr-2-boxW/2;
+  const availRowW=pageRight-pageLeft; // usable width for boxes
+  const maxPerSubRow=Math.max(1,Math.floor(availRowW/minBoxGap)+1);
 
-  // Grid step
-  const gridStep=unit==="imperial"?10:5;
+  // Split each Y-row into sub-rows if too many boxes to fit
+  // Each sub-row is an array of {p, cx} with guaranteed no overlap
+  function layoutRow(pts){
+    const sorted=[...pts].sort((a,b)=>getXv(a)-getXv(b));
+    const subRows=[];
+    for(let i=0;i<sorted.length;i+=maxPerSubRow){
+      const chunk=sorted.slice(i,i+maxPerSubRow);
+      // Evenly space this chunk across the available width
+      const boxes=chunk.map((p,idx)=>{
+        let cx;
+        if(chunk.length===1){cx=clX+(getXv(p)/((Math.max(Math.abs(Math.min(...pts.map(getXv))),Math.abs(Math.max(...pts.map(getXv))))||1)))*availRowW/2;}
+        else{
+          // Place proportionally across page width, preserving relative X order
+          const t=chunk.length>1?idx/(chunk.length-1):0.5;
+          cx=pageLeft+t*availRowW;
+        }
+        return{p,cx};
+      });
+      // Final pass: ensure no overlap by greedy left-to-right placement
+      for(let j=1;j<boxes.length;j++){
+        if(boxes[j].cx-boxes[j-1].cx<minBoxGap){
+          boxes[j].cx=boxes[j-1].cx+minBoxGap;
+        }
+      }
+      // If rightmost box exceeds page, shift everything left
+      if(boxes.length>0&&boxes[boxes.length-1].cx>pageRight){
+        const shift=boxes[boxes.length-1].cx-pageRight;
+        boxes.forEach(b=>{b.cx-=shift;});
+      }
+      // Clamp all to page bounds
+      boxes.forEach(b=>{b.cx=Math.max(pageLeft,Math.min(pageRight,b.cx));});
+      subRows.push(boxes);
+    }
+    return subRows;
+  }
 
-  // Scaling
-  const rawScale=stripH/dataRangeY;
-  const autoScale=Math.min(6,Math.max(0.5,rawScale))*0.85;
-  const totalYmm=dataRangeY*autoScale;
-  const pagesNeeded=Math.max(1,Math.ceil(totalYmm/stripH));
+  // Pre-calculate sub-row counts for each Y-row to determine total visual rows
+  const rowLayouts=rows.map(r=>({y:r.y,points:r.points,subRows:layoutRow(r.points)}));
+  // Each Y-row's visual height: subRows * boxH + (subRows-1) * subRowGap + rowGap
+  const rowVisualH=rowLayouts.map(r=>{const n=r.subRows.length;return n*boxH+(n-1)*subRowGap+rowGap;});
 
-  // X scale: half page minus box width minus margin
-  const halfW=(usableW/2)-boxW/2-6;
-  const xScale=halfW/absMaxX;
-
-  // Mapping functions
-  const yToMM=(yVal,pageOffset)=>stripTop+((yVal-dataMinY)*autoScale)-pageOffset;
-  const xToMM=(xVal)=>clX+(xVal*xScale);
+  // Paginate: pack rows into pages based on actual visual height
+  const pages=[];
+  let curPage=[],curH=0;
+  for(let i=0;i<rowLayouts.length;i++){
+    if(curH+rowVisualH[i]>stripH&&curPage.length>0){
+      pages.push(curPage);
+      curPage=[];curH=0;
+    }
+    curPage.push({row:rowLayouts[i],h:rowVisualH[i]});
+    curH+=rowVisualH[i];
+  }
+  if(curPage.length>0)pages.push(curPage);
+  const pagesNeeded=pages.length;
 
   // Total weight for footer
   const totW=isImp?loadInPts.reduce((s,p)=>s+p.lbs,0):loadInPts.reduce((s,p)=>s+p.kgs,0);
 
   for(let page=0;page<pagesNeeded;page++){
     if(page>0)doc.addPage();
-    const pageYOffset=page*stripH;
 
     // ── HEADER ──
     [ac,[255,255,255],sc2,[255,255,255],ac].forEach((c,i)=>{doc.setFillColor(c[0],c[1],c[2]);doc.rect(pw/5*i,0,pw/5,3,"F");});
@@ -1858,79 +2440,102 @@ function generateLoadInPDF({points,unit,paperSize,fileName,tx,theme}){
     doc.text(tx.moSR||"SR",clX-24,stripTop-8,{align:"right"});
     doc.text(tx.moSL||"SL",clX+24,stripTop-8,{align:"left"});
 
-    // DOWNSTAGE / UPSTAGE labels
+    // UPSTAGE at top, DOWNSTAGE at bottom (positive Y = upstage)
     doc.setFontSize(6);doc.setFont("helvetica","bold");doc.setTextColor(...ac);
-    doc.text(tx.moDownstage||"DOWNSTAGE",clX,stripTop-2,{align:"center"});
-    doc.text(tx.moUpstage||"UPSTAGE",clX,stripBot+10,{align:"center"});
+    doc.text(tx.moUpstage||"UPSTAGE",clX,stripTop-2,{align:"center"});
+    doc.text(tx.moDownstage||"DOWNSTAGE",clX,stripBot+10,{align:"center"});
 
-    // ── Y GRID TICKS ──
-    doc.setFont("helvetica","normal");doc.setFontSize(5.5);
-    const yGridStart=Math.floor(dataMinY/gridStep)*gridStep;
-    const yGridEnd=Math.ceil(dataMaxY/gridStep)*gridStep;
-    for(let yg=yGridStart;yg<=yGridEnd;yg+=gridStep){
-      const ymm=yToMM(yg,pageYOffset);
-      if(ymm>=stripTop&&ymm<=stripBot){
-        doc.setDrawColor(180,180,180);doc.setLineWidth(0.15);
-        doc.setLineDashPattern([1,1],0);
-        doc.line(ml+8,ymm,pw-mr-8,ymm);
-        doc.setLineDashPattern([],0);
-        doc.setTextColor(150,150,150);
-        doc.text(`${yg} ${uL}`,clX+3,ymm-1.5);
-      }
-    }
+    // ── ROWS FOR THIS PAGE ──
+    const pageRows=pages[page];
+    let yPos=stripTop;
 
-    // ── POINT BOXES ──
-    loadInPts.forEach(p=>{
-      const yMM=yToMM(getYv(p),pageYOffset);
-      if(yMM<stripTop-boxH||yMM>stripBot+boxH)return;
+    pageRows.forEach(({row,h})=>{
+      const subRows=row.subRows;
+      const yLabel=row.y;
+      const ySign=yLabel>=0?"+":"";
 
-      const xMM=xToMM(getXv(p));
-      const bx=xMM-boxW/2;
-      const by=yMM-boxH/2;
+      // Y label on right margin (centered on this row group)
+      doc.setFont("helvetica","normal");doc.setFontSize(5.5);
+      doc.setTextColor(150,150,150);
+      doc.text(`${ySign}${yLabel.toFixed(1)} ${uL}`,pw-mr+2,yPos+h/2+1.5);
 
-      const rgb=hexToRgb(moColor(p.type));
-      // Light fill (blend toward white at 15% strength)
-      const lR=Math.round(rgb[0]*0.15+255*0.85);
-      const lG=Math.round(rgb[1]*0.15+255*0.85);
-      const lB=Math.round(rgb[2]*0.15+255*0.85);
-      doc.setFillColor(lR,lG,lB);
-      doc.rect(bx,by,boxW,boxH,"F");
-      // Border
-      doc.setDrawColor(rgb[0],rgb[1],rgb[2]);doc.setLineWidth(0.4);
-      doc.rect(bx,by,boxW,boxH,"S");
-
-      // Label (bold, type color)
-      doc.setFont("helvetica","bold");doc.setFontSize(6);
-      doc.setTextColor(rgb[0],rgb[1],rgb[2]);
-      doc.text(p.label,bx+boxW/2,by+5,{align:"center"});
-
-      // Type abbreviation
-      const typeAbbr=p.type.length>14?p.type.substring(0,13)+"..":p.type;
-      doc.setFont("helvetica","normal");doc.setFontSize(4.5);
-      doc.setTextColor(80,80,80);
-      doc.text(typeAbbr,bx+boxW/2,by+9,{align:"center"});
-
-      // Weight
-      const wt=isImp?p.lbs:p.kgs;
-      if(wt){
-        doc.setFontSize(4.5);doc.setTextColor(120,120,120);
-        doc.text(`${wt} ${wL}`,bx+boxW/2,by+12.5,{align:"center"});
-      }
-
-      // Leader line from box to CL
-      doc.setDrawColor(200,200,200);doc.setLineWidth(0.15);
-      doc.setLineDashPattern([0.5,0.5],0);
-      const xv=getXv(p);
-      if(xv>0){doc.line(bx,yMM,clX+1,yMM);}
-      else if(xv<0){doc.line(bx+boxW,yMM,clX-1,yMM);}
+      // Horizontal grid line at first sub-row center
+      const firstCenter=yPos+boxH/2;
+      doc.setDrawColor(210,210,210);doc.setLineWidth(0.1);
+      doc.setLineDashPattern([1,1],0);
+      doc.line(ml+8,firstCenter,pw-mr-8,firstCenter);
       doc.setLineDashPattern([],0);
+
+      // Draw each sub-row
+      subRows.forEach((boxes,si)=>{
+        const subCenterY=yPos+si*(boxH+subRowGap)+boxH/2;
+
+        // "continued" label for spill sub-rows
+        if(si>0){
+          doc.setFont("helvetica","italic");doc.setFontSize(4);
+          doc.setTextColor(180,180,180);
+          doc.text("cont.",ml+2,subCenterY+1.5);
+        }
+
+        boxes.forEach(({p,cx})=>{
+          const bx=cx-boxW/2;
+          const by=subCenterY-boxH/2;
+          const rgb=hexToRgb(moColor(p.type));
+
+          // Light fill (15% type color blended toward white)
+          const lR=Math.round(rgb[0]*0.15+255*0.85);
+          const lG=Math.round(rgb[1]*0.15+255*0.85);
+          const lB=Math.round(rgb[2]*0.15+255*0.85);
+
+          // Rounded rectangle — fill then border
+          doc.setFillColor(lR,lG,lB);
+          doc.roundedRect(bx,by,boxW,boxH,cornerR,cornerR,"F");
+          doc.setDrawColor(rgb[0],rgb[1],rgb[2]);doc.setLineWidth(0.4);
+          doc.roundedRect(bx,by,boxW,boxH,cornerR,cornerR,"S");
+
+          // ── Content inside shape ──
+          // Label (bold, type color)
+          doc.setFont("helvetica","bold");doc.setFontSize(6);
+          doc.setTextColor(rgb[0],rgb[1],rgb[2]);
+          doc.text(p.label,cx,by+4.5,{align:"center"});
+
+          // X offset value with +/- sign
+          const xv=getXv(p);
+          const xSign=xv>=0?"+":"";
+          doc.setFont("helvetica","bold");doc.setFontSize(5.5);
+          doc.setTextColor(40,40,40);
+          doc.text(`${xSign}${xv.toFixed(1)} ${uL}`,cx,by+8.5,{align:"center"});
+
+          // Type abbreviation
+          const typeAbbr=p.type.length>12?p.type.substring(0,11)+"..":p.type;
+          doc.setFont("helvetica","normal");doc.setFontSize(4);
+          doc.setTextColor(100,100,100);
+          doc.text(typeAbbr,cx,by+11.5,{align:"center"});
+
+          // Weight
+          const wt=isImp?p.lbs:p.kgs;
+          if(wt){
+            doc.setFontSize(4);doc.setTextColor(130,130,130);
+            doc.text(`${wt} ${wL}`,cx,by+14.5,{align:"center"});
+          }
+
+          // Dashed leader line from box edge to center line
+          doc.setDrawColor(200,200,200);doc.setLineWidth(0.1);
+          doc.setLineDashPattern([0.5,0.5],0);
+          if(xv>0){doc.line(bx,subCenterY,clX+1,subCenterY);}
+          else if(xv<0){doc.line(bx+boxW,subCenterY,clX-1,subCenterY);}
+          doc.setLineDashPattern([],0);
+        });
+      });
+
+      yPos+=h;
     });
 
     // ── FOOTER BAR ──
     const fY=ph-mb-footerH;
     doc.setFillColor(...ac);doc.rect(ml,fY,usableW,8,"F");
     doc.setFontSize(6);doc.setFont("helvetica","bold");doc.setTextColor(255,255,255);
-    doc.text(`${tx.moTotalPts}: ${loadInPts.length}  |  ${tx.moTotalWeight}: ${totW.toLocaleString()} ${wL}  |  WYP Assist v1.0`,ml+3,fY+5.5);
+    doc.text(`${tx.moTotalPts}: ${loadInPts.length}  |  ${tx.moTotalWeight}: ${totW.toLocaleString()} ${wL}  |  WYP Assist v1.1.0`,ml+3,fY+5.5);
   }
 
   doc.save(`WYP_LoadIn_${fileName||"export"}.pdf`);
@@ -2113,6 +2718,7 @@ function MarkoutTab(){
 // ═══════════════════════════════════════════════════════════════════════════════
 export default function WYPAssist(){
   const[lang,setLang]=useState("usa");const[tab,setTab]=useState("load");
+  const[waiverAccepted,setWaiverAccepted]=useState(false);const[waiverChecked,setWaiverChecked]=useState(false);
   // Shared Pull Sheet motor state — can be set from Markout tab
   const[sharedMotors,setSharedMotors]=useState(null);
   const theme=THEMES[lang];const styles=mkS(theme);const tx=i18n[lang];
@@ -2182,15 +2788,56 @@ export default function WYPAssist(){
         </div></header>
         <FlagStripe theme={lang}/>
         <main data-r="main-area" style={styles.main}>
+          {!waiverAccepted?(
+            <div style={{maxWidth:680,margin:"40px auto",padding:"0 16px"}}>
+              <div style={{background:theme.surface,border:`1px solid ${theme.border}`,borderRadius:8,padding:"32px 28px",boxShadow:"0 4px 24px rgba(0,0,0,.4)"}}>
+                <div style={{textAlign:"center",marginBottom:24}}>
+                  <img src="/wyp-logo-192.png" alt="WYP" style={{width:48,height:48,borderRadius:"50%",marginBottom:12}}/>
+                  <div style={{fontSize:16,fontWeight:700,color:theme.accent,letterSpacing:1,textTransform:"uppercase"}}>{tx.waiverTitle}</div>
+                </div>
+                <div style={{fontSize:12,color:theme.textSecondary,lineHeight:1.7,display:"flex",flexDirection:"column",gap:12}}>
+                  <p>{tx.waiverBody1}</p>
+                  <p>{tx.waiverBody2}</p>
+                  <p>{tx.waiverBody3}</p>
+                  <p style={{color:danger,fontWeight:600}}>{tx.waiverBody4}</p>
+                  <p style={{fontWeight:600,color:theme.text}}>{tx.waiverBody5}</p>
+                  <ul style={{margin:"0 0 0 20px",display:"flex",flexDirection:"column",gap:4}}>
+                    <li>{tx.waiverBullet1}</li>
+                    <li>{tx.waiverBullet2}</li>
+                    <li>{tx.waiverBullet3}</li>
+                    <li>{tx.waiverBullet4}</li>
+                  </ul>
+                  <p>{tx.waiverBody6}</p>
+                  <p style={{fontWeight:600}}>{tx.waiverBody7}</p>
+                </div>
+                <div style={{marginTop:24,padding:"16px 20px",background:theme.surfaceLight,border:`1px solid ${theme.border}`,borderRadius:6}}>
+                  <div style={{fontSize:12,fontWeight:700,color:theme.text,marginBottom:10}}>{tx.waiverAgreeTitle}</div>
+                  <ul style={{fontSize:11,color:theme.textSecondary,margin:"0 0 0 18px",lineHeight:1.8}}>
+                    <li>{tx.waiverAgree1}</li>
+                    <li>{tx.waiverAgree2}</li>
+                    <li>{tx.waiverAgree3}</li>
+                    <li>{tx.waiverAgree4}</li>
+                  </ul>
+                </div>
+                <label style={{display:"flex",alignItems:"center",gap:10,marginTop:20,cursor:"pointer",fontSize:12,color:theme.text,padding:"12px 16px",background:waiverChecked?`${theme.accent}15`:theme.surfaceLight,border:`1px solid ${waiverChecked?theme.accent:theme.border}`,borderRadius:6,transition:"all .2s"}}>
+                  <input type="checkbox" checked={waiverChecked} onChange={e=>setWaiverChecked(e.target.checked)} style={{width:18,height:18,accentColor:theme.accent,cursor:"pointer"}}/>
+                  <span>{tx.waiverCheckbox}</span>
+                </label>
+                <button disabled={!waiverChecked} onClick={()=>setWaiverAccepted(true)} style={{marginTop:16,width:"100%",padding:"14px 0",fontSize:13,fontWeight:700,letterSpacing:2,textTransform:"uppercase",fontFamily:"'IBM Plex Mono',monospace",background:waiverChecked?theme.accent:`${theme.textSecondary}30`,color:waiverChecked?"#fff":`${theme.textSecondary}60`,border:"none",borderRadius:6,cursor:waiverChecked?"pointer":"not-allowed",transition:"all .2s"}}>{tx.waiverBtn}</button>
+              </div>
+            </div>
+          ):<>
           <div style={styles.disc}>{tx.disclaimer}</div>
           {tab==="load"&&<PointLoadTab/>}
           {tab==="pull"&&<PullSheetTab/>}
           {tab==="bridle"&&<BridleTab/>}
           {tab==="markout"&&<MarkoutTab/>}
-          <footer style={{textAlign:"center",padding:"40px 0 20px",borderTop:`1px solid ${theme.border}`,marginTop:40}}>
+          </>}
+          <footer style={{textAlign:"center",padding:"40px 20px 24px",borderTop:`1px solid ${theme.border}`,marginTop:40,background:theme.bg}}>
             <img src="/wyp-logo-192.png" alt="WYP" style={{width:32,height:32,borderRadius:"50%",marginBottom:8}}/>
             <div style={{fontSize:11,color:theme.textSecondary,letterSpacing:2,textTransform:"uppercase"}}>{tx.footer1}</div>
-            <div style={{fontSize:10,color:`${theme.textSecondary}60`,marginTop:4}}>{tx.footer2}</div>
+            <div style={{fontSize:10,color:`${theme.textSecondary}60`,marginTop:4,marginBottom:16}}>{tx.footer2}</div>
+            <div style={{maxWidth:720,margin:"0 auto"}}><div style={{fontSize:9,color:`${theme.textSecondary}45`,lineHeight:1.7,textAlign:"left",padding:"16px 20px",background:theme.surface,border:`1px solid ${theme.border}60`,borderRadius:6}}>{tx.footerDisclaimer}</div></div>
           </footer>
         </main>
       </div>
