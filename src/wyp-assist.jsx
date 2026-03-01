@@ -2778,7 +2778,7 @@ export default function WYPAssist(){
           </div>
           <button data-r="lang-toggle" style={{...styles.langBtn(true),position:"relative"}} onClick={()=>setLang(lang==="usa"?"pr":"usa")}>
             <span>{lang==="usa"?"🇺🇸":"🇵🇷"}</span>
-            <span style={{fontSize:11}}>{lang==="usa"?"EN":"ES"}</span>
+            <span style={{fontSize:11}}>{lang==="usa"?"English":"Español"}</span>
             <span style={{fontSize:8,opacity:0.5,marginLeft:2}}>▾</span>
           </button>
           <div data-r="header-nav-wrap" style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap",flexShrink:1}}>
