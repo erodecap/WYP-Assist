@@ -66,22 +66,22 @@ const CAT = {
 // For ≤1 Ton: 5/8" shackle & pear ring, 3/8" steel
 // For >1 Ton: 3/4" shackle & pear ring, 1/2" steel
 const HOIST_GEAR_LIGHT = {
-  "RIG10-00": { per: 7, round5: true, label: 'Shackle 5/8"' },
+  "RIG10-00": { per: 10, round5: true, label: 'Shackle 5/8"' },
   "RIG10-05": { per: 1, label: 'Pear Ring 5/8" Crosby' },
   "RIG11-20": { per: 2, label: "S.T.A.C. Chain 3'" },
   "RIG10-50": { per: 2, label: 'Steel 3/8" Cable 2\'' },
-  "RIG10-55": { per: 4, label: 'Steel 3/8" Cable 5\'' },
-  "RIG10-60": { per: 4, label: 'Steel 3/8" Cable 10\'' },
+  "RIG10-55": { per: 5, label: 'Steel 3/8" Cable 5\'' },
+  "RIG10-60": { per: 5, label: 'Steel 3/8" Cable 10\'' },
   "RIG10-65": { per: 2, label: 'Steel 3/8" Cable 20\'' },
   "RIG11-30": { per: 2.5, roundUp: true, label: "Burlap" },
 };
 const HOIST_GEAR_HEAVY = {
-  "RIG17-10": { per: 7, round5: true, label: 'Shackle 3/4"' },
+  "RIG17-10": { per: 10, round5: true, label: 'Shackle 3/4"' },
   "RIG17-20": { per: 1, label: 'Pear Ring 3/4"' },
   "RIG11-20": { per: 2, label: "S.T.A.C. Chain 3'" },
   "RIG17-25": { per: 2, label: 'Steel 1/2" Cable 2\'' },
-  "RIG17-30": { per: 4, label: 'Steel 1/2" Cable 5\'' },
-  "RIG17-40": { per: 4, label: 'Steel 1/2" Cable 10\'' },
+  "RIG17-30": { per: 5, label: 'Steel 1/2" Cable 5\'' },
+  "RIG17-40": { per: 5, label: 'Steel 1/2" Cable 10\'' },
   "RIG17-50": { per: 2, label: 'Steel 1/2" Cable 20\'' },
   "RIG11-30": { per: 2.5, roundUp: true, label: "Burlap" },
 };
