@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect, useRef, createContext, useContext } from "react";
 import { jsPDF } from "jspdf";
+import { Analytics } from "@vercel/analytics/react";
 
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -2840,6 +2841,7 @@ export default function WYPAssist(){
           </footer>
         </main>
       </div>
+      <Analytics />
     </ThemeCtx.Provider>
   );
 }
