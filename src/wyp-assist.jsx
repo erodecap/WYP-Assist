@@ -2892,14 +2892,23 @@ function AccountView({ onClose }) {
   const { s, t, tx } = useTheme();
   const { user, subscription, isPro, signOut } = useAuth();
 
+  const [subLoading, setSubLoading] = useState(false);
+  const [subError, setSubError] = useState("");
   const handleSubscribe = async () => {
-    const res = await fetch("/api/create-checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: user.id, email: user.email }),
-    });
-    const { url } = await res.json();
-    if (url) window.location.href = url;
+    setSubLoading(true); setSubError("");
+    try {
+      const res = await fetch("/api/create-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: user.id, email: user.email }),
+      });
+      const data = await res.json();
+      if (data.url) { window.location.href = data.url; return; }
+      setSubError(data.error || "Checkout failed");
+    } catch (err) {
+      setSubError("Could not connect to checkout");
+    }
+    setSubLoading(false);
   };
 
   const handleManage = async () => {
@@ -2945,7 +2954,8 @@ function AccountView({ onClose }) {
             <div style={{ fontSize: 13, fontWeight: 700, color: t.accent, marginBottom: 4 }}>{tx.authSubscribe}</div>
             <div style={{ fontSize: 12, color: t.textSecondary, marginBottom: 12 }}>{tx.authProFeatures}</div>
             <div style={{ fontSize: 24, fontWeight: 900, color: t.textPrimary, marginBottom: 16 }}>{tx.authPrice}</div>
-            <button style={{ ...s.exportBtn, width: "100%", justifyContent: "center" }} onClick={handleSubscribe}>{tx.authSubscribe}</button>
+            <button style={{ ...s.exportBtn, width: "100%", justifyContent: "center" }} onClick={handleSubscribe} disabled={subLoading}>{subLoading ? "..." : tx.authSubscribe}</button>
+            {subError && <div style={{ fontSize: 11, color: "#ef4444", marginTop: 8 }}>{subError}</div>}
           </div>
         )}
 
@@ -3160,14 +3170,22 @@ function PaywallGate({ children, onAuthView }) {
           {!user ? (
             <button style={{ ...s.exportBtn, width: "100%", justifyContent: "center" }} onClick={() => onAuthView("login")}>{tx.authLogin}</button>
           ) : (
-            <button style={{ ...s.exportBtn, width: "100%", justifyContent: "center" }} onClick={async () => {
-              const res = await fetch("/api/create-checkout", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ userId: user.id, email: user.email }),
-              });
-              const { url } = await res.json();
-              if (url) window.location.href = url;
+            <button style={{ ...s.exportBtn, width: "100%", justifyContent: "center" }} onClick={async (e) => {
+              const btn = e.currentTarget;
+              btn.disabled = true; btn.textContent = "...";
+              try {
+                const res = await fetch("/api/create-checkout", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ userId: user.id, email: user.email }),
+                });
+                const data = await res.json();
+                if (data.url) { window.location.href = data.url; return; }
+                alert(data.error || "Checkout failed. Please try again.");
+              } catch (err) {
+                alert("Could not connect to checkout. Please try again.");
+              }
+              btn.disabled = false; btn.textContent = tx.authSubscribe;
             }}>{tx.authSubscribe}</button>
           )}
           {!user && (

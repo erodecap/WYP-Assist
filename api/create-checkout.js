@@ -8,6 +8,8 @@ export default async function handler(req, res) {
   const { userId, email } = req.body;
   if (!userId || !email) return res.status(400).json({ error: "Missing userId or email" });
 
+  const siteUrl = process.env.SITE_URL || `https://${req.headers.host}`;
+
   try {
     const customers = await stripe.customers.list({ email, limit: 1 });
     let customer;
@@ -24,8 +26,8 @@ export default async function handler(req, res) {
       customer: customer.id,
       mode: "subscription",
       line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
-      success_url: `${process.env.SITE_URL}?checkout=success`,
-      cancel_url: `${process.env.SITE_URL}?checkout=cancel`,
+      success_url: `${siteUrl}?checkout=success`,
+      cancel_url: `${siteUrl}?checkout=cancel`,
       subscription_data: {
         metadata: { supabase_user_id: userId },
       },
