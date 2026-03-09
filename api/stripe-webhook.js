@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
+import { buffer } from "micro";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const supabase = createClient(
@@ -9,14 +10,8 @@ const supabase = createClient(
 
 export const config = { api: { bodyParser: false } };
 
-async function getRawBody(req) {
-  const chunks = [];
-  for await (const chunk of req) chunks.push(chunk);
-  return Buffer.concat(chunks);
-}
-
 async function upsertSubscription(userId, customerId, subscription) {
-  await supabase.from("subscriptions").upsert({
+  const { error } = await supabase.from("subscriptions").upsert({
     user_id: userId,
     stripe_customer_id: customerId,
     stripe_subscription_id: subscription.id,
@@ -27,12 +22,22 @@ async function upsertSubscription(userId, customerId, subscription) {
     cancel_at_period_end: subscription.cancel_at_period_end,
     updated_at: new Date().toISOString(),
   }, { onConflict: "user_id" });
+  if (error) console.error("Supabase upsert error:", error);
 }
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
-  const rawBody = await getRawBody(req);
+  let rawBody;
+  try {
+    rawBody = await buffer(req);
+  } catch {
+    // Fallback: read manually
+    const chunks = [];
+    for await (const chunk of req) chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
+    rawBody = Buffer.concat(chunks);
+  }
+
   const sig = req.headers["stripe-signature"];
 
   let event;
@@ -40,7 +45,7 @@ export default async function handler(req, res) {
     event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
     console.error("Webhook signature verification failed:", err.message);
-    return res.status(400).json({ error: "Invalid signature" });
+    return res.status(400).json({ error: "Invalid signature: " + err.message });
   }
 
   const relevantEvents = [
@@ -93,7 +98,7 @@ export default async function handler(req, res) {
     }
   } catch (err) {
     console.error("Webhook processing error:", err);
-    return res.status(500).json({ error: "Webhook handler failed" });
+    return res.status(500).json({ error: "Webhook handler failed: " + err.message });
   }
 
   return res.status(200).json({ received: true });
