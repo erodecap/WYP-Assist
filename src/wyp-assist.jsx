@@ -3179,11 +3179,13 @@ function PaywallGate({ children, onAuthView }) {
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({ userId: user.id, email: user.email }),
                 });
-                const data = await res.json();
+                const text = await res.text();
+                let data;
+                try { data = JSON.parse(text); } catch { alert("Server error: " + text.slice(0, 200)); btn.disabled = false; btn.textContent = tx.authSubscribe; return; }
                 if (data.url) { window.location.href = data.url; return; }
                 alert(data.error || "Checkout failed. Please try again.");
               } catch (err) {
-                alert("Could not connect to checkout. Please try again.");
+                alert("Network error: " + err.message);
               }
               btn.disabled = false; btn.textContent = tx.authSubscribe;
             }}>{tx.authSubscribe}</button>
