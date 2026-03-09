@@ -8,6 +8,12 @@ import kbPullSheet from "./kb/pull-sheet.md?raw";
 import kbBridleCalc from "./kb/bridle-calc.md?raw";
 import kbMarkout from "./kb/markout.md?raw";
 
+// Get auth headers for API calls
+async function authHeaders() {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session?.access_token) return { "Content-Type": "application/json" };
+  return { "Content-Type": "application/json", Authorization: `Bearer ${session.access_token}` };
+}
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // CATALOG DATABASE
@@ -1812,9 +1818,10 @@ function PullSheetTab(){
     try{
       const doc=generatePDF(pdfParams());
       const pdfBase64=doc.output("datauristring").split(",")[1];
+      const hdrs=await authHeaders();
       const resp=await fetch("/api/send-quote",{
         method:"POST",
-        headers:{"Content-Type":"application/json"},
+        headers:hdrs,
         body:JSON.stringify({
           from_name:userName,
           from_email:userEmail,
@@ -3078,10 +3085,11 @@ function AccountView({ onClose }) {
   const handleSubscribe = async () => {
     setSubLoading(true); setSubError("");
     try {
+      const hdrs = await authHeaders();
       const res = await fetch("/api/create-checkout", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: user.id, email: user.email }),
+        headers: hdrs,
+        body: JSON.stringify({}),
       });
       const data = await res.json();
       if (data.url) { window.location.href = data.url; return; }
@@ -3093,10 +3101,11 @@ function AccountView({ onClose }) {
   };
 
   const handleManage = async () => {
+    const hdrs = await authHeaders();
     const res = await fetch("/api/create-portal", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ customerId: subscription.stripe_customer_id }),
+      headers: hdrs,
+      body: JSON.stringify({}),
     });
     const { url } = await res.json();
     if (url) window.location.href = url;
@@ -3355,10 +3364,11 @@ function PaywallGate({ children, onAuthView }) {
               const btn = e.currentTarget;
               btn.disabled = true; btn.textContent = "...";
               try {
+                const hdrs = await authHeaders();
                 const res = await fetch("/api/create-checkout", {
                   method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ userId: user.id, email: user.email }),
+                  headers: hdrs,
+                  body: JSON.stringify({}),
                 });
                 const text = await res.text();
                 let data;

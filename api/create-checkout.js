@@ -1,16 +1,31 @@
 import Stripe from "stripe";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+import { createClient } from "@supabase/supabase-js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
-  const { userId, email } = req.body;
-  if (!userId || !email) return res.status(400).json({ error: "Missing userId or email" });
+  // Verify auth token and extract user
+  const auth = req.headers.authorization;
+  if (!auth?.startsWith("Bearer ")) return res.status(401).json({ error: "Unauthorized" });
 
-  const siteUrl = process.env.SITE_URL || `https://${req.headers.host}`;
+  const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+  );
+  const { data: { user }, error: authErr } = await supabase.auth.getUser(auth.slice(7));
+  if (authErr || !user) return res.status(401).json({ error: "Unauthorized" });
+
+  const userId = user.id;
+  const email = user.email;
+  const siteUrl = process.env.SITE_URL;
+  if (!siteUrl) {
+    console.error("SITE_URL not configured");
+    return res.status(500).json({ error: "Server configuration error" });
+  }
 
   try {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
     const customers = await stripe.customers.list({ email, limit: 1 });
     let customer;
     if (customers.data.length > 0) {
@@ -38,6 +53,6 @@ export default async function handler(req, res) {
     return res.status(200).json({ url: session.url });
   } catch (err) {
     console.error("Checkout error:", err);
-    return res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: "Failed to create checkout session" });
   }
 }

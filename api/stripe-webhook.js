@@ -31,15 +31,8 @@ export default async function handler(req, res) {
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!stripeKey || !webhookSecret || !supabaseUrl || !supabaseKey) {
-    return res.status(500).json({
-      error: "Missing env vars",
-      has: {
-        stripe: !!stripeKey,
-        webhook: !!webhookSecret,
-        supaUrl: !!supabaseUrl,
-        supaKey: !!supabaseKey,
-      },
-    });
+    console.error("Missing env vars:", { stripe: !!stripeKey, webhook: !!webhookSecret, supaUrl: !!supabaseUrl, supaKey: !!supabaseKey });
+    return res.status(500).json({ error: "Server configuration error" });
   }
 
   const stripe = new Stripe(stripeKey);
@@ -49,7 +42,8 @@ export default async function handler(req, res) {
   try {
     event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
   } catch (err) {
-    return res.status(400).json({ error: "Signature failed: " + err.message });
+    console.error("Webhook signature failed:", err.message);
+    return res.status(400).json({ error: "Invalid signature" });
   }
 
   try {
@@ -70,7 +64,7 @@ export default async function handler(req, res) {
             cancel_at_period_end: subscription.cancel_at_period_end,
             updated_at: new Date().toISOString(),
           }, { onConflict: "user_id" });
-          if (error) return res.status(500).json({ error: "DB error: " + error.message });
+          if (error) { console.error("DB error:", error.message); return res.status(500).json({ error: "Internal error" }); }
         }
       }
     } else if (event.type === "customer.subscription.created" || event.type === "customer.subscription.updated") {
@@ -103,7 +97,8 @@ export default async function handler(req, res) {
       }
     }
   } catch (err) {
-    return res.status(500).json({ error: "Handler error: " + err.message });
+    console.error("Webhook handler error:", err.message);
+    return res.status(500).json({ error: "Internal error" });
   }
 
   return res.status(200).json({ received: true });
