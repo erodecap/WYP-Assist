@@ -3,6 +3,14 @@ import { createClient } from "@supabase/supabase-js";
 
 export const config = { api: { bodyParser: false } };
 
+// Safely convert a Stripe timestamp (epoch seconds or null) to ISO string
+function toISO(val) {
+  if (!val) return new Date().toISOString();
+  if (typeof val === "string") return val; // already ISO
+  if (typeof val === "number") return new Date(val * 1000).toISOString();
+  return new Date().toISOString();
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
@@ -57,8 +65,8 @@ export default async function handler(req, res) {
             stripe_subscription_id: subscription.id,
             status: subscription.status,
             price_id: subscription.items.data[0]?.price.id,
-            current_period_start: new Date(subscription.current_period_start * 1000).toISOString(),
-            current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
+            current_period_start: toISO(subscription.current_period_start),
+            current_period_end: toISO(subscription.current_period_end),
             cancel_at_period_end: subscription.cancel_at_period_end,
             updated_at: new Date().toISOString(),
           }, { onConflict: "user_id" });
@@ -75,8 +83,8 @@ export default async function handler(req, res) {
           stripe_subscription_id: sub.id,
           status: sub.status,
           price_id: sub.items.data[0]?.price.id,
-          current_period_start: new Date(sub.current_period_start * 1000).toISOString(),
-          current_period_end: new Date(sub.current_period_end * 1000).toISOString(),
+          current_period_start: toISO(sub.current_period_start),
+          current_period_end: toISO(sub.current_period_end),
           cancel_at_period_end: sub.cancel_at_period_end,
           updated_at: new Date().toISOString(),
         }, { onConflict: "user_id" });
