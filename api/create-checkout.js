@@ -26,6 +26,7 @@ export default async function handler(req, res) {
       customer: customer.id,
       mode: "subscription",
       line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
+      allow_promotion_codes: true,
       success_url: `${siteUrl}?checkout=success`,
       cancel_url: `${siteUrl}?checkout=cancel`,
       subscription_data: {

@@ -60,15 +60,104 @@ export const CAT = {
   "RIG16-70": { name: "Lifting Bracket H Type Truss - 3\" Pipe, 2 Ton", cat: "bracket" },
   // ── Pipe & Fittings ──
   "RIGZZ-J1": { name: 'Pipe Flange 2" (npt 1.5")', cat: "pipe" },
+  "GROPI-01": { name: 'Pipe 2" (npt 1.5") Steel 1\'', cat: "pipe" },
+  "GROPI-02": { name: 'Pipe 2" (npt 1.5") Steel 2\'', cat: "pipe" },
+  "GROPI-03": { name: 'Pipe 2" (npt 1.5") Steel 3\'', cat: "pipe" },
+  "GROPI-04": { name: 'Pipe 2" (npt 1.5") Steel 4\'', cat: "pipe" },
+  "GROPI-06": { name: 'Pipe 2" (npt 1.5") Steel 6\'', cat: "pipe" },
+  "GROPI-08": { name: 'Pipe 2" (npt 1.5") Steel 8\'', cat: "pipe" },
+  "GROPI-10": { name: 'Pipe 2" (npt 1.5") Steel 10\'', cat: "pipe" },
+  "GROPI-12": { name: 'Pipe 2" (npt 1.5") Steel 12\'', cat: "pipe" },
+  "GROPI-16": { name: 'Pipe 2" (npt 1.5") Steel 16\'', cat: "pipe" },
+  // ── Side Arms CL Style ──
+  "RIG13-10": { name: 'Side Arm 12" CL Style', cat: "sidearm" },
+  "RIG13-20": { name: 'Side Arm 18" CL Style', cat: "sidearm" },
+  "RIG13-30": { name: 'Side Arm 24" CL Style', cat: "sidearm" },
+  "RIG13-40": { name: 'Side Arm 42" CL Style', cat: "sidearm" },
+  "RIG13-50": { name: 'Side Arm 84" CL Style', cat: "sidearm" },
   // ── Misc Hardware ──
   "RIG19-10": { name: "3 Level Cable Hanger", cat: "misc" },
-  "RIGZZ-24": { name: 'Side Arm 6" Theatrical', cat: "sidearm" },
-  "RIGZZ-25": { name: 'Side Arm 12" Theatrical', cat: "sidearm" },
-  "RIGZZ-26": { name: 'Side Arm 18" Theatrical', cat: "sidearm" },
   "RIGZZ-G1": { name: 'Ratchet Strap 2" - Endless', cat: "misc" },
   "RIGZZ-I1": { name: "Hand Line 100'", cat: "misc" },
   "RIGZZ-I2": { name: "Sheave", cat: "misc" },
   "RIGZZ-I3": { name: "Carabiner Locking", cat: "misc" },
+  "GROPI-A2": { name: "Sandbag", cat: "misc" },
+  // ── A Type (12") Truss ──
+  "TRUA0-01": { name: 'A Type (12") Blk 8\' Truss', cat: "truss12" },
+  "TRUA0-02": { name: 'A Type (12") Blk 6\' Truss', cat: "truss12" },
+  "TRUA0-03": { name: 'A Type (12") Blk 4\' Truss', cat: "truss12" },
+  "TRUA0-04": { name: 'A Type (12") Blk 3\' Truss', cat: "truss12" },
+  "TRUA0-05": { name: 'A Type (12") Blk 2\' Truss', cat: "truss12" },
+  "TRUA0-06": { name: 'A Type (12") Blk 1\' Truss', cat: "truss12" },
+  "TRUAA-22": { name: 'A Type (12") Corner 22.5 Deg', cat: "truss12" },
+  "TRUAA-30": { name: 'A Type (12") Corner 30 Deg', cat: "truss12" },
+  "TRUAA-45": { name: 'A Type (12") Corner 45 Deg', cat: "truss12" },
+  "TRUAA-90": { name: 'A Type (12") Corner 90 Deg 6-Way', cat: "truss12" },
+  "TRUAA-H6": { name: 'A Type (12") Hub 6-Way', cat: "truss12" },
+  "TRUAA-PH": { name: 'A Type (12") Plate Hinge', cat: "truss12" },
+  "TRUAC-45": { name: 'A Type Curve Truss 45Deg, 18\' 3/4" Diam (8Pc)', cat: "truss12" },
+  "TRUAC-90": { name: 'A Type Curve Truss 90Deg, 12\' 3/4" Diam (4Pc)', cat: "truss12" },
+  // ── B Type (16") Truss ──
+  "TRUB0-01": { name: 'B Type (16") Blk 8\' Truss w/Pinblocks', cat: "truss16" },
+  "TRUB0-02": { name: 'B Type (16") Blk 6\' Truss w/Pinblocks', cat: "truss16" },
+  "TRUB0-03": { name: 'B Type (16") Blk 4\' Truss w/Pinblocks', cat: "truss16" },
+  "TRUB0-04": { name: 'B Type (16") Blk 2\' Truss w/Pinblocks', cat: "truss16" },
+  "TRUB0-06": { name: 'B Type (16") Blk 14" Truss w/Pinblocks', cat: "truss16" },
+  "TRUB0-08": { name: 'B Type (16") Blk 34" Truss w/Pinblocks', cat: "truss16" },
+  "TRUBA-07": { name: 'B Type (16") Single Brace 7.5 Deg w/2x4" Bolt Sets', cat: "truss16" },
+  "TRUBA-15": { name: 'B Type (16") Single Brace 15 Deg', cat: "truss16" },
+  "TRUBA-22": { name: 'B Type (16") Single Brace 22.5 Deg', cat: "truss16" },
+  "TRUBA-30": { name: 'B Type (16") Single Brace 30 Deg', cat: "truss16" },
+  "TRUBA-45": { name: 'B Type (16") Single Brace 45 Deg', cat: "truss16" },
+  "TRUBA-60": { name: 'B Type (16") Single Brace 60 Deg', cat: "truss16" },
+  "TRUBA-90": { name: 'B Type (16") Single Brace 90 Deg', cat: "truss16" },
+  "TRUBA-C6": { name: 'B Type (16") Blk Corner 6-Way', cat: "truss16" },
+  "TRUBA-FP": { name: 'B Type (16") Blk Face Plate w/(4") Truss Bolt Set', cat: "truss16" },
+  "TRUBC-30": { name: 'B Type Curve Truss 30Deg, 32\' 2 1/4" Diam (12Pc)', cat: "truss16" },
+  "TRUBC-31": { name: 'B Type Curve Truss 30Deg, 24\' 2 1/4" Diam (12Pc)', cat: "truss16" },
+  // ── C Type (20.5") Truss ──
+  "TRUC0-01": { name: 'C Type (20") Blk 8\' Truss', cat: "truss20" },
+  "TRUC0-03": { name: 'C Type (20") Blk 4\' Truss', cat: "truss20" },
+  "TRUC0-04": { name: 'C Type (20") Blk 2\' Truss', cat: "truss20" },
+  "TRUCA-45": { name: 'C Type (20") Corner 45 Deg', cat: "truss20" },
+  "TRUCA-90": { name: 'C Type (20") Corner 90 Deg 6-Way', cat: "truss20" },
+  "TRUCA-PH": { name: 'C Type (20") Plate Hinge', cat: "truss20" },
+  "TRUCC-22": { name: 'C Type Curve Truss 22.5Deg, 39\' 5 3/4" Diam (16Pc)', cat: "truss20" },
+  // ── H Type (24"x36") Super Duty Truss ──
+  "TRUH0-01": { name: 'H Type (24"x36") Blk 8\' Truss', cat: "trussH" },
+  "TRUH0-02": { name: 'H Type (24"x36") Blk 4\' Truss', cat: "trussH" },
+  "TRUHA-02": { name: 'H Type (24"x36") Blk Corner 4-Way', cat: "trussH" },
+  "TRUHA-03": { name: 'H Type (24"x36") Blk Face Plate', cat: "trussH" },
+  // ── G Type (24") Heavy Duty Truss ──
+  "TRUG0-01": { name: 'G Type (24") Blk 8\' Truss', cat: "trussG" },
+  "TRUG0-02": { name: 'G Type (24") Blk 4\' Truss', cat: "trussG" },
+  "TRUG0-03": { name: 'G Type (24") Blk 1\' Truss', cat: "trussG" },
+  "TRUG0-04": { name: 'G Type (24") Blk Corner 6-Way', cat: "trussG" },
+  "TRUG0-05": { name: 'G Type (24") Blk Face Plate', cat: "trussG" },
+  // ── Socapex Motor Cable 14/7 ──
+  "XS140-08": { name: "Socapex 7 Pin Motor Cable 14/7 8'", cat: "socapex" },
+  "XS140-16": { name: "Socapex 7 Pin Motor Cable 14/7 16'", cat: "socapex" },
+  "XS140-24": { name: "Socapex 7 Pin Motor Cable 14/7 24'", cat: "socapex" },
+  "XS140-32": { name: "Socapex 7 Pin Motor Cable 14/7 32'", cat: "socapex" },
+  "XS140-40": { name: "Socapex 7 Pin Motor Cable 14/7 40'", cat: "socapex" },
+  "XS140-48": { name: "Socapex 7 Pin Motor Cable 14/7 48'", cat: "socapex" },
+  "XS140-56": { name: "Socapex 7 Pin Motor Cable 14/7 56'", cat: "socapex" },
+  "XS140-64": { name: "Socapex 7 Pin Motor Cable 14/7 64'", cat: "socapex" },
+  "XS140-72": { name: "Socapex 7 Pin Motor Cable 14/7 72'", cat: "socapex" },
+  "XS140-80": { name: "Socapex 7 Pin Motor Cable 14/7 80'", cat: "socapex" },
+  "XS140-88": { name: "Socapex 7 Pin Motor Cable 14/7 88'", cat: "socapex" },
+  "XS140-96": { name: "Socapex 7 Pin Motor Cable 14/7 96'", cat: "socapex" },
+  "XS141-44": { name: "Socapex 7 Pin Motor Cable 14/7 144'", cat: "socapex" },
+  // ── Tajimi Motor Control ──
+  "XTAJ0-24": { name: "Tajimi Motor Control 24'", cat: "tajimi" },
+  "XTAJ0-48": { name: "Tajimi Motor Control 48'", cat: "tajimi" },
+  "XTAJ0-96": { name: "Tajimi Motor Control 96'", cat: "tajimi" },
+  "XTAJ1-44": { name: "Tajimi Motor Control 144'", cat: "tajimi" },
+  "XTAJE-XT": { name: "Tajimi Inline Extender", cat: "tajimi" },
+  // ── Motor Distro & Remote Control ──
+  "MOTDI-S0": { name: "Motor Distro 8-Way CS-800", cat: "motordistro" },
+  "MOTDI-S3": { name: "Remote Control Motor 16 Way", cat: "motordistro" },
+  "MOTDI-S4": { name: "Remote Control Motor 24 Way", cat: "motordistro" },
 };
 
 // Per-hoist auto-calculated items (keyed by catalog ID)
@@ -131,8 +220,14 @@ const ADDON_GROUPS = [
     key: "pipe", titleEN: "Pipe & Side Arms", titleES: "Tubería y Brazos Laterales",
     items: [
       { id: "RIGZZ-J1", label: 'Pipe Flange 2"' },
-      { id: "RIGZZ-24", label: 'Side Arm 6"' }, { id: "RIGZZ-25", label: 'Side Arm 12"' },
-      { id: "RIGZZ-26", label: 'Side Arm 18"' },
+      { id: "GROPI-01", label: "Pipe 1'" }, { id: "GROPI-02", label: "Pipe 2'" },
+      { id: "GROPI-03", label: "Pipe 3'" }, { id: "GROPI-04", label: "Pipe 4'" },
+      { id: "GROPI-06", label: "Pipe 6'" }, { id: "GROPI-08", label: "Pipe 8'" },
+      { id: "GROPI-10", label: "Pipe 10'" }, { id: "GROPI-12", label: "Pipe 12'" },
+      { id: "GROPI-16", label: "Pipe 16'" },
+      { id: "RIG13-10", label: 'Side Arm 12"' }, { id: "RIG13-20", label: 'Side Arm 18"' },
+      { id: "RIG13-30", label: 'Side Arm 24"' }, { id: "RIG13-40", label: 'Side Arm 42"' },
+      { id: "RIG13-50", label: 'Side Arm 84"' },
     ],
   },
   {
@@ -141,6 +236,85 @@ const ADDON_GROUPS = [
       { id: "RIG19-10", label: "Cable Hanger" },
       { id: "RIGZZ-G1", label: "Ratchet Strap" }, { id: "RIGZZ-I1", label: "Hand Line 100'" },
       { id: "RIGZZ-I2", label: "Sheave" }, { id: "RIGZZ-I3", label: "Carabiner" },
+      { id: "GROPI-A2", label: "Sandbag" },
+    ],
+  },
+  {
+    key: "truss12", titleEN: 'A Type (12") Truss', titleES: 'Truss Tipo A (12")',
+    items: [
+      { id: "TRUA0-01", label: "8'" }, { id: "TRUA0-02", label: "6'" },
+      { id: "TRUA0-03", label: "4'" }, { id: "TRUA0-04", label: "3'" },
+      { id: "TRUA0-05", label: "2'" }, { id: "TRUA0-06", label: "1'" },
+      { id: "TRUAA-22", label: "Corner 22.5°" }, { id: "TRUAA-30", label: "Corner 30°" },
+      { id: "TRUAA-45", label: "Corner 45°" }, { id: "TRUAA-90", label: "Corner 90° 6-Way" },
+      { id: "TRUAA-H6", label: "Hub 6-Way" }, { id: "TRUAA-PH", label: "Plate Hinge" },
+      { id: "TRUAC-45", label: "Curve 45°" }, { id: "TRUAC-90", label: "Curve 90°" },
+    ],
+  },
+  {
+    key: "truss16", titleEN: 'B Type (16") Truss', titleES: 'Truss Tipo B (16")',
+    items: [
+      { id: "TRUB0-01", label: "8'" }, { id: "TRUB0-02", label: "6'" },
+      { id: "TRUB0-03", label: "4'" }, { id: "TRUB0-04", label: "2'" },
+      { id: "TRUB0-06", label: '14"' }, { id: "TRUB0-08", label: '34"' },
+      { id: "TRUBA-07", label: "Brace 7.5°" }, { id: "TRUBA-15", label: "Brace 15°" },
+      { id: "TRUBA-22", label: "Brace 22.5°" }, { id: "TRUBA-30", label: "Brace 30°" },
+      { id: "TRUBA-45", label: "Brace 45°" }, { id: "TRUBA-60", label: "Brace 60°" },
+      { id: "TRUBA-90", label: "Brace 90°" }, { id: "TRUBA-C6", label: "Corner 6-Way" },
+      { id: "TRUBA-FP", label: "Face Plate" },
+      { id: "TRUBC-30", label: 'Curve 30° 32"D' }, { id: "TRUBC-31", label: 'Curve 30° 24"D' },
+    ],
+  },
+  {
+    key: "truss20", titleEN: 'C Type (20.5") Truss', titleES: 'Truss Tipo C (20.5")',
+    items: [
+      { id: "TRUC0-01", label: "8'" }, { id: "TRUC0-03", label: "4'" },
+      { id: "TRUC0-04", label: "2'" },
+      { id: "TRUCA-45", label: "Corner 45°" }, { id: "TRUCA-90", label: "Corner 90° 6-Way" },
+      { id: "TRUCA-PH", label: "Plate Hinge" },
+      { id: "TRUCC-22", label: "Curve 22.5°" },
+    ],
+  },
+  {
+    key: "trussH", titleEN: 'H Type (24"x36") Super Duty Truss', titleES: 'Truss Super Duty Tipo H (24"x36")',
+    items: [
+      { id: "TRUH0-01", label: "8'" }, { id: "TRUH0-02", label: "4'" },
+      { id: "TRUHA-02", label: "Corner 4-Way" }, { id: "TRUHA-03", label: "Face Plate" },
+    ],
+  },
+  {
+    key: "trussG", titleEN: 'G Type (24") Heavy Duty Truss', titleES: 'Truss Heavy Duty Tipo G (24")',
+    items: [
+      { id: "TRUG0-01", label: "8'" }, { id: "TRUG0-02", label: "4'" },
+      { id: "TRUG0-03", label: "1'" },
+      { id: "TRUG0-04", label: "Corner 6-Way" }, { id: "TRUG0-05", label: "Face Plate" },
+    ],
+  },
+  {
+    key: "socapex", titleEN: "Socapex Motor Cable", titleES: "Cable de Motor Socapex",
+    items: [
+      { id: "XS140-08", label: "8'" }, { id: "XS140-16", label: "16'" },
+      { id: "XS140-24", label: "24'" }, { id: "XS140-32", label: "32'" },
+      { id: "XS140-40", label: "40'" }, { id: "XS140-48", label: "48'" },
+      { id: "XS140-56", label: "56'" }, { id: "XS140-64", label: "64'" },
+      { id: "XS140-72", label: "72'" }, { id: "XS140-80", label: "80'" },
+      { id: "XS140-88", label: "88'" }, { id: "XS140-96", label: "96'" },
+      { id: "XS141-44", label: "144'" },
+    ],
+  },
+  {
+    key: "tajimi", titleEN: "Tajimi Motor Control", titleES: "Control de Motor Tajimi",
+    items: [
+      { id: "XTAJ0-24", label: "24'" }, { id: "XTAJ0-48", label: "48'" },
+      { id: "XTAJ0-96", label: "96'" }, { id: "XTAJ1-44", label: "144'" },
+      { id: "XTAJE-XT", label: "Extender" },
+    ],
+  },
+  {
+    key: "motordistro", titleEN: "Motor Distro & Control", titleES: "Distro y Control de Motor",
+    items: [
+      { id: "MOTDI-S0", label: "8-Way CS-800" },
+      { id: "MOTDI-S3", label: "Remote 16 Way" }, { id: "MOTDI-S4", label: "Remote 24 Way" },
     ],
   },
 ];
@@ -165,7 +339,7 @@ const i18n = {
     straight:"Straight",curved:"Curved",circular:"Circular",vertical:"Vertical",
     straightNote:"Even distribution assumed along straight truss/pipe",straightNote2:"End points ~60% avg, mid points ~115% avg (beam loading)",curvedNote1:"End points carry half the load of interior points (tributary method)",curvedNote2:"Design load based on maximum interior point",curvedCustomNote:"Custom point weights — design to maximum point",circularEndNote:"end points carry ~20% more",circularNote:"Circular rigs distribute load evenly when full 360°",verticalNote1:"Vertical loads include 1.25x dynamic factor for movement",verticalNote2:"Account for shock loading during accel/decel",openArc:"Open arc",
     psTitle:"Pull Sheet Generator",psProject:"Project Name",psVenue:"Venue",psChainSystem:"Chain Hoist System",psSystemType:"System Type",psMotorCounts:"Motor Counts",psHardware:"Hardware",psSteelCable:"Steel",psTotalHoists:"Total Hoists",psOnSystem:"on",psSystem:"system",psPullSheet:"Pull Sheet",psProject2:"Project",psVenue2:"Venue",psChainSys2:"Chain System",psBreakdown:"Breakdown by Motor Type",psMotors:"Motors",psItem:"Item",psSize:"Cat. ID",psQty:"Qty",
-    psGrandTotals:"Grand Totals — All Gear",psTotalChain:"Total Chain Hoists",psEmpty:"Add motors above to generate your pull sheet",psExportPDF:"Export PDF",psShowDate:"Show Date",psReturnDate:"Return Date",psCountry:"Country / Region",psD8:"D8 / D8+ Rated",psD8Warn:"\u26A0 D8/D8+ RATED SYSTEM REQUIRED",psSendQuote:"Send for Quote",psName:"Your Name",psEmail:"Your Email",psRequired:"Required",psSending:"Sending\u2026",psSent:"Sent \u2713",psSendFail:"Failed \u2014 Retry",
+    psGrandTotals:"Grand Totals — All Gear",psTotalChain:"Total Chain Hoists",psEmpty:"Add motors above to generate your pull sheet",psExportPDF:"Export PDF",psDeliveryDate:"Delivery Date",psShowDate:"First Show Date",psReturnDate:"Return Date",psCountry:"Country / Region",psD8:"D8 / D8+ Rated",psD8Warn:"\u26A0 D8/D8+ RATED SYSTEM REQUIRED",psSendQuote:"Send for Quote",psName:"Your Name",psEmail:"Your Email",psRequired:"Required",psSending:"Sending\u2026",psSent:"Sent \u2713",psSendFail:"Failed \u2014 Retry",
     psAddons:"Additional Equipment",psAddonSub:"Add quantities for optional gear",
     brTitle:"Bridle Calculator",brType:"Bridle Type",brConfig:"Configuration",brDimensions:"Dimensions",brBeamSpacing:"Distance Between Beams",brLoadWeight:"Load Weight",brDistFromA:"Pick Point Distance from Beam A",brHeadroom:"Available Headroom",brThirdLeg:"Third Leg Offset",brHoistType:"Hoist Type (for gear list)",brMotorRating:"Motor Rating",brResults:"Bridle Results",brLegLength:"Leg Length",brLegA:"Leg A",brLegB:"Leg B",brIncAngle:"Included Angle",brApexHeight:"Apex Height",brPerLeg:"per Leg",brHorizForce:"Horizontal Force",brLegs:"Legs",brThirdLegLen:"Third Leg Length",brNotes:"Rigging Notes",brVisual:"Bridle Diagram",brSteelPieces:"Steel Pieces",brBeamConn:"Beam Connection",brAutoHoist:"Recommended Hoist",
     brNote1:"Always verify beam/structure capacity before loading. Angles above 90° significantly increase leg tension.",brNote2:"Horizontal forces must be resolved by the structure. Confirm breast line capacity if used.",brNote3:"Arena bridles: ensure all four attachment points are at equal elevation.",brGearList:"Bridle Gear List",brAngleWarn:"ANGLE WARNING",brAngleWarnText:"Included angle exceeds 120°. Leg loads increase dramatically. Consider wider beam spacing or more headroom.",brError:"Beam spacing must be > pick point spacing.",brEmpty:"Enter dimensions above to calculate bridle geometry",
@@ -205,7 +379,7 @@ const i18n = {
     straight:"Recto",curved:"Curvo",circular:"Circular",vertical:"Vertical",
     straightNote:"Distribución uniforme a lo largo de truss/tubo recto",straightNote2:"Puntos finales ~60%, puntos medios ~115%",curvedNote1:"Puntos extremos llevan la mitad de carga que los interiores (método tributario)",curvedNote2:"Carga de diseño basada en punto interior máximo",curvedCustomNote:"Pesos personalizados — diseño al punto máximo",circularEndNote:"puntos finales ~20% más",circularNote:"Circular distribuye carga uniforme a 360°",verticalNote1:"Cargas verticales: factor dinámico 1.25x",verticalNote2:"Considere carga de impacto en aceleración",openArc:"Arco abierto",
     psTitle:"Generador de Hoja de Tiro",psProject:"Nombre del Proyecto",psVenue:"Lugar",psChainSystem:"Sistema de Polipasto",psSystemType:"Tipo de Sistema",psMotorCounts:"Conteo de Motores",psHardware:"Herrajes",psSteelCable:"Acero",psTotalHoists:"Total Polipastos",psOnSystem:"en",psSystem:"sistema",psPullSheet:"Hoja de Tiro",psProject2:"Proyecto",psVenue2:"Lugar",psChainSys2:"Sistema de Cadena",psBreakdown:"Desglose por Tipo de Motor",psMotors:"Motores",psItem:"Artículo",psSize:"Cat. ID",psQty:"Cant.",
-    psGrandTotals:"Totales Generales — Todo el Equipo",psTotalChain:"Total Polipastos",psEmpty:"Agregue motores para generar la hoja",psExportPDF:"Exportar PDF",psShowDate:"Fecha del Show",psReturnDate:"Fecha de Devolución",psCountry:"País / Región",psD8:"D8 / D8+ Clasificado",psD8Warn:"\u26A0 SE REQUIERE SISTEMA CLASIFICADO D8/D8+",psSendQuote:"Enviar para Cotización",psName:"Tu Nombre",psEmail:"Tu Correo",psRequired:"Requerido",psSending:"Enviando\u2026",psSent:"Enviado \u2713",psSendFail:"Error \u2014 Reintentar",
+    psGrandTotals:"Totales Generales — Todo el Equipo",psTotalChain:"Total Polipastos",psEmpty:"Agregue motores para generar la hoja",psExportPDF:"Exportar PDF",psDeliveryDate:"Fecha de Entrega",psShowDate:"Fecha del Primer Show",psReturnDate:"Fecha de Devolución",psCountry:"País / Región",psD8:"D8 / D8+ Clasificado",psD8Warn:"\u26A0 SE REQUIERE SISTEMA CLASIFICADO D8/D8+",psSendQuote:"Enviar para Cotización",psName:"Tu Nombre",psEmail:"Tu Correo",psRequired:"Requerido",psSending:"Enviando\u2026",psSent:"Enviado \u2713",psSendFail:"Error \u2014 Reintentar",
     psAddons:"Equipo Adicional",psAddonSub:"Agregue cantidades para equipo opcional",
     brTitle:"Calculadora de Brida",brType:"Tipo de Brida",brConfig:"Configuración",brDimensions:"Dimensiones",brBeamSpacing:"Distancia Entre Vigas",brLoadWeight:"Peso de Carga",brDistFromA:"Distancia del Punto de Carga desde Viga A",brHeadroom:"Altura Disponible",brThirdLeg:"Desplazamiento 3ra Pata",brHoistType:"Tipo de Polipasto (para equipo)",brMotorRating:"Capacidad del Motor",brResults:"Resultados de Brida",brLegLength:"Longitud de Pata",brLegA:"Pata A",brLegB:"Pata B",brIncAngle:"Ángulo Incluido",brApexHeight:"Altura del Ápice",brPerLeg:"por Pata",brHorizForce:"Fuerza Horizontal",brLegs:"Patas",brThirdLegLen:"Longitud 3ra Pata",brNotes:"Notas de Aparejo",brVisual:"Diagrama de Brida",brSteelPieces:"Piezas de Acero",brBeamConn:"Conexión a Viga",brAutoHoist:"Polipasto Recomendado",
     brNote1:"Verifique capacidad de viga/estructura. Ángulos >90° aumentan tensión.",brNote2:"Fuerzas horizontales resueltas por la estructura. Confirme línea de pecho.",brNote3:"Arena: cuatro puntos a misma elevación.",brGearList:"Lista de Equipo de Brida",brAngleWarn:"ADVERTENCIA DE ÁNGULO",brAngleWarnText:"Ángulo >120°. Cargas aumentan dramáticamente.",brError:"Espaciado de vigas debe ser > espaciado de puntos.",brEmpty:"Ingrese dimensiones para calcular",
@@ -1215,7 +1389,7 @@ function BridleDiagram({bridleType,result,unit}){
 // ═══════════════════════════════════════════════════════════════════════════════
 // PDF EXPORT
 // ═══════════════════════════════════════════════════════════════════════════════
-function generatePDF({projectName,venue,chainSystem,totalHoists,hoistLines,addonItems,tx,theme,showDate,returnDate,country,d8,userName,userEmail}){
+function generatePDF({projectName,venue,chainSystem,totalHoists,hoistLines,addonItems,tx,theme,deliveryDate,showDate,returnDate,country,d8,userName,userEmail}){
     const doc=new jsPDF('p','mm','letter');
     const pw=215.9,ph=279.4,ml=18,mr=18,mb=14;let y=4;
     const maxY=ph-mb; // page bottom margin
@@ -1231,6 +1405,7 @@ function generatePDF({projectName,venue,chainSystem,totalHoists,hoistLines,addon
     if(projectName) infoLines.push(`${tx.psProject2}: ${projectName}`);
     if(venue) infoLines.push(`${tx.psVenue2}: ${venue}`);
     infoLines.push(`${tx.psChainSys2}: ${chainSystem}  |  ${tx.psTotalHoists}: ${totalHoists}`);
+    if(deliveryDate) infoLines.push(`${tx.psDeliveryDate}: ${deliveryDate}`);
     if(showDate) infoLines.push(`${tx.psShowDate}: ${showDate}${returnDate?`  |  ${tx.psReturnDate}: ${returnDate}`:""}`);
     if(country) infoLines.push(`${tx.psCountry}: ${country}`);
     if(userName||userEmail) infoLines.push(`${userName||""}${userEmail?`  |  ${userEmail}`:""}`);
@@ -1578,6 +1753,7 @@ function PullSheetTab(){
   const[m,setM]=useState(()=>sharedMotors||{".25 Ton":0,".5 Ton":0,"1 Ton":0,"2 Ton":0});
   const[pn,setPn]=useState("");const[vn,setVn]=useState("");
   // New fields
+  const[deliveryDate,setDeliveryDate]=useState("");
   const[showDate,setShowDate]=useState("");
   const[returnDate,setReturnDate]=useState("");
   const[country,setCountry]=useState("N & S America");
@@ -1622,7 +1798,7 @@ function PullSheetTab(){
     return Object.entries(merged).filter(([,v])=>v.qty>0);
   },[hoistLines,addonItems]);
 
-  const pdfParams=()=>({projectName:pn,venue:vn,chainSystem:cs,totalHoists:tot,hoistLines,addonItems,tx,theme:lang,showDate,returnDate,country,d8,userName,userEmail});
+  const pdfParams=()=>({projectName:pn,venue:vn,chainSystem:cs,totalHoists:tot,hoistLines,addonItems,tx,theme:lang,deliveryDate,showDate,returnDate,country,d8,userName,userEmail});
 
   const handleExport=()=>{if(!hasData)return;const doc=generatePDF(pdfParams());doc.save(`WYP_PullSheet_${pn||'export'}.pdf`);};
 
@@ -1644,6 +1820,7 @@ function PullSheetTab(){
           from_email:userEmail,
           project_name:pn||"Untitled",
           venue:vn||"—",
+          delivery_date:deliveryDate||"N/A",
           show_date:showDate,
           return_date:returnDate||"N/A",
           country:country,
@@ -1674,8 +1851,11 @@ function PullSheetTab(){
         <Field label={tx.psVenue}><Inp type="text" value={vn} onChange={setVn} placeholder="..."/></Field>
       </div>
 
-      {/* Show Date / Return Date / Country */}
-      <div data-r="g3" style={{...s.g3,marginTop:16}}>
+      {/* Delivery Date / Show Date / Return Date / Country */}
+      <div data-r="g4" style={{...s.g4,marginTop:16}}>
+        <Field label={tx.psDeliveryDate}>
+          <input type="date" style={s.input} value={deliveryDate} onChange={e=>setDeliveryDate(e.target.value)}/>
+        </Field>
         <Field label={<>{tx.psShowDate} <span style={{color:danger,fontSize:10}}>*</span></>}>
           <input type="date" style={s.input} value={showDate} onChange={e=>setShowDate(e.target.value)}/>
         </Field>
@@ -1777,6 +1957,7 @@ function PullSheetTab(){
           {pn&&<div style={{fontSize:13}}><span style={{color:t.textSecondary}}>{tx.psProject2}:</span> {pn}</div>}
           {vn&&<div style={{fontSize:13}}><span style={{color:t.textSecondary}}>{tx.psVenue2}:</span> {vn}</div>}
           <div style={{fontSize:13}}><span style={{color:t.textSecondary}}>{tx.psChainSys2}:</span> {cs}</div>
+          {deliveryDate&&<div style={{fontSize:13}}><span style={{color:t.textSecondary}}>{tx.psDeliveryDate}:</span> {deliveryDate}</div>}
           {showDate&&<div style={{fontSize:13}}><span style={{color:t.textSecondary}}>{tx.psShowDate}:</span> {showDate}{returnDate&&<> <span style={{color:t.textSecondary,marginLeft:12}}>{tx.psReturnDate}:</span> {returnDate}</>}</div>}
           <div style={{fontSize:13}}><span style={{color:t.textSecondary}}>{tx.psCountry}:</span> {country}</div>
         </div>
