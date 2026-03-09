@@ -35,10 +35,10 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:
 .controls button:hover{color:var(--text);border-color:var(--accent)}
 
 /* ─── SCENE 1 — TITLE ─── */
-.s1-logo{width:160px;height:160px;border-radius:50%;border:4px solid var(--accent);display:flex;align-items:center;
+.s1-logo{width:160px;height:160px;border-radius:50%;display:flex;align-items:center;
   justify-content:center;animation:pulse 2s ease-in-out infinite;margin-bottom:48px;
-  box-shadow:0 0 80px rgba(237,0,0,0.3)}
-.s1-logo svg{width:96px;height:96px}
+  box-shadow:0 0 80px rgba(237,0,0,0.3);overflow:hidden}
+.s1-logo img{width:100%;height:100%;object-fit:cover}
 @keyframes pulse{0%,100%{box-shadow:0 0 40px rgba(237,0,0,0.2)}50%{box-shadow:0 0 80px rgba(237,0,0,0.5)}}
 .s1-title{font-family:var(--head);font-size:80px;font-weight:900;letter-spacing:6px;text-align:center;
   background:linear-gradient(135deg,#fff 0%,#ccc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
@@ -194,14 +194,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:
 <!-- ═══════════════════════════════════════ -->
 <div class="scene active" id="scene1">
   <div class="s1-logo">
-    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="44" stroke="#ED0000" stroke-width="3" fill="none"/>
-      <path d="M30 35 L50 70 L70 35" stroke="#ED0000" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M36 35 L50 60 L64 35" stroke="#FF2B2B" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/>
-      <line x1="50" y1="25" x2="50" y2="35" stroke="#ED0000" stroke-width="3" stroke-linecap="round"/>
-      <line x1="26" y1="50" x2="36" y2="50" stroke="#ED0000" stroke-width="2" stroke-linecap="round" opacity=".5"/>
-      <line x1="64" y1="50" x2="74" y2="50" stroke="#ED0000" stroke-width="2" stroke-linecap="round" opacity=".5"/>
-    </svg>
+    <img src="/wyp-logo-192.png" alt="WYP Assist">
   </div>
   <div class="s1-title">WYP ASSIST</div>
   <div class="s1-sub">ENTERTAINMENT RIGGING TOOLS</div>
@@ -609,11 +602,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:
 <div class="scene" id="scene9">
   <div style="text-align:center">
     <div class="s1-logo" style="margin:0 auto 40px">
-      <svg viewBox="0 0 100 100" fill="none">
-        <circle cx="50" cy="50" r="44" stroke="#ED0000" stroke-width="3" fill="none"/>
-        <path d="M30 35 L50 70 L70 35" stroke="#ED0000" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <line x1="50" y1="25" x2="50" y2="35" stroke="#ED0000" stroke-width="3" stroke-linecap="round"/>
-      </svg>
+      <img src="/wyp-logo-192.png" alt="WYP Assist">
     </div>
     <div class="s1-title" style="font-size:64px">WYP ASSIST</div>
     <div class="s1-sub" style="margin-top:16px">ENTERTAINMENT RIGGING TOOLS</div>
