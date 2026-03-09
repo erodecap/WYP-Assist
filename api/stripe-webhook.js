@@ -1,6 +1,5 @@
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
-import { buffer } from "micro";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const supabase = createClient(
@@ -28,15 +27,14 @@ async function upsertSubscription(userId, customerId, subscription) {
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
-  let rawBody;
-  try {
-    rawBody = await buffer(req);
-  } catch {
-    // Fallback: read manually
-    const chunks = [];
-    for await (const chunk of req) chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
-    rawBody = Buffer.concat(chunks);
-  }
+  // Read raw body manually — works on Vercel without micro
+  const chunks = [];
+  await new Promise((resolve, reject) => {
+    req.on("data", (chunk) => chunks.push(chunk));
+    req.on("end", resolve);
+    req.on("error", reject);
+  });
+  const rawBody = Buffer.concat(chunks);
 
   const sig = req.headers["stripe-signature"];
 
