@@ -313,9 +313,13 @@ async function handleVenueImages(req, res) {
   const { supabase } = ctx;
 
   try {
-    const { data: venues, error } = await supabase.from("venues").select("id, name, image_url").is("image_url", null).eq("status", "approved").limit(10);
+    // Fetch a larger pool and randomly pick 10 so each batch covers different venues
+    const { data: allVenues, error } = await supabase.from("venues").select("id, name, image_url").is("image_url", null).eq("status", "approved").limit(200);
     if (error) throw error;
-    if (!venues || venues.length === 0) return res.status(200).json({ message: "All venues already have images", processed: 0, success: 0 });
+    if (!allVenues || allVenues.length === 0) return res.status(200).json({ message: "All venues already have images", processed: 0, success: 0 });
+    // Fisher-Yates shuffle then take first 10
+    for (let i = allVenues.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [allVenues[i], allVenues[j]] = [allVenues[j], allVenues[i]]; }
+    const venues = allVenues.slice(0, 10);
 
     let success = 0, failed = 0;
     const results = [];
