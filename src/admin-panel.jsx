@@ -153,6 +153,7 @@ function UsersView({ token }) {
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState(null); // user object for detail modal
   const [saving, setSaving] = useState(false);
+  const [proLoading, setProLoading] = useState(false);
 
   const fetchUsers = useCallback(() => {
     if (!token) return;
@@ -172,7 +173,29 @@ function UsersView({ token }) {
   const totalPages = Math.ceil(total / 25);
 
   const openUser = (u) => {
-    setSelected({ ...u, _editName: u.display_name || "", _editRole: u.role, _editBanned: u.banned });
+    setSelected({ ...u, _editName: u.display_name || "", _editRole: u.role, _editBanned: u.banned, _grantReason: "", _grantDays: "365" });
+  };
+
+  const togglePro = async (grant) => {
+    if (!selected) return;
+    setProLoading(true);
+    if (grant) {
+      const end = new Date(Date.now() + parseInt(selected._grantDays || 365) * 86400000).toISOString();
+      const res = await API("/api/admin/grant-pro", token, {
+        method: "POST",
+        body: { user_id: selected.id, reason: selected._grantReason || "Admin granted", period_end: end },
+      });
+      if (res.error) { alert(res.error); setProLoading(false); return; }
+    } else {
+      const res = await API("/api/admin/revoke-pro", token, {
+        method: "POST",
+        body: { user_id: selected.id },
+      });
+      if (res.error) { alert(res.error); setProLoading(false); return; }
+    }
+    setProLoading(false);
+    setSelected(null);
+    fetchUsers();
   };
 
   const saveUser = async () => {
@@ -357,6 +380,66 @@ function UsersView({ token }) {
                 </span>
               </label>
             </div>
+            {/* ── PRO Access ── */}
+            <div style={{ borderTop: `1px solid ${t.border}`, paddingTop: 16, marginBottom: 20 }}>
+              <div style={{ fontSize: 11, color: t.textSecondary, letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 10, fontWeight: 700 }}>
+                Subscription
+              </div>
+              {selected.sub_status === "active" ? (
+                <div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+                    <span style={s.badge("#22C55E")}>PRO ACTIVE</span>
+                    {selected.is_manual_sub && <span style={s.badge("#F59E0B")}>manual</span>}
+                    {!selected.is_manual_sub && <span style={s.badge("#3B82F6")}>stripe</span>}
+                    {selected.sub_end && (
+                      <span style={{ fontSize: 11, color: t.textSecondary }}>expires {selected.sub_end?.slice(0, 10)}</span>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => togglePro(false)}
+                    disabled={proLoading}
+                    style={{ ...s.chip(false), fontSize: 10, padding: "6px 14px", cursor: "pointer", color: "#EF4444", borderColor: "#EF4444", opacity: proLoading ? 0.5 : 1 }}
+                  >
+                    {proLoading ? "Revoking…" : "Revoke PRO"}
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+                    <span style={{ fontSize: 12, color: t.textSecondary }}>
+                      {selected.sub_status ? <span style={s.badge(t.textSecondary)}>{selected.sub_status}</span> : "No subscription (free)"}
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 10 }}>
+                    <input
+                      style={{ ...s.input, maxWidth: 200, flex: 1 }}
+                      type="text"
+                      placeholder="Reason (optional)"
+                      value={selected._grantReason}
+                      onChange={e => setSelected(p => ({ ...p, _grantReason: e.target.value }))}
+                    />
+                    <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                      <input
+                        style={{ ...s.input, maxWidth: 80 }}
+                        type="number"
+                        min="1"
+                        value={selected._grantDays}
+                        onChange={e => setSelected(p => ({ ...p, _grantDays: e.target.value }))}
+                      />
+                      <span style={{ fontSize: 10, color: t.textSecondary }}>days</span>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => togglePro(true)}
+                    disabled={proLoading}
+                    style={{ ...s.exportBtn, padding: "8px 18px", fontSize: 11, opacity: proLoading ? 0.5 : 1 }}
+                  >
+                    {proLoading ? "Granting…" : "Grant PRO"}
+                  </button>
+                </div>
+              )}
+            </div>
+
             <div style={{ display: "flex", gap: 10, justifyContent: "flex-end" }}>
               <button onClick={() => setSelected(null)} style={{ ...s.chip(false), cursor: "pointer" }}>Cancel</button>
               <button

@@ -3726,7 +3726,16 @@ export default function WYPAssist(){
   // Clear checkout message once subscription activates
   useEffect(()=>{if(isPro&&checkoutMsg)setCheckoutMsg(null);},[isPro,checkoutMsg]);
   const theme=THEMES[lang];const styles=mkS(theme);const tx=i18n[lang];
-  const tabList=[{id:"load",icon:"⚙",label:tx.tabLoad},{id:"pull",icon:"📋",label:tx.tabPull,pro:true},{id:"bridle",icon:"△",label:tx.tabBridle,pro:true},{id:"markout",icon:"📐",label:tx.tabMarkout,pro:true},{id:"venues",icon:"🏟",label:tx.tabVenues,pro:true,beta:true},...(isAdmin?[{id:"admin",icon:"🛡",label:"Admin"}]:[])];
+  const Ico=({d,sz=14})=><svg width={sz} height={sz} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:"middle",marginRight:3,flexShrink:0}}><path d={d}/></svg>;
+  const TabIcons={
+    load:<Ico d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/>,
+    pull:<Ico d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 14l2 2 4-4"/>,
+    bridle:<svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:"middle",marginRight:3,flexShrink:0}}><path d="M12 2L2 22h20L12 2Z"/></svg>,
+    markout:<svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:"middle",marginRight:3,flexShrink:0}}><path d="M21 3L14.5 21l-3.5-8-8-3.5L21 3Z"/></svg>,
+    venues:<svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:"middle",marginRight:3,flexShrink:0}}><path d="M3 21h18M5 21V7l8-4 8 4v14M9 21v-6h6v6"/><line x1="9" y1="10" x2="9" y2="10.01"/><line x1="15" y1="10" x2="15" y2="10.01"/><line x1="9" y1="14" x2="9" y2="14.01"/><line x1="15" y1="14" x2="15" y2="14.01"/></svg>,
+    admin:<Ico d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
+  };
+  const tabList=[{id:"load",icon:TabIcons.load,label:tx.tabLoad},{id:"pull",icon:TabIcons.pull,label:tx.tabPull,pro:true},{id:"bridle",icon:TabIcons.bridle,label:tx.tabBridle,pro:true},{id:"markout",icon:TabIcons.markout,label:tx.tabMarkout,pro:true},{id:"venues",icon:TabIcons.venues,label:tx.tabVenues,pro:true,beta:true},...(isAdmin?[{id:"admin",icon:TabIcons.admin,label:"Admin"}]:[])];
 
   const ctx=useMemo(()=>({s:styles,t:theme,lang,tx,setTab,setAuthView,sharedMotors,setSharedMotors}),[lang,sharedMotors,setAuthView]);
   return(
@@ -3813,8 +3822,8 @@ export default function WYPAssist(){
             </div>
           </div>
           <div data-r="header-nav-wrap" style={{display:"flex",alignItems:"center",justifyContent:"center",width:"100%"}}>
-            <nav style={styles.nav}>{tabList.map(tb=><button key={tb.id} style={styles.navBtn(tab===tb.id)} onClick={()=>setTab(tb.id)}>
-              {tb.icon} {tb.label}
+            <nav style={styles.nav}>{tabList.map(tb=><button key={tb.id} style={{...styles.navBtn(tab===tb.id),display:"inline-flex",alignItems:"center"}} onClick={()=>setTab(tb.id)}>
+              {tb.icon}{tb.label}
               {tb.pro&&!isPro&&<span style={{fontSize:7,background:theme.accent,color:"#fff",padding:"1px 4px",borderRadius:2,marginLeft:4,fontWeight:900,letterSpacing:0.5}}>PRO</span>}
               {tb.beta&&<span style={{fontSize:7,background:"#FF8C00",color:"#fff",padding:"1px 4px",borderRadius:2,marginLeft:4,fontWeight:900,letterSpacing:0.5}}>BETA</span>}
             </button>)}</nav>
