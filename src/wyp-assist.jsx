@@ -3449,29 +3449,46 @@ function PaywallGate({ children, onAuthView }) {
 
 const VENUE_PLACEHOLDER = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' fill='%231A1A1A'%3E%3Crect width='400' height='200'/%3E%3Ctext x='200' y='90' text-anchor='middle' font-family='sans-serif' font-size='48' fill='%233A3A3A'%3E%F0%9F%8F%9F%3C/text%3E%3Ctext x='200' y='130' text-anchor='middle' font-family='sans-serif' font-size='12' fill='%235A5A5A'%3ENo Image Available%3C/text%3E%3C/svg%3E";
 
+const VENUE_TYPE_COLORS={stadium:"#EF4444",arena:"#F59E0B",theatre:"#8B5CF6",amphitheatre:"#22C55E",convention_center:"#3B82F6",ballroom:"#EC4899",club:"#F97316",outdoor:"#10B981",other:"#6B7280"};
+const VENUE_TYPE_LABELS={stadium:"Stadium",arena:"Arena",theatre:"Theatre",amphitheatre:"Amphitheatre",convention_center:"Convention Ctr",ballroom:"Ballroom",club:"Club",outdoor:"Outdoor",other:"Other"};
+
 function VenueCard({venue,onClick}){
   const{s,t}=useTheme();
+  const typeColor=VENUE_TYPE_COLORS[venue.venue_type]||t.textSecondary;
   return(
     <div onClick={onClick} style={{...s.card,cursor:"pointer",padding:0,overflow:"hidden",transition:"border-color .2s",marginBottom:0}} onMouseEnter={e=>e.currentTarget.style.borderColor=t.accent} onMouseLeave={e=>e.currentTarget.style.borderColor=t.border}>
-      <img src={venue.image_url||VENUE_PLACEHOLDER} alt={venue.name} style={{width:"100%",height:140,objectFit:"cover",display:"block",background:t.surface}}/>
+      <div style={{position:"relative"}}>
+        <img src={venue.image_url||VENUE_PLACEHOLDER} alt={venue.name} style={{width:"100%",height:140,objectFit:"cover",display:"block",background:t.surface}}/>
+        {venue.venue_type&&<span style={{position:"absolute",top:8,right:8,fontSize:8,fontWeight:800,background:typeColor,color:"#fff",padding:"2px 8px",borderRadius:3,textTransform:"uppercase",letterSpacing:1}}>{VENUE_TYPE_LABELS[venue.venue_type]||venue.venue_type}</span>}
+      </div>
       <div style={{padding:"12px 14px"}}>
         <div style={{fontSize:14,fontWeight:700,color:t.textPrimary,marginBottom:4}}>{venue.name}</div>
-        <div style={{fontSize:11,color:t.textSecondary}}>{[venue.city,venue.state,venue.country].filter(Boolean).join(", ")}</div>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+          <div style={{fontSize:11,color:t.textSecondary}}>{[venue.city,venue.state,venue.country].filter(Boolean).join(", ")}</div>
+          {venue.capacity&&<div style={{fontSize:10,color:t.textSecondary}}>{venue.capacity.toLocaleString()} cap</div>}
+        </div>
       </div>
     </div>
   );
 }
 
-function VenueList({venues,search,setSearch,loading,onSelect,onSubmitNew}){
+function VenueList({venues,search,setSearch,typeFilter,setTypeFilter,loading,onSelect,onSubmitNew}){
   const{s,t,tx}=useTheme();
   const{user,isPro}=useAuth();
+  const types=["","stadium","arena","theatre","amphitheatre","convention_center","ballroom","club","outdoor"];
   return(
     <div style={{maxWidth:1000,margin:"0 auto"}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:16,gap:12,flexWrap:"wrap"}}>
         <div style={{fontSize:16,fontWeight:700,color:t.accent,letterSpacing:1,textTransform:"uppercase"}}>{tx.vnTitle}</div>
         {user&&isPro&&<button style={{...s.exportBtn,fontSize:11}} onClick={onSubmitNew}>{tx.vnSubmitNew}</button>}
       </div>
-      <input style={{...s.input,marginBottom:16}} value={search} onChange={e=>setSearch(e.target.value)} placeholder={tx.vnSearch}/>
+      <div style={{display:"flex",gap:8,marginBottom:12,flexWrap:"wrap",alignItems:"center"}}>
+        <input style={{...s.input,flex:1,minWidth:200}} value={search} onChange={e=>setSearch(e.target.value)} placeholder={tx.vnSearch}/>
+        <select style={{...s.input,maxWidth:180}} value={typeFilter} onChange={e=>setTypeFilter(e.target.value)}>
+          <option value="">All Types</option>
+          {types.filter(Boolean).map(tp=><option key={tp} value={tp}>{VENUE_TYPE_LABELS[tp]}</option>)}
+        </select>
+      </div>
       {loading?(
         <div style={{...s.card,textAlign:"center",padding:40}}><div style={{fontSize:13,color:t.textSecondary}}>{tx.vnLoading}</div></div>
       ):venues.length===0?(
@@ -3494,42 +3511,89 @@ function VenueDetailRow({label,value}){
 function VenueDetail({venue,onBack,onSuggestEdit}){
   const{s,t,tx,setAuthView}=useTheme();
   const{user,isPro}=useAuth();
+  const[techPacks,setTechPacks]=useState([]);
+  const[uploading,setUploading]=useState(false);
   const rigLabels={counterweight:tx.vnRigCounterweight,"dead-hang":tx.vnRigDeadHang,automated:tx.vnRigAutomated,mixed:tx.vnRigMixed};
   const gridLabels={fixed:tx.vnGridFixed,variable:tx.vnGridVariable};
+  const typeLabels={stadium:"Stadium",arena:"Arena",theatre:"Theatre",amphitheatre:"Amphitheatre",convention_center:"Convention Center",ballroom:"Ballroom",club:"Club",outdoor:"Outdoor",other:"Other"};
+  const attachLabels={beam_clamp:"Beam Clamp",wrap_basket:"Wrap/Basket",stinger:"Stinger",dead_hang:"Dead Hang",bridle:"Bridle",mixed:"Mixed"};
+  const isArenaOrStadium=venue.venue_type==="arena"||venue.venue_type==="stadium";
+
+  useEffect(()=>{
+    supabase.from("venue_tech_packs").select("*").eq("venue_id",venue.id).order("upload_date",{ascending:false})
+      .then(({data})=>setTechPacks(data||[]));
+  },[venue.id]);
+
+  const uploadTechPack=async(file)=>{
+    if(!file||!user)return;
+    setUploading(true);
+    try{
+      const ext=file.name.split(".").pop();
+      const path=`${venue.id}/${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
+      const{error:upErr}=await supabase.storage.from("venue-techpacks").upload(path,file,{contentType:file.type});
+      if(upErr)throw upErr;
+      const{data:{publicUrl}}=supabase.storage.from("venue-techpacks").getPublicUrl(path);
+      await supabase.from("venue_tech_packs").insert({venue_id:venue.id,uploaded_by:user.id,file_name:file.name,file_url:publicUrl,file_size_bytes:file.size,description:""});
+      const{data}=await supabase.from("venue_tech_packs").select("*").eq("venue_id",venue.id).order("upload_date",{ascending:false});
+      setTechPacks(data||[]);
+    }catch(e){alert("Upload failed: "+e.message);}
+    setUploading(false);
+  };
+
+  const Section=({title,children,show=true})=>{if(!show)return null;return<div style={s.card}><div style={s.cardTitle}><span>{title}</span></div>{children}</div>;};
+
   return(
     <div style={{maxWidth:700,margin:"0 auto"}}>
       <button onClick={onBack} style={{background:"none",border:"none",color:t.accent,cursor:"pointer",fontSize:12,fontWeight:600,padding:"8px 0",marginBottom:8,fontFamily:"inherit"}}>&#8592; {tx.vnBack}</button>
       <div style={s.card}>
         <img src={venue.image_url||VENUE_PLACEHOLDER} alt={venue.name} style={{width:"100%",height:220,objectFit:"cover",borderRadius:4,marginBottom:16,display:"block",background:t.surface}}/>
-        <div style={{fontSize:18,fontWeight:700,color:t.textPrimary,marginBottom:4}}>{venue.name}</div>
-        <div style={{fontSize:12,color:t.textSecondary,marginBottom:8}}>{[venue.city,venue.state,venue.country].filter(Boolean).join(", ")}</div>
+        <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:4,flexWrap:"wrap"}}>
+          <div style={{fontSize:18,fontWeight:700,color:t.textPrimary}}>{venue.name}</div>
+          {venue.venue_type&&<span style={{fontSize:9,fontWeight:700,background:`${t.accent}20`,color:t.accent,padding:"2px 8px",borderRadius:3,textTransform:"uppercase",letterSpacing:1}}>{typeLabels[venue.venue_type]||venue.venue_type}</span>}
+        </div>
+        <div style={{fontSize:12,color:t.textSecondary,marginBottom:4}}>{[venue.city,venue.state,venue.country].filter(Boolean).join(", ")}</div>
+        {venue.capacity&&<div style={{fontSize:11,color:t.textSecondary}}>Capacity: {venue.capacity.toLocaleString()}</div>}
       </div>
       <PaywallGate onAuthView={setAuthView}>
         <div style={{display:"flex",flexDirection:"column",gap:16}}>
-          {(venue.contact_name||venue.contact_phone||venue.contact_email||venue.website)&&<div style={s.card}>
-            <div style={s.cardTitle}><span>{tx.vnContact}</span></div>
+          <Section title={tx.vnContact} show={!!(venue.contact_name||venue.contact_phone||venue.contact_email||venue.website)}>
             <VenueDetailRow label={tx.vnContactName} value={venue.contact_name}/>
             <VenueDetailRow label={tx.vnContactPhone} value={venue.contact_phone}/>
             <VenueDetailRow label={tx.vnContactEmail} value={venue.contact_email}/>
             <VenueDetailRow label={tx.vnWebsite} value={venue.website}/>
-          </div>}
-          {(venue.dock_description||venue.dock_restrictions||venue.dock_height_ft||venue.dock_truck_access)&&<div style={s.card}>
-            <div style={s.cardTitle}><span>{tx.vnLoadingDock}</span></div>
+          </Section>
+          <Section title={tx.vnLoadingDock} show={!!(venue.dock_description||venue.dock_restrictions||venue.dock_height_ft||venue.dock_truck_access)}>
             <VenueDetailRow label={tx.vnDockDesc} value={venue.dock_description}/>
             <VenueDetailRow label={tx.vnDockRestrictions} value={venue.dock_restrictions}/>
             <VenueDetailRow label={tx.vnDockHeight} value={venue.dock_height_ft}/>
             <VenueDetailRow label={tx.vnTruckAccess} value={venue.dock_truck_access}/>
-          </div>}
-          {(venue.stage_width_ft||venue.stage_depth_ft||venue.proscenium_height_ft||venue.grid_height_ft||venue.wing_space_ft)&&<div style={s.card}>
-            <div style={s.cardTitle}><span>{tx.vnStageDims}</span></div>
+            <VenueDetailRow label="Freight Elevator" value={venue.freight_elevator?"Yes":"No"}/>
+            {venue.freight_elevator&&<>
+              <VenueDetailRow label="Elevator Dimensions" value={venue.freight_elevator_dimensions}/>
+              <VenueDetailRow label="Elevator Capacity (lbs)" value={venue.freight_elevator_capacity_lbs}/>
+            </>}
+          </Section>
+          <Section title={tx.vnStageDims} show={!!(venue.stage_width_ft||venue.stage_depth_ft||venue.proscenium_height_ft||venue.grid_height_ft||venue.wing_space_ft)}>
             <VenueDetailRow label={tx.vnStageWidth} value={venue.stage_width_ft}/>
             <VenueDetailRow label={tx.vnStageDepth} value={venue.stage_depth_ft}/>
             <VenueDetailRow label={tx.vnProscHeight} value={venue.proscenium_height_ft}/>
             <VenueDetailRow label={tx.vnGridHeight} value={venue.grid_height_ft}/>
             <VenueDetailRow label={tx.vnWingSpace} value={venue.wing_space_ft}/>
-          </div>}
-          {(venue.grid_type||venue.grid_capacity_total_lbs||venue.rigging_type||venue.num_line_sets)&&<div style={s.card}>
-            <div style={s.cardTitle}><span>{tx.vnSteelGrid}</span></div>
+          </Section>
+          {isArenaOrStadium&&<Section title="Floor / Field Dimensions" show={!!(venue.floor_length_ft||venue.floor_width_ft||venue.floor_type||venue.floor_load_capacity_psf)}>
+            <VenueDetailRow label="Floor Length (ft)" value={venue.floor_length_ft}/>
+            <VenueDetailRow label="Floor Width (ft)" value={venue.floor_width_ft}/>
+            <VenueDetailRow label="Floor Type" value={venue.floor_type}/>
+            <VenueDetailRow label="Floor Load Capacity (PSF)" value={venue.floor_load_capacity_psf}/>
+          </Section>}
+          {isArenaOrStadium&&<Section title="Vomitory / Floor Access" show={!!(venue.vomitory_count||venue.vomitory_details||venue.floor_access_description)}>
+            <VenueDetailRow label="Vom Count" value={venue.vomitory_count}/>
+            <VenueDetailRow label="Vom Width (ft)" value={venue.vomitory_width_ft}/>
+            <VenueDetailRow label="Vom Height (ft)" value={venue.vomitory_height_ft}/>
+            {venue.vomitory_details&&<div style={{fontSize:12,color:t.textSecondary,lineHeight:1.6,whiteSpace:"pre-wrap",marginTop:8}}>{venue.vomitory_details}</div>}
+            {venue.floor_access_description&&<><VenueDetailRow label="Floor Access"/><div style={{fontSize:12,color:t.textSecondary,lineHeight:1.6,whiteSpace:"pre-wrap",marginTop:4}}>{venue.floor_access_description}</div></>}
+          </Section>}
+          <Section title={tx.vnSteelGrid} show={!!(venue.grid_type||venue.grid_capacity_total_lbs||venue.rigging_type||venue.num_line_sets||venue.steel_type||venue.attachment_type)}>
             <VenueDetailRow label={tx.vnGridType} value={gridLabels[venue.grid_type]||venue.grid_type}/>
             <VenueDetailRow label={tx.vnGridCapTotal} value={venue.grid_capacity_total_lbs}/>
             <VenueDetailRow label={tx.vnGridCapPerPoint} value={venue.grid_capacity_per_point_lbs}/>
@@ -3538,15 +3602,52 @@ function VenueDetail({venue,onBack,onSuggestEdit}){
             <VenueDetailRow label={tx.vnTrimHigh} value={venue.trim_height_high_ft}/>
             <VenueDetailRow label={tx.vnNumLineSets} value={venue.num_line_sets}/>
             <VenueDetailRow label={tx.vnRiggingType} value={rigLabels[venue.rigging_type]||venue.rigging_type}/>
-          </div>}
-          {venue.tech_pack_url&&<div style={s.card}>
-            <div style={s.cardTitle}><span>{tx.vnTechPack}</span></div>
-            <a href={venue.tech_pack_url} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:t.accent,textDecoration:"underline"}}>{tx.vnDownloadTechPack}</a>
-          </div>}
-          {venue.notes&&<div style={s.card}>
-            <div style={s.cardTitle}><span>{tx.vnNotes}</span></div>
-            <div style={{fontSize:12,color:t.textSecondary,lineHeight:1.6,whiteSpace:"pre-wrap"}}>{venue.notes}</div>
-          </div>}
+            <VenueDetailRow label="Steel Type" value={venue.steel_type}/>
+            <VenueDetailRow label="Steel Manufacturer" value={venue.steel_manufacturer}/>
+            <VenueDetailRow label="Beam Spacing (ft)" value={venue.beam_spacing_ft}/>
+            <VenueDetailRow label="Beam Orientation" value={venue.beam_orientation}/>
+            <VenueDetailRow label="Attachment Type" value={attachLabels[venue.attachment_type]||venue.attachment_type}/>
+            <VenueDetailRow label="Chain Hoist Inventory" value={venue.chain_hoist_inventory}/>
+            {venue.house_rigging_notes&&<div style={{fontSize:12,color:t.textSecondary,lineHeight:1.6,whiteSpace:"pre-wrap",marginTop:8,borderTop:`1px solid ${t.border}22`,paddingTop:8}}>{venue.house_rigging_notes}</div>}
+          </Section>
+          <Section title="Rigging Labor" show={!!(venue.iatse_local||venue.rigging_labor_provider||venue.rigging_labor_contact)}>
+            <VenueDetailRow label="IATSE Local" value={venue.iatse_local}/>
+            <VenueDetailRow label="Rigging Provider" value={venue.rigging_labor_provider}/>
+            <VenueDetailRow label="Contact" value={venue.rigging_labor_contact}/>
+            <VenueDetailRow label="Phone" value={venue.rigging_labor_phone}/>
+            <VenueDetailRow label="Email" value={venue.rigging_labor_email}/>
+            {venue.rigging_labor_notes&&<div style={{fontSize:12,color:t.textSecondary,lineHeight:1.6,whiteSpace:"pre-wrap",marginTop:8}}>{venue.rigging_labor_notes}</div>}
+          </Section>
+          <Section title="Stagehands" show={!!(venue.stagehand_provider||venue.stagehand_contact)}>
+            <VenueDetailRow label="Provider" value={venue.stagehand_provider}/>
+            <VenueDetailRow label="Contact" value={venue.stagehand_contact}/>
+            <VenueDetailRow label="Phone" value={venue.stagehand_phone}/>
+            <VenueDetailRow label="Email" value={venue.stagehand_email}/>
+            <VenueDetailRow label="Minimum Call (hrs)" value={venue.stagehand_min_call}/>
+            {venue.stagehand_notes&&<div style={{fontSize:12,color:t.textSecondary,lineHeight:1.6,whiteSpace:"pre-wrap",marginTop:8}}>{venue.stagehand_notes}</div>}
+          </Section>
+          <Section title="Tech Packs" show={true}>
+            {techPacks.length>0?(
+              <div style={{display:"flex",flexDirection:"column",gap:8}}>
+                {techPacks.map(tp=>(
+                  <div key={tp.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"6px 0",borderBottom:`1px solid ${t.border}22`}}>
+                    <a href={tp.file_url} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:t.accent,textDecoration:"underline"}}>{tp.file_name}</a>
+                    <span style={{fontSize:10,color:t.textSecondary}}>{new Date(tp.upload_date).toLocaleDateString()}</span>
+                  </div>
+                ))}
+              </div>
+            ):(
+              <div style={{fontSize:12,color:t.textSecondary}}>No tech packs uploaded yet</div>
+            )}
+            {venue.tech_pack_url&&!techPacks.length&&<a href={venue.tech_pack_url} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:t.accent,textDecoration:"underline",marginTop:8,display:"block"}}>{tx.vnDownloadTechPack}</a>}
+            {user&&<div style={{marginTop:12}}>
+              <label style={{display:"inline-flex",alignItems:"center",gap:8,cursor:"pointer",fontSize:11,color:t.accent,fontWeight:600}}>
+                {uploading?"Uploading...":"Upload Tech Pack"}
+                <input type="file" accept=".pdf,.dwg,.dxf" style={{display:"none"}} disabled={uploading} onChange={e=>{if(e.target.files[0])uploadTechPack(e.target.files[0]);}}/>
+              </label>
+            </div>}
+          </Section>
+          {venue.notes&&<Section title={tx.vnNotes}><div style={{fontSize:12,color:t.textSecondary,lineHeight:1.6,whiteSpace:"pre-wrap"}}>{venue.notes}</div></Section>}
           {isPro&&<button style={{...s.exportBtn,justifyContent:"center"}} onClick={()=>onSuggestEdit(venue)}>{tx.vnSuggestEdit}</button>}
         </div>
       </PaywallGate>
@@ -3556,9 +3657,10 @@ function VenueDetail({venue,onBack,onSuggestEdit}){
 
 function VenueSubmitForm({editVenue,onBack,onSubmitted}){
   const{s,t,tx}=useTheme();
+  const defaultFields={name:"",city:"",state:"",country:"US",venue_type:"",capacity:"",contact_name:"",contact_phone:"",contact_email:"",website:"",dock_description:"",dock_restrictions:"",dock_height_ft:"",dock_truck_access:"",freight_elevator:false,freight_elevator_dimensions:"",freight_elevator_capacity_lbs:"",stage_width_ft:"",stage_depth_ft:"",proscenium_height_ft:"",grid_height_ft:"",wing_space_ft:"",floor_length_ft:"",floor_width_ft:"",floor_type:"",floor_load_capacity_psf:"",vomitory_count:"",vomitory_width_ft:"",vomitory_height_ft:"",vomitory_details:"",floor_access_description:"",grid_type:"",grid_capacity_total_lbs:"",grid_capacity_per_point_lbs:"",grid_spacing_ft:"",trim_height_low_ft:"",trim_height_high_ft:"",num_line_sets:"",rigging_type:"",steel_type:"",steel_manufacturer:"",beam_spacing_ft:"",beam_orientation:"",attachment_type:"",chain_hoist_inventory:"",house_rigging_notes:"",iatse_local:"",rigging_labor_provider:"",rigging_labor_contact:"",rigging_labor_phone:"",rigging_labor_email:"",rigging_labor_notes:"",stagehand_provider:"",stagehand_contact:"",stagehand_phone:"",stagehand_email:"",stagehand_min_call:"",stagehand_notes:"",notes:""};
   const[form,setForm]=useState(()=>{
-    if(editVenue)return{name:editVenue.name||"",city:editVenue.city||"",state:editVenue.state||"",country:editVenue.country||"",contact_name:editVenue.contact_name||"",contact_phone:editVenue.contact_phone||"",contact_email:editVenue.contact_email||"",website:editVenue.website||"",dock_description:editVenue.dock_description||"",dock_restrictions:editVenue.dock_restrictions||"",dock_height_ft:editVenue.dock_height_ft||"",dock_truck_access:editVenue.dock_truck_access||"",stage_width_ft:editVenue.stage_width_ft||"",stage_depth_ft:editVenue.stage_depth_ft||"",proscenium_height_ft:editVenue.proscenium_height_ft||"",grid_height_ft:editVenue.grid_height_ft||"",wing_space_ft:editVenue.wing_space_ft||"",grid_type:editVenue.grid_type||"",grid_capacity_total_lbs:editVenue.grid_capacity_total_lbs||"",grid_capacity_per_point_lbs:editVenue.grid_capacity_per_point_lbs||"",grid_spacing_ft:editVenue.grid_spacing_ft||"",trim_height_low_ft:editVenue.trim_height_low_ft||"",trim_height_high_ft:editVenue.trim_height_high_ft||"",num_line_sets:editVenue.num_line_sets||"",rigging_type:editVenue.rigging_type||"",notes:editVenue.notes||""};
-    return{name:"",city:"",state:"",country:"US",contact_name:"",contact_phone:"",contact_email:"",website:"",dock_description:"",dock_restrictions:"",dock_height_ft:"",dock_truck_access:"",stage_width_ft:"",stage_depth_ft:"",proscenium_height_ft:"",grid_height_ft:"",wing_space_ft:"",grid_type:"",grid_capacity_total_lbs:"",grid_capacity_per_point_lbs:"",grid_spacing_ft:"",trim_height_low_ft:"",trim_height_high_ft:"",num_line_sets:"",rigging_type:"",notes:""};
+    if(editVenue){const f={};Object.keys(defaultFields).forEach(k=>{f[k]=editVenue[k]||defaultFields[k];});return f;}
+    return{...defaultFields};
   });
   const[techPackFile,setTechPackFile]=useState(null);
   const[status,setStatus]=useState("idle"); // idle|submitting|done|error
@@ -3608,9 +3710,11 @@ function VenueSubmitForm({editVenue,onBack,onSubmitted}){
             <div style={{fontSize:11,fontWeight:700,color:t.accent,textTransform:"uppercase",letterSpacing:1,marginBottom:8,marginTop:8}}>General</div>
             <div style={s.g2}>
               <Field label={tx.vnName+"*"}><input style={s.input} value={form.name} onChange={e=>upd("name",e.target.value)}/></Field>
+              <Field label="Venue Type"><select style={s.input} value={form.venue_type} onChange={e=>upd("venue_type",e.target.value)}><option value="">Select…</option>{["stadium","arena","theatre","amphitheatre","convention_center","ballroom","club","outdoor","other"].map(o=><option key={o} value={o}>{VENUE_TYPE_LABELS[o]}</option>)}</select></Field>
               <Field label={tx.vnCity+"*"}><input style={s.input} value={form.city} onChange={e=>upd("city",e.target.value)}/></Field>
               <Field label={tx.vnState}><input style={s.input} value={form.state} onChange={e=>upd("state",e.target.value)}/></Field>
               <Field label={tx.vnCountry+"*"}><input style={s.input} value={form.country} onChange={e=>upd("country",e.target.value)}/></Field>
+              <Field label="Capacity"><input style={s.input} type="number" value={form.capacity} onChange={e=>upd("capacity",e.target.value)}/></Field>
             </div>
             <div style={{fontSize:11,fontWeight:700,color:t.accent,textTransform:"uppercase",letterSpacing:1,marginBottom:8,marginTop:16}}>{tx.vnContact}</div>
             <div style={s.g2}>
@@ -3626,6 +3730,11 @@ function VenueSubmitForm({editVenue,onBack,onSubmitted}){
               <Field label={tx.vnDockHeight}><input style={s.input} type="number" value={form.dock_height_ft} onChange={e=>upd("dock_height_ft",e.target.value)}/></Field>
               <Field label={tx.vnTruckAccess}><input style={s.input} value={form.dock_truck_access} onChange={e=>upd("dock_truck_access",e.target.value)}/></Field>
             </div>
+            <div style={s.g2}>
+              <Field label="Freight Elevator"><label style={{display:"flex",alignItems:"center",gap:8,cursor:"pointer"}}><input type="checkbox" checked={form.freight_elevator} onChange={e=>upd("freight_elevator",e.target.checked)} style={{width:16,height:16,accentColor:t.accent}}/><span style={{fontSize:12,color:t.textSecondary}}>Has freight elevator</span></label></Field>
+              {form.freight_elevator&&<><Field label="Elevator Dimensions"><input style={s.input} placeholder="e.g. 8'W x 12'D x 10'H" value={form.freight_elevator_dimensions} onChange={e=>upd("freight_elevator_dimensions",e.target.value)}/></Field>
+              <Field label="Elevator Capacity (lbs)"><input style={s.input} type="number" value={form.freight_elevator_capacity_lbs} onChange={e=>upd("freight_elevator_capacity_lbs",e.target.value)}/></Field></>}
+            </div>
             <div style={{fontSize:11,fontWeight:700,color:t.accent,textTransform:"uppercase",letterSpacing:1,marginBottom:8,marginTop:16}}>{tx.vnStageDims}</div>
             <div style={s.g2}>
               <Field label={tx.vnStageWidth}><input style={s.input} type="number" value={form.stage_width_ft} onChange={e=>upd("stage_width_ft",e.target.value)}/></Field>
@@ -3634,6 +3743,23 @@ function VenueSubmitForm({editVenue,onBack,onSubmitted}){
               <Field label={tx.vnGridHeight}><input style={s.input} type="number" value={form.grid_height_ft} onChange={e=>upd("grid_height_ft",e.target.value)}/></Field>
               <Field label={tx.vnWingSpace}><input style={s.input} type="number" value={form.wing_space_ft} onChange={e=>upd("wing_space_ft",e.target.value)}/></Field>
             </div>
+            {(form.venue_type==="arena"||form.venue_type==="stadium")&&<>
+            <div style={{fontSize:11,fontWeight:700,color:t.accent,textTransform:"uppercase",letterSpacing:1,marginBottom:8,marginTop:16}}>Floor / Field Dimensions</div>
+            <div style={s.g2}>
+              <Field label="Floor Length (ft)"><input style={s.input} type="number" value={form.floor_length_ft} onChange={e=>upd("floor_length_ft",e.target.value)}/></Field>
+              <Field label="Floor Width (ft)"><input style={s.input} type="number" value={form.floor_width_ft} onChange={e=>upd("floor_width_ft",e.target.value)}/></Field>
+              <Field label="Floor Type"><input style={s.input} placeholder="e.g. Concrete, Sport Court" value={form.floor_type} onChange={e=>upd("floor_type",e.target.value)}/></Field>
+              <Field label="Floor Load Capacity (PSF)"><input style={s.input} type="number" value={form.floor_load_capacity_psf} onChange={e=>upd("floor_load_capacity_psf",e.target.value)}/></Field>
+            </div>
+            <div style={{fontSize:11,fontWeight:700,color:t.accent,textTransform:"uppercase",letterSpacing:1,marginBottom:8,marginTop:16}}>Vomitory / Floor Access</div>
+            <div style={s.g2}>
+              <Field label="Vom Count"><input style={s.input} type="number" value={form.vomitory_count} onChange={e=>upd("vomitory_count",e.target.value)}/></Field>
+              <Field label="Vom Width (ft)"><input style={s.input} type="number" value={form.vomitory_width_ft} onChange={e=>upd("vomitory_width_ft",e.target.value)}/></Field>
+              <Field label="Vom Height (ft)"><input style={s.input} type="number" value={form.vomitory_height_ft} onChange={e=>upd("vomitory_height_ft",e.target.value)}/></Field>
+            </div>
+            <Field label="Vomitory Details"><textarea style={{...s.input,minHeight:60,resize:"vertical"}} placeholder="Describe vom locations, restrictions..." value={form.vomitory_details} onChange={e=>upd("vomitory_details",e.target.value)}/></Field>
+            <Field label="Floor Access Description"><textarea style={{...s.input,minHeight:60,resize:"vertical"}} placeholder="Drive-on access, ramps, tunnel access..." value={form.floor_access_description} onChange={e=>upd("floor_access_description",e.target.value)}/></Field>
+            </>}
             <div style={{fontSize:11,fontWeight:700,color:t.accent,textTransform:"uppercase",letterSpacing:1,marginBottom:8,marginTop:16}}>{tx.vnSteelGrid}</div>
             <Field label={tx.vnGridType}><div style={{display:"flex",gap:8,flexWrap:"wrap"}}>{gridOpts.map(o=><button type="button" key={o} style={s.chip(form.grid_type===o)} onClick={()=>upd("grid_type",o)}>{gridLabels[o]}</button>)}</div></Field>
             <div style={s.g2}>
@@ -3645,8 +3771,38 @@ function VenueSubmitForm({editVenue,onBack,onSubmitted}){
               <Field label={tx.vnNumLineSets}><input style={s.input} type="number" value={form.num_line_sets} onChange={e=>upd("num_line_sets",e.target.value)}/></Field>
             </div>
             <Field label={tx.vnRiggingType}><div style={{display:"flex",gap:8,flexWrap:"wrap"}}>{rigOpts.map(o=><button type="button" key={o} style={s.chip(form.rigging_type===o)} onClick={()=>upd("rigging_type",o)}>{rigLabels[o]}</button>)}</div></Field>
+            <div style={{fontSize:11,fontWeight:700,color:t.accent,textTransform:"uppercase",letterSpacing:1,marginBottom:8,marginTop:16}}>Steel Details</div>
+            <div style={s.g2}>
+              <Field label="Steel Type"><input style={s.input} placeholder="e.g. I-beam, Box truss" value={form.steel_type} onChange={e=>upd("steel_type",e.target.value)}/></Field>
+              <Field label="Steel Manufacturer"><input style={s.input} value={form.steel_manufacturer} onChange={e=>upd("steel_manufacturer",e.target.value)}/></Field>
+              <Field label="Beam Spacing (ft)"><input style={s.input} type="number" value={form.beam_spacing_ft} onChange={e=>upd("beam_spacing_ft",e.target.value)}/></Field>
+              <Field label="Beam Orientation"><input style={s.input} placeholder="e.g. N-S, E-W, Radial" value={form.beam_orientation} onChange={e=>upd("beam_orientation",e.target.value)}/></Field>
+            </div>
+            <Field label="Attachment Type"><div style={{display:"flex",gap:8,flexWrap:"wrap"}}>{["beam_clamp","wrap_basket","stinger","dead_hang","bridle","mixed"].map(o=><button type="button" key={o} style={s.chip(form.attachment_type===o)} onClick={()=>upd("attachment_type",o)}>{{beam_clamp:"Beam Clamp",wrap_basket:"Wrap/Basket",stinger:"Stinger",dead_hang:"Dead Hang",bridle:"Bridle",mixed:"Mixed"}[o]}</button>)}</div></Field>
+            <div style={s.g2}>
+              <Field label="Chain Hoist Inventory"><input style={s.input} placeholder="e.g. 40x 1-ton CM Lodestar" value={form.chain_hoist_inventory} onChange={e=>upd("chain_hoist_inventory",e.target.value)}/></Field>
+            </div>
+            <Field label="House Rigging Notes"><textarea style={{...s.input,minHeight:60,resize:"vertical"}} value={form.house_rigging_notes} onChange={e=>upd("house_rigging_notes",e.target.value)}/></Field>
+            <div style={{fontSize:11,fontWeight:700,color:t.accent,textTransform:"uppercase",letterSpacing:1,marginBottom:8,marginTop:16}}>Rigging Labor</div>
+            <div style={s.g2}>
+              <Field label="IATSE Local"><input style={s.input} placeholder="e.g. IATSE Local 1" value={form.iatse_local} onChange={e=>upd("iatse_local",e.target.value)}/></Field>
+              <Field label="Rigging Provider"><input style={s.input} value={form.rigging_labor_provider} onChange={e=>upd("rigging_labor_provider",e.target.value)}/></Field>
+              <Field label="Contact Name"><input style={s.input} value={form.rigging_labor_contact} onChange={e=>upd("rigging_labor_contact",e.target.value)}/></Field>
+              <Field label="Phone"><input style={s.input} value={form.rigging_labor_phone} onChange={e=>upd("rigging_labor_phone",e.target.value)}/></Field>
+              <Field label="Email"><input style={s.input} type="email" value={form.rigging_labor_email} onChange={e=>upd("rigging_labor_email",e.target.value)}/></Field>
+            </div>
+            <Field label="Rigging Labor Notes"><textarea style={{...s.input,minHeight:60,resize:"vertical"}} value={form.rigging_labor_notes} onChange={e=>upd("rigging_labor_notes",e.target.value)}/></Field>
+            <div style={{fontSize:11,fontWeight:700,color:t.accent,textTransform:"uppercase",letterSpacing:1,marginBottom:8,marginTop:16}}>Stagehands</div>
+            <div style={s.g2}>
+              <Field label="Stagehand Provider"><input style={s.input} value={form.stagehand_provider} onChange={e=>upd("stagehand_provider",e.target.value)}/></Field>
+              <Field label="Contact Name"><input style={s.input} value={form.stagehand_contact} onChange={e=>upd("stagehand_contact",e.target.value)}/></Field>
+              <Field label="Phone"><input style={s.input} value={form.stagehand_phone} onChange={e=>upd("stagehand_phone",e.target.value)}/></Field>
+              <Field label="Email"><input style={s.input} type="email" value={form.stagehand_email} onChange={e=>upd("stagehand_email",e.target.value)}/></Field>
+              <Field label="Minimum Call (hrs)"><input style={s.input} type="number" value={form.stagehand_min_call} onChange={e=>upd("stagehand_min_call",e.target.value)}/></Field>
+            </div>
+            <Field label="Stagehand Notes"><textarea style={{...s.input,minHeight:60,resize:"vertical"}} value={form.stagehand_notes} onChange={e=>upd("stagehand_notes",e.target.value)}/></Field>
             <div style={{fontSize:11,fontWeight:700,color:t.accent,textTransform:"uppercase",letterSpacing:1,marginBottom:8,marginTop:16}}>{tx.vnTechPack}</div>
-            <Field label={tx.vnUploadTechPack}><input type="file" accept=".pdf" onChange={e=>setTechPackFile(e.target.files[0]||null)} style={{fontSize:11,color:t.textSecondary}}/></Field>
+            <Field label={tx.vnUploadTechPack}><input type="file" accept=".pdf,.dwg,.dxf" onChange={e=>setTechPackFile(e.target.files[0]||null)} style={{fontSize:11,color:t.textSecondary}}/></Field>
             <div style={{fontSize:11,fontWeight:700,color:t.accent,textTransform:"uppercase",letterSpacing:1,marginBottom:8,marginTop:16}}>{tx.vnNotes}</div>
             <Field label={tx.vnGeneralNotes}><textarea style={{...s.input,minHeight:80,resize:"vertical"}} value={form.notes} onChange={e=>upd("notes",e.target.value)}/></Field>
             {error&&<div style={{fontSize:12,color:"#E74C3C",marginTop:8}}>{error}</div>}
@@ -3666,17 +3822,20 @@ function VenueTab(){
   const[venues,setVenues]=useState([]);
   const[selectedVenue,setSelectedVenue]=useState(null);
   const[search,setSearch]=useState("");
+  const[typeFilter,setTypeFilter]=useState("");
   const[loading,setLoading]=useState(true);
   const[editVenue,setEditVenue]=useState(null);
 
   useEffect(()=>{
-    supabase.from("venues").select("id,name,city,state,country,image_url").eq("status","approved").order("name")
+    supabase.from("venues").select("id,name,city,state,country,image_url,venue_type,capacity").eq("status","approved").order("name")
       .then(({data,error})=>{setVenues(data||[]);setLoading(false);});
   },[]);
 
   const filtered=venues.filter(v=>{
     const q=search.toLowerCase();
-    return v.name.toLowerCase().includes(q)||v.city.toLowerCase().includes(q)||(v.state||"").toLowerCase().includes(q);
+    const matchesSearch=v.name.toLowerCase().includes(q)||v.city.toLowerCase().includes(q)||(v.state||"").toLowerCase().includes(q);
+    const matchesType=!typeFilter||v.venue_type===typeFilter;
+    return matchesSearch&&matchesType;
   });
 
   const openDetail=async(venue)=>{
@@ -3686,7 +3845,7 @@ function VenueTab(){
 
   if(view==="detail"&&selectedVenue)return <VenueDetail venue={selectedVenue} onBack={()=>{setSelectedVenue(null);setView("list");}} onSuggestEdit={v=>{setEditVenue(v);setView("submit");}}/>;
   if(view==="submit")return <VenueSubmitForm editVenue={editVenue} onBack={()=>{setEditVenue(null);setView("list");}} onSubmitted={()=>{setEditVenue(null);setView("list");}}/>;
-  return <VenueList venues={filtered} search={search} setSearch={setSearch} loading={loading} onSelect={openDetail} onSubmitNew={()=>{setEditVenue(null);setView("submit");}}/>;
+  return <VenueList venues={filtered} search={search} setSearch={setSearch} typeFilter={typeFilter} setTypeFilter={setTypeFilter} loading={loading} onSelect={openDetail} onSubmitNew={()=>{setEditVenue(null);setView("submit");}}/>;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
