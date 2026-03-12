@@ -262,23 +262,46 @@ async function handleRefund(req, res) {
 const UA = { "User-Agent": "WYPAssist/1.0 (https://wypassist.com)" };
 
 async function findImage(name) {
+  const fetchOpts = { headers: UA, signal: AbortSignal.timeout(8000) };
+
+  // 1. Wikipedia summary – exact name
   try {
-    const url1 = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name)}`;
-    const r1 = await fetch(url1, { headers: UA });
+    const r1 = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name)}`, fetchOpts);
     if (r1.ok) { const d = await r1.json(); const img = d.originalimage?.source || d.thumbnail?.source; if (img) return { url: img, source: "wikipedia" }; }
-  } catch (e) { console.error(`Wikipedia lookup failed for "${name}":`, e.message); }
+  } catch (e) { console.error(`WP1 "${name}":`, e.message); }
 
+  // 2. Wikipedia summary – name (venue)
   try {
-    const url2 = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name + " (venue)")}`;
-    const r2 = await fetch(url2, { headers: UA });
+    const r2 = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name + " (venue)")}`, fetchOpts);
     if (r2.ok) { const d = await r2.json(); const img = d.originalimage?.source || d.thumbnail?.source; if (img) return { url: img, source: "wikipedia-venue" }; }
-  } catch (e) { console.error(`Wikipedia venue lookup failed for "${name}":`, e.message); }
+  } catch (e) { console.error(`WP2 "${name}":`, e.message); }
 
+  // 3. Wikipedia summary – name (arena)
+  try {
+    const r3 = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name + " (arena)")}`, fetchOpts);
+    if (r3.ok) { const d = await r3.json(); const img = d.originalimage?.source || d.thumbnail?.source; if (img) return { url: img, source: "wikipedia-arena" }; }
+  } catch (e) { console.error(`WP3 "${name}":`, e.message); }
+
+  // 4. Wikipedia search API – find the right article title
+  try {
+    const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(name + " venue arena stadium")}&srlimit=3&format=json`;
+    const sr = await fetch(searchUrl, fetchOpts);
+    if (sr.ok) {
+      const sd = await sr.json();
+      for (const hit of (sd.query?.search || [])) {
+        const sumUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(hit.title)}`;
+        const rs = await fetch(sumUrl, fetchOpts);
+        if (rs.ok) { const d = await rs.json(); const img = d.originalimage?.source || d.thumbnail?.source; if (img) return { url: img, source: "wikipedia-search" }; }
+      }
+    }
+  } catch (e) { console.error(`WP-search "${name}":`, e.message); }
+
+  // 5. Wikimedia Commons file search
   try {
     const commonsUrl = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(name)}&gsrlimit=5&prop=imageinfo&iiprop=url|mime&iiurlwidth=800&format=json`;
-    const r3 = await fetch(commonsUrl, { headers: UA });
-    if (r3.ok) {
-      const d = await r3.json();
+    const r4 = await fetch(commonsUrl, fetchOpts);
+    if (r4.ok) {
+      const d = await r4.json();
       const pages = d.query?.pages;
       if (pages) {
         for (const p of Object.values(pages)) {
@@ -287,7 +310,7 @@ async function findImage(name) {
         }
       }
     }
-  } catch (e) { console.error(`Commons lookup failed for "${name}":`, e.message); }
+  } catch (e) { console.error(`Commons "${name}":`, e.message); }
 
   return { url: null, source: null };
 }
@@ -328,7 +351,7 @@ async function handleVenueImages(req, res) {
       try {
         const searchName = venue.name.replace(/\s*\(.*?\)\s*/g, "").replace(/\u2019/g, "'");
         const { url: imageUrl, source: imgSource } = await findImage(searchName);
-        if (!imageUrl) { results.push({ name: venue.name, status: "no_image", searched: searchName }); failed++; continue; }
+        if (!imageUrl) { results.push({ name: venue.name, status: "no_image", searched: searchName, detail: "No image found on Wikipedia or Commons" }); failed++; continue; }
         await fetchAndStore(supabase, venue.id, imageUrl);
         results.push({ name: venue.name, status: "ok", source: imgSource });
         success++;
