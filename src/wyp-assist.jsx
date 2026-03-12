@@ -3683,7 +3683,7 @@ function VenueSubmitForm({editVenue,onBack,onSubmitted}){
         techPackPath=publicUrl;
       }
       const hdrs=await authHeaders();
-      const res=await fetch("/api/venue-submit",{method:"POST",headers:hdrs,body:JSON.stringify({submission_type:editVenue?"edit":"new",venue_id:editVenue?.id||null,data:{...form,tech_pack_url:techPackPath||editVenue?.tech_pack_url||null}})});
+      const res=await fetch("/api/venues?action=submit",{method:"POST",headers:hdrs,body:JSON.stringify({submission_type:editVenue?"edit":"new",venue_id:editVenue?.id||null,data:{...form,tech_pack_url:techPackPath||editVenue?.tech_pack_url||null}})});
       if(!res.ok){const d=await res.json().catch(()=>({}));throw new Error(d.error||"Submit failed");}
       setStatus("done");
     }catch(err){setError(err.message);setStatus("error");}

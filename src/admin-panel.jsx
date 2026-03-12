@@ -80,7 +80,7 @@ function DashboardView({ token }) {
 
   useEffect(() => {
     if (!token) return;
-    API("/api/admin/stats", token)
+    API("/api/admin?action=stats", token)
       .then(d => { if (!d.error) setStats(d); })
       .finally(() => setLoading(false));
   }, [token]);
@@ -163,7 +163,7 @@ function UsersView({ token }) {
     const params = new URLSearchParams({ page, limit: 25 });
     if (search) params.set("search", search);
     if (roleFilter) params.set("role", roleFilter);
-    API(`/api/admin/users?${params}`, token)
+    API(`/api/admin?action=users&${params}`, token)
       .then(d => {
         if (!d.error) { setUsers(d.users); setTotal(d.total); }
       })
@@ -183,13 +183,13 @@ function UsersView({ token }) {
     setProLoading(true);
     if (grant) {
       const end = new Date(Date.now() + parseInt(selected._grantDays || 365) * 86400000).toISOString();
-      const res = await API("/api/admin/grant-pro", token, {
+      const res = await API("/api/admin?action=grant-pro", token, {
         method: "POST",
         body: { user_id: selected.id, reason: selected._grantReason || "Admin granted", period_end: end },
       });
       if (res.error) { alert(res.error); setProLoading(false); return; }
     } else {
-      const res = await API("/api/admin/revoke-pro", token, {
+      const res = await API("/api/admin?action=revoke-pro", token, {
         method: "POST",
         body: { user_id: selected.id },
       });
@@ -203,7 +203,7 @@ function UsersView({ token }) {
   const saveUser = async () => {
     if (!selected) return;
     setSaving(true);
-    const res = await API("/api/admin/user", token, {
+    const res = await API("/api/admin?action=user", token, {
       method: "PATCH",
       body: {
         id: selected.id,
@@ -477,7 +477,7 @@ function SubscriptionsView({ token }) {
   const fetchAll = useCallback(() => {
     if (!token) return;
     setLoading(true);
-    API("/api/admin/users?limit=100", token)
+    API("/api/admin?action=users&limit=100", token)
       .then(d => {
         if (!d.error) setUsers(d.users.filter(u => u.sub_status));
       })
@@ -491,12 +491,12 @@ function SubscriptionsView({ token }) {
     setActionLoading(true);
     setMsg(null);
     // Find user by email
-    const allRes = await API(`/api/admin/users?search=${encodeURIComponent(grantForm.email)}&limit=5`, token);
+    const allRes = await API(`/api/admin?action=users&search=${encodeURIComponent(grantForm.email)}&limit=5`, token);
     const target = allRes.users?.find(u => u.email.toLowerCase() === grantForm.email.toLowerCase());
     if (!target) { setMsg("User not found"); setActionLoading(false); return; }
 
     const end = new Date(Date.now() + parseInt(grantForm.days) * 86400000).toISOString();
-    const res = await API("/api/admin/grant-pro", token, {
+    const res = await API("/api/admin?action=grant-pro", token, {
       method: "POST",
       body: { user_id: target.id, reason: grantForm.reason, period_end: end },
     });
@@ -511,7 +511,7 @@ function SubscriptionsView({ token }) {
   const revokePro = async (userId) => {
     if (!confirm("Revoke PRO access for this user?")) return;
     setActionLoading(true);
-    const res = await API("/api/admin/revoke-pro", token, {
+    const res = await API("/api/admin?action=revoke-pro", token, {
       method: "POST",
       body: { user_id: userId },
     });
@@ -525,7 +525,7 @@ function SubscriptionsView({ token }) {
     setActionLoading(true);
     const body = { user_id: refundModal.id };
     if (refundAmt) body.amount = parseFloat(refundAmt);
-    const res = await API("/api/admin/refund", token, { method: "POST", body });
+    const res = await API("/api/admin?action=refund", token, { method: "POST", body });
     setActionLoading(false);
     if (res.error) { alert(res.error); return; }
     alert(`Refund issued: $${res.amount}`);
@@ -721,7 +721,7 @@ function VenueAdminView({ token }) {
   useEffect(() => {
     if (!token) return;
     // Get venue counts
-    fetch("/api/admin/users", { headers: { Authorization: `Bearer ${token}` } })
+    fetch("/api/admin?action=users", { headers: { Authorization: `Bearer ${token}` } })
       .then(() => {
         // Just use a simple count query via the bulk endpoint with a GET-like check
         setLoading(false);
@@ -732,7 +732,7 @@ function VenueAdminView({ token }) {
     setFetching(true);
     setResults(null);
     try {
-      const res = await API("/api/admin/venue-images", token, { method: "POST", body: {} });
+      const res = await API("/api/admin?action=venue-images", token, { method: "POST", body: {} });
       setResults(res);
     } catch (e) {
       setResults({ error: e.message });
@@ -797,7 +797,7 @@ function AuditView({ token }) {
 
   useEffect(() => {
     if (!token) return;
-    API("/api/admin/stats", token)
+    API("/api/admin?action=stats", token)
       .then(d => { if (!d.error && d.recentActions) setLogs(d.recentActions); })
       .finally(() => setLoading(false));
   }, [token]);
