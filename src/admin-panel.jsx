@@ -21,12 +21,13 @@ export default function AdminPanel() {
   const { s, t } = useTheme();
   const { session } = useAuth();
   const tk = session?.access_token;
-  const [sub, setSub] = useState("dashboard"); // dashboard | users | subs | audit
+  const [sub, setSub] = useState("dashboard"); // dashboard | users | subs | venues | audit
 
   const tabs = [
     { id: "dashboard", label: "Dashboard", icon: "📊" },
     { id: "users", label: "Users", icon: "👤" },
     { id: "subs", label: "Subscriptions", icon: "💳" },
+    { id: "venues", label: "Venues", icon: "🏟" },
     { id: "audit", label: "Audit Log", icon: "📜" },
   ];
 
@@ -62,6 +63,7 @@ export default function AdminPanel() {
       {sub === "dashboard" && <DashboardView token={tk} />}
       {sub === "users" && <UsersView token={tk} />}
       {sub === "subs" && <SubscriptionsView token={tk} />}
+      {sub === "venues" && <VenueAdminView token={tk} />}
       {sub === "audit" && <AuditView token={tk} />}
     </div>
   );
@@ -701,6 +703,85 @@ function SubscriptionsView({ token }) {
           </div>
         </Modal>
       )}
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// VENUE ADMIN
+// ═══════════════════════════════════════════════════════════════════════════════
+
+function VenueAdminView({ token }) {
+  const { s, t } = useTheme();
+  const [fetching, setFetching] = useState(false);
+  const [results, setResults] = useState(null);
+  const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!token) return;
+    // Get venue counts
+    fetch("/api/admin/users", { headers: { Authorization: `Bearer ${token}` } })
+      .then(() => {
+        // Just use a simple count query via the bulk endpoint with a GET-like check
+        setLoading(false);
+      });
+  }, [token]);
+
+  const fetchImages = async () => {
+    setFetching(true);
+    setResults(null);
+    try {
+      const res = await API("/api/admin/venue-images", token, { method: "POST", body: {} });
+      setResults(res);
+    } catch (e) {
+      setResults({ error: e.message });
+    }
+    setFetching(false);
+  };
+
+  return (
+    <div>
+      <div style={{ ...s.card, padding: 20 }}>
+        <div style={s.cardTitle}>Venue Image Management</div>
+        <p style={{ fontSize: 12, color: t.textSecondary, marginBottom: 16, lineHeight: 1.6 }}>
+          Fetch images from Wikipedia for all venues that don't have one yet. Processes 50 venues per batch.
+          Run multiple times until all venues have images.
+        </p>
+        <button
+          onClick={fetchImages}
+          disabled={fetching}
+          style={{ ...s.exportBtn, padding: "10px 24px", fontSize: 11, opacity: fetching ? 0.6 : 1 }}
+        >
+          {fetching ? "Fetching images… (this may take a minute)" : "Fetch Wikipedia Images"}
+        </button>
+
+        {results && !results.error && (
+          <div style={{ marginTop: 16 }}>
+            <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginBottom: 12 }}>
+              <div style={{ fontSize: 13, color: "#22C55E", fontWeight: 700 }}>{results.success} fetched</div>
+              <div style={{ fontSize: 13, color: "#EF4444", fontWeight: 700 }}>{results.failed} failed</div>
+              <div style={{ fontSize: 13, color: t.textSecondary }}>{results.remaining} remaining without images</div>
+            </div>
+            <div style={{ maxHeight: 300, overflowY: "auto", borderTop: `1px solid ${t.border}`, paddingTop: 8 }}>
+              {results.results?.map((r, i) => (
+                <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "4px 0", fontSize: 11 }}>
+                  <span style={{ color: t.textPrimary }}>{r.name}</span>
+                  <span style={{
+                    color: r.status === "ok" ? "#22C55E" : r.status === "not_found" ? "#F59E0B" : "#EF4444",
+                    fontWeight: 600,
+                  }}>
+                    {r.status === "ok" ? "✓" : r.status === "not_found" ? "not found" : r.status === "no_image" ? "no image" : "error"}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        {results?.error && (
+          <div style={{ marginTop: 12, fontSize: 12, color: "#EF4444" }}>{results.error}</div>
+        )}
+      </div>
     </div>
   );
 }
