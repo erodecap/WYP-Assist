@@ -27,50 +27,20 @@ export default async function handler(req, res) {
 
     for (const venue of venues) {
       try {
-        // Try Wikipedia REST API
         const searchName = venue.name
           .replace(/\s*\(.*?\)\s*/g, "") // Remove parenthetical
-          .replace(/'/g, "'");
+          .replace(/\u2019/g, "'");
 
-        const wikiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(searchName)}`;
-        const wikiRes = await fetch(wikiUrl, {
-          headers: { "User-Agent": "WYPAssist/1.0 (https://wypassist.com)" },
-        });
+        const imageUrl = await findImage(searchName);
 
-        if (!wikiRes.ok) {
-          // Try with " (venue)" suffix
-          const altUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(searchName + " (venue)")}`;
-          const altRes = await fetch(altUrl, {
-            headers: { "User-Agent": "WYPAssist/1.0 (https://wypassist.com)" },
-          });
-
-          if (!altRes.ok) {
-            results.push({ name: venue.name, status: "not_found" });
-            failed++;
-            continue;
-          }
-
-          const altData = await altRes.json();
-          const thumbUrl = altData.originalimage?.source || altData.thumbnail?.source;
-          if (!thumbUrl) { results.push({ name: venue.name, status: "no_image" }); failed++; continue; }
-
-          await fetchAndStore(supabase, venue.id, thumbUrl);
-          results.push({ name: venue.name, status: "ok" });
-          success++;
-          continue;
-        }
-
-        const wikiData = await wikiRes.json();
-        const thumbUrl = wikiData.originalimage?.source || wikiData.thumbnail?.source;
-
-        if (!thumbUrl) {
+        if (!imageUrl) {
           results.push({ name: venue.name, status: "no_image" });
           failed++;
           continue;
         }
 
-        await fetchAndStore(supabase, venue.id, thumbUrl);
-        results.push({ name: venue.name, status: "ok" });
+        await fetchAndStore(supabase, venue.id, imageUrl);
+        results.push({ name: venue.name, status: "ok", source: imageUrl.includes("commons") ? "commons" : "wikipedia" });
         success++;
       } catch (e) {
         results.push({ name: venue.name, status: "error", error: e.message });
@@ -89,6 +59,48 @@ export default async function handler(req, res) {
     console.error("Bulk venue image error:", err.message);
     return res.status(500).json({ error: "Internal error" });
   }
+}
+
+const UA = { "User-Agent": "WYPAssist/1.0 (https://wypassist.com)" };
+
+// Try Wikipedia first, then Wikipedia with "(venue)" suffix, then Wikimedia Commons
+async function findImage(name) {
+  // 1. Wikipedia REST API — exact article
+  const url1 = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name)}`;
+  const r1 = await fetch(url1, { headers: UA });
+  if (r1.ok) {
+    const d = await r1.json();
+    const img = d.originalimage?.source || d.thumbnail?.source;
+    if (img) return img;
+  }
+
+  // 2. Wikipedia with "(venue)" suffix
+  const url2 = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name + " (venue)")}`;
+  const r2 = await fetch(url2, { headers: UA });
+  if (r2.ok) {
+    const d = await r2.json();
+    const img = d.originalimage?.source || d.thumbnail?.source;
+    if (img) return img;
+  }
+
+  // 3. Wikimedia Commons search — finds images even without a Wikipedia article
+  const commonsUrl = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(name)}&gsrlimit=5&prop=imageinfo&iiprop=url|mime&iiurlwidth=800&format=json`;
+  const r3 = await fetch(commonsUrl, { headers: UA });
+  if (r3.ok) {
+    const d = await r3.json();
+    const pages = d.query?.pages;
+    if (pages) {
+      // Pick the first result that is an actual image (not SVG/PDF)
+      for (const p of Object.values(pages)) {
+        const info = p.imageinfo?.[0];
+        if (info && /^image\/(jpeg|png|webp)/.test(info.mime)) {
+          return info.thumburl || info.url;
+        }
+      }
+    }
+  }
+
+  return null;
 }
 
 async function fetchAndStore(supabase, venueId, imageUrl) {
