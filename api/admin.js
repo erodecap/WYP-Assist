@@ -191,8 +191,6 @@ async function handleGrantPro(req, res) {
   try {
     const { user_id, reason, period_end } = req.body;
     if (!user_id) return res.status(400).json({ error: "user_id required" });
-    const { data: { user: target }, error: userErr } = await supabase.auth.admin.getUserById(user_id);
-    if (userErr || !target) return res.status(404).json({ error: "User not found" });
 
     const end = period_end || new Date(Date.now() + 365 * 86400000).toISOString();
     const { error } = await supabase.from("subscriptions").upsert({
@@ -203,10 +201,10 @@ async function handleGrantPro(req, res) {
       cancel_at_period_end: false, updated_at: new Date().toISOString(),
     }, { onConflict: "user_id" });
 
-    if (error) { console.error("Grant PRO error:", error.message); return res.status(500).json({ error: "Failed to grant PRO" }); }
-    await auditLog(supabase, admin.id, "grant_pro", user_id, { reason, period_end: end });
+    if (error) { console.error("Grant PRO error:", error.message, error.details, error.hint); return res.status(500).json({ error: `Failed to grant PRO: ${error.message}` }); }
+    try { await auditLog(supabase, admin.id, "grant_pro", user_id, { reason, period_end: end }); } catch (_) {}
     return res.status(200).json({ success: true });
-  } catch (err) { console.error("Admin grant-pro error:", err.message); return res.status(500).json({ error: "Internal error" }); }
+  } catch (err) { console.error("Admin grant-pro error:", err.message); return res.status(500).json({ error: `Grant PRO error: ${err.message}` }); }
 }
 
 // ─── Revoke PRO ─────────────────────────────────────────────────────────────
