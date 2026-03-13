@@ -3455,6 +3455,19 @@ const VENUE_TYPE_LABELS={stadium:"Stadium",arena:"Arena",theatre:"Theatre",amphi
 function VenueCard({venue,onClick}){
   const{s,t}=useTheme();
   const typeColor=VENUE_TYPE_COLORS[venue.venue_type]||t.textSecondary;
+  const has=(v)=>v!==null&&v!==undefined&&v!==""&&v!==false;
+  const metrics=[
+    {icon:"📞",label:"Contact",ok:has(venue.contact_name)||has(venue.contact_phone)||has(venue.contact_email)},
+    {icon:"🚚",label:"Dock",ok:has(venue.dock_description)||has(venue.dock_truck_access)},
+    {icon:"🛗",label:"Elevator",ok:has(venue.freight_elevator)&&venue.freight_elevator},
+    {icon:"🎭",label:"Stage",ok:has(venue.stage_width_ft)||has(venue.stage_depth_ft)},
+    {icon:"⚙️",label:"Grid",ok:has(venue.grid_type)||has(venue.grid_capacity_total_lbs)},
+    {icon:"🔗",label:"Rigging",ok:has(venue.rigging_type)||has(venue.steel_type)},
+    {icon:"👷",label:"Labor",ok:has(venue.rigging_labor_provider)||has(venue.stagehand_provider)},
+    {icon:"📄",label:"Tech Pack",ok:has(venue.tech_pack_url)},
+  ];
+  const filled=metrics.filter(m=>m.ok).length;
+  const pct=Math.round((filled/metrics.length)*100);
   return(
     <div onClick={onClick} style={{...s.card,cursor:"pointer",padding:0,overflow:"hidden",transition:"border-color .2s",marginBottom:0}} onMouseEnter={e=>e.currentTarget.style.borderColor=t.accent} onMouseLeave={e=>e.currentTarget.style.borderColor=t.border}>
       <div style={{position:"relative"}}>
@@ -3463,9 +3476,18 @@ function VenueCard({venue,onClick}){
       </div>
       <div style={{padding:"12px 14px"}}>
         <div style={{fontSize:14,fontWeight:700,color:t.textPrimary,marginBottom:4}}>{venue.name}</div>
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
           <div style={{fontSize:11,color:t.textSecondary}}>{[venue.city,venue.state,venue.country].filter(Boolean).join(", ")}</div>
           {venue.capacity&&<div style={{fontSize:10,color:t.textSecondary}}>{venue.capacity.toLocaleString()} cap</div>}
+        </div>
+        <div style={{display:"flex",flexWrap:"wrap",gap:4,marginBottom:6}}>
+          {metrics.map((m,i)=><span key={i} title={m.label} style={{fontSize:9,padding:"1px 5px",borderRadius:3,background:m.ok?t.accent+"22":t.surface,color:m.ok?t.accent:t.textSecondary+"66",border:`1px solid ${m.ok?t.accent+"44":t.border}`,opacity:m.ok?1:0.5}}>{m.icon} {m.label}</span>)}
+        </div>
+        <div style={{display:"flex",alignItems:"center",gap:6}}>
+          <div style={{flex:1,height:4,borderRadius:2,background:t.surface,overflow:"hidden"}}>
+            <div style={{width:`${pct}%`,height:"100%",borderRadius:2,background:pct===100?"#22C55E":pct>=50?t.accent:"#F59E0B",transition:"width .3s"}}/>
+          </div>
+          <span style={{fontSize:9,color:t.textSecondary,fontWeight:600}}>{pct}%</span>
         </div>
       </div>
     </div>
@@ -3827,7 +3849,7 @@ function VenueTab(){
   const[editVenue,setEditVenue]=useState(null);
 
   useEffect(()=>{
-    supabase.from("venues").select("id,name,city,state,country,image_url,venue_type,capacity").eq("status","approved").order("name")
+    supabase.from("venues").select("id,name,city,state,country,image_url,venue_type,capacity,contact_name,contact_phone,contact_email,website,dock_description,dock_truck_access,freight_elevator,stage_width_ft,stage_depth_ft,proscenium_height_ft,grid_height_ft,floor_length_ft,floor_width_ft,vomitory_count,grid_type,grid_capacity_total_lbs,rigging_type,steel_type,num_line_sets,iatse_local,rigging_labor_provider,stagehand_provider,tech_pack_url,notes").eq("status","approved").order("name")
       .then(({data,error})=>{setVenues(data||[]);setLoading(false);});
   },[]);
 
